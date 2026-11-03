@@ -1,0 +1,14 @@
+# IDEA
+.idea/
+
+# Maven
+target/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# Environment
+.env

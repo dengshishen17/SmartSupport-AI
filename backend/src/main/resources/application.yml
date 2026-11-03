@@ -1,0 +1,121 @@
+# ============================================================
+# SmartSupport AI 后端配置文件
+# MySQL：已连接本机 MySQL80 服务（端口 3306，数据库 smart_support）
+# Redis：Day 6 使用，客户端(Lettuce)是懒连接，现在没启动 Redis 也不影响项目运行
+# ============================================================
+
+server:
+  port: 8080 # 后端服务端口，前端将来通过 http://localhost:8080 调用接口
+
+spring:
+  application:
+    name: smart-support-backend # 应用名称（日志/将来注册到注册中心时会显示）
+
+  # ---- MVC 异步请求超时（Day 7 SSE 使用）----
+  # SseEmitter 默认超时较短，AI 流式生成可能超过，统一设为 300 秒
+  mvc:
+    async:
+      request-timeout: 300000
+
+  # ---- 文件上传大小限制（Day 8 知识库管理页上传 md/txt）----
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  # ---- MySQL 数据源配置（Day 2 业务模块使用）----
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/smart_support?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    # MySQL 密码只允许通过环境变量 MYSQL_PASSWORD 注入，不保留任何明文默认值。
+    # 未设置该环境变量时应用将启动失败——这是刻意设计，避免把真实密码写进版本库。
+    # Windows 示例（临时生效）：
+    #   $env:MYSQL_PASSWORD="你的密码"
+    # Linux/macOS 示例：
+    #   export MYSQL_PASSWORD=你的密码
+    password: "${MYSQL_PASSWORD}"
+    # driver-class-name 不用手写：Spring Boot 会根据 url 自动找到 MySQL 驱动
+
+  # ---- Redis 配置（Day 6 多轮对话/缓存使用）----
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  # ---- OpenAI 自动配置排除（Day 4-3 调整）----
+  # OpenAI starter 会自动配置 6 个模型，全部要求 spring.ai.openai.api-key 非空。
+  # Day 4-3 启用 Embedding（用阿里云百炼 text-embedding-v4），排除其余 5 个不需要的。
+  # PgVectorStore 自动配置也排除——因为它会拿默认的 MySQL JdbcTemplate，而我们要用 PG 专属的。
+  autoconfigure:
+    exclude:
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiChatAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiImageAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioSpeechAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioTranscriptionAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiModerationAutoConfiguration
+      - org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
+
+  # ---- DeepSeek 聊天模型配置（Day 3 使用，保持不变）----
+  # API Key 从环境变量 ${DEEPSEEK-KEY} 读取，绝不硬编码
+  ai:
+    deepseek:
+      api-key: ${DEEPSEEK-KEY:}
+      chat:
+        options:
+          model: deepseek-chat
+
+    # ---- AI 出网调用的重试策略（同步路径生效）----
+    # 背景：后端直连 api.deepseek.com 走 JDK HttpClient（不读 Windows 系统代理），
+    # 闲置连接被对端关闭后复用会收到 RST，表现为 "Connection reset"。
+    # 这里调优的是 Spring AI 的 RetryTemplate（仅作用于同步调用）；
+    # 流式调用路径由 RetryableChatModel 单独兜底（见 com.smartsupport.ai.RetryableChatModel）。
+    # 注意：不开启 on-client-errors —— 它会把 401/参数错误这类不可恢复的 4xx 也重试，
+    # 只会浪费配额。默认行为下 5xx 自动重试、4xx 直接失败，正是想要的。
+    retry:
+      max-attempts: 5
+      backoff:
+        initial-interval: 1s
+        max-interval: 10s
+        multiplier: 2
+
+    # ---- 出网 HTTP 客户端超时（connect/read）----
+    # JDK HttpClient 默认无连接超时，网络不通时会长时间挂起。
+    # read-timeout 要大于一次流式生成的时长，但小于 SseEmitter 的 300s 超时。
+    http:
+      client:
+        connect-timeout: 10s
+        read-timeout: 240s
+    # ---- 阿里云百炼 Embedding 模型配置（Day 4-3 使用）----
+    # 阿里云百炼提供 OpenAI 兼容接口，复用 spring-ai-starter-model-openai 的 Embedding 自动配置
+    # base-url 指向百炼 OpenAI 兼容端点；api-key 复用环境变量 ${ALIYUN-KEY}（不硬编码）
+    # text-embedding-v4 默认输出 1024 维向量，通过 dimensions=1024 明确指定
+    openai:
+      embedding:
+        api-key: ${ALIYUN-KEY:}
+        # 注意：base-url 末尾不能带 /v1！
+        # Spring AI 内部会拼接固定路径 /v1/embeddings，
+        # 若 base-url 已含 /v1，最终 URL 变成 .../v1/v1/embeddings 导致 404
+        base-url: https://dashscope.aliyuncs.com/compatible-mode
+        options:
+          model: text-embedding-v4
+          dimensions: 1024
+
+# ---- MyBatis Plus 配置（Day 2 使用）----
+mybatis-plus:
+  configuration:
+    # 开启下划线转驼峰：数据库 order_no 字段自动映射 Java 的 orderNo 属性
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto # 主键自增策略
+
+# ---- PostgreSQL 向量库独立配置（Day 4 RAG 使用）----
+# 与上方 spring.datasource (MySQL) 完全独立，互不影响
+# 密码从环境变量 ${PG_PASSWORD} 读取，不硬编码
+# （环境变量值 = docker-compose.yml 中 POSTGRES_PASSWORD 的值）
+pgvector:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/knowledge
+    username: postgres
+    password: ${PG_PASSWORD:}
+

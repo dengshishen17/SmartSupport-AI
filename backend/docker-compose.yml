@@ -1,0 +1,25 @@
+# ============================================================
+# SmartSupport AI —— 中间件编排（Redis + PostgreSQL 向量库）
+#
+# 密码不落盘：请在项目根目录创建 .env（参考 .env.example），
+# 或直接 export PG_PASSWORD 后再执行 docker compose up。
+# 未提供 PG_PASSWORD 时 compose 会直接报错退出，避免使用弱口令默认值。
+# ============================================================
+services:
+  redis:
+    image: redis:7
+    container_name: smart-redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  pgvector:
+    image: pgvector/pgvector:pg16
+    container_name: smart-pgvector
+    ports:
+      - "5432:5432"
+    environment:
+      # 仅从环境变量读取，无明文默认值
+      POSTGRES_PASSWORD: ${PG_PASSWORD:?PG_PASSWORD is required}
+      POSTGRES_USER: postgres
+      POSTGRES_DB: knowledge

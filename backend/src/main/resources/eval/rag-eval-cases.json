@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "description": "SmartSupport AI RAG 检索评测集。ground truth 使用知识库 chunk 的章节标题（chunk content 以 '## 标题' 开头），检索命中判定为：返回 chunk 的 content 包含任一 expectedSections 标题。",
+  "groundTruthBasis": "public.vector_store 中 metadata->>'source' = '售后政策演示数据.md' 的 6 个 chunk",
+  "scoringNote": "expectedSections 为空的用例归入 out_of_scope 探针集，不计入 Hit Rate@K 与 MRR 的分母，单独成表报告。",
+  "cases": [
+    { "id": "refund-01", "query": "什么情况下可以申请退款", "category": "退款政策", "expectedSections": ["一、退款政策"] },
+    { "id": "refund-02", "query": "退款要经过哪些状态流转", "category": "退款政策", "expectedSections": ["一、退款政策"] },
+    { "id": "refund-03", "query": "退款审核大概要多久能通过", "category": "退款政策", "expectedSections": ["一、退款政策"] },
+    { "id": "refund-04", "query": "七天无理由退货退运费是谁承担", "category": "退款政策", "expectedSections": ["一、退款政策"] },
+    { "id": "refund-05", "query": "哪些情况是不支持退款的", "category": "退款政策", "expectedSections": ["一、退款政策"] },
+
+    { "id": "return-01", "query": "怎么申请退货", "category": "退货政策", "expectedSections": ["二、退货政策"] },
+    { "id": "return-02", "query": "退货工单的状态是怎么流转的", "category": "退货政策", "expectedSections": ["二、退货政策"] },
+    { "id": "return-03", "query": "退货的运费由谁承担", "category": "退货政策", "expectedSections": ["二、退货政策"] },
+    { "id": "return-04", "query": "退货审核通过之后退款记录是什么时候创建的", "category": "退货政策", "expectedSections": ["二、退货政策", "一、退款政策"] },
+    { "id": "return-05", "query": "签收多少天内可以退", "category": "退货政策", "expectedSections": ["二、退货政策"] },
+
+    { "id": "logistics-01", "query": "订单状态一共有哪几种分别代表什么", "category": "物流查询", "expectedSections": ["三、物流查询"] },
+    { "id": "logistics-02", "query": "下单之后多久可以发货", "category": "物流查询", "expectedSections": ["三、物流查询"] },
+    { "id": "logistics-03", "query": "怎么查到快递单号", "category": "物流查询", "expectedSections": ["三、物流查询"] },
+    { "id": "logistics-04", "query": "物流长时间没有更新应该怎么办", "category": "物流查询", "expectedSections": ["三、物流查询"] },
+    { "id": "logistics-05", "query": "快递丢件了怎么处理", "category": "物流查询", "expectedSections": ["三、物流查询", "五、售后工单问题类型汇总"] },
+
+    { "id": "warranty-01", "query": "家电类商品保修多长时间", "category": "保修规则", "expectedSections": ["四、保修规则"] },
+    { "id": "warranty-02", "query": "什么情况属于免费保修", "category": "保修规则", "expectedSections": ["四、保修规则"] },
+    { "id": "warranty-03", "query": "保修申请的具体流程是什么", "category": "保修规则", "expectedSections": ["四、保修规则"] },
+    { "id": "warranty-04", "query": "保修期内维修几次还不好可以换新机", "category": "保修规则", "expectedSections": ["四、保修规则"] },
+    { "id": "warranty-05", "query": "人为损坏还能保修吗", "category": "保修规则", "expectedSections": ["四、保修规则"] },
+
+    { "id": "ticket-01", "query": "售后工单的问题类型有哪些取值", "category": "工单类型汇总", "expectedSections": ["五、售后工单问题类型汇总"] },
+    { "id": "ticket-02", "query": "报修和退货在工单里怎么区分", "category": "工单类型汇总", "expectedSections": ["五、售后工单问题类型汇总"] },
+
+    { "id": "quickref-01", "query": "客户想退款需要关联哪些字段", "category": "快速参考表", "expectedSections": ["六、快速参考表"] },
+    { "id": "quickref-02", "query": "查订单物流要查什么数据", "category": "快速参考表", "expectedSections": ["六、快速参考表"] },
+
+    { "id": "colloquial-01", "query": "拆封了还能退吗", "category": "口语化改写", "expectedSections": ["二、退货政策", "一、退款政策"] },
+    { "id": "colloquial-02", "query": "钱什么时候能退到我卡上", "category": "口语化改写", "expectedSections": ["一、退款政策"] },
+    { "id": "colloquial-03", "query": "东西坏了找谁修", "category": "口语化改写", "expectedSections": ["四、保修规则"] },
+    { "id": "colloquial-04", "query": "快递怎么还没到", "category": "口语化改写", "expectedSections": ["三、物流查询"] },
+    { "id": "colloquial-05", "query": "我下错单了还能退吗", "category": "口语化改写", "expectedSections": ["一、退款政策"] },
+
+    { "id": "oos-01", "query": "你们的客服电话是多少", "category": "out_of_scope", "expectedSections": [] },
+    { "id": "oos-02", "query": "我要投诉刚才接待我的客服", "category": "out_of_scope", "expectedSections": [] },
+    { "id": "oos-03", "query": "你们公司的股票代码是多少", "category": "out_of_scope", "expectedSections": [] },
+    { "id": "oos-04", "query": "能不能给我发一张优惠券", "category": "out_of_scope", "expectedSections": [] }
+  ]
+}

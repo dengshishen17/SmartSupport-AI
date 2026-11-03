@@ -1,0 +1,90 @@
+# ============================================================
+# SmartSupport AI —— 统一 .gitignore
+# 位于项目根目录，对 backend/ 与 frontend/ 子目录同时生效
+# （Git 会叠加各层 .gitignore，根目录这份是主规则）
+# ============================================================
+
+# ============ 依赖 ============
+node_modules/
+.pnpm-store/
+.yarn/
+.yarn/cache/
+
+# ============ 构建产物 ============
+target/
+dist/
+build/
+out/
+*.class
+*.jar
+*.war
+
+# ============ 环境变量与密钥（最重要）============
+# 只允许提交 .env.example 作为变量清单
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+credentials.json
+secrets.*
+
+# ============ 日志 ============
+*.log
+logs/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ============ IDE 配置 ============
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.iws.bak
+.project
+.classpath
+.settings/
+.factorypath
+nbproject/
+*.swp
+*.swo
+
+# ============ 本地工具（内置 Maven 发行版，约 27 MB）============
+.tools/
+
+# ============ 操作系统 ============
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ============ 临时文件 ============
+*.tmp
+*.bak
+*.old
+*.orig
+*~
+.~*
+
+# ============ RAG 评测一次性产物 ============
+# 仅保留最终报告 backend/eval/RAG-评估报告.md 与用例集
+backend/eval-full-result.json
+backend/eval/eval-full-result.json
+backend/eval/eval-threshold-scan.json
+backend/eval-sections.txt
+backend/req.json
+
+# ============ 本地数据库文件 ============
+*.dump
+*.sqlite
+*.sqlite3
+*.db
+*.ibd
+*.frm
+data/

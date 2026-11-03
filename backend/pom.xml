@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Spring Boot 父工程：统一管理几百个常用依赖的版本，
+         所以下面大部分依赖不用自己写 <version> -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.1</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.smartsupport</groupId>
+    <artifactId>smart-support-backend</artifactId>
+    <version>1.0.0</version>
+    <name>smart-support-backend</name>
+    <description>SmartSupport AI - 企业智能售后助手后端</description>
+
+    <properties>
+        <!-- 项目使用 JDK 17 编译运行（Spring Boot 3.x 的最低要求） -->
+        <java.version>17</java.version>
+        <!-- MyBatis Plus 版本单独声明：Spring Boot 3 必须用 boot3 专用 starter -->
+        <mybatis-plus.version>3.5.9</mybatis-plus.version>
+        <!-- Spring AI 版本：1.0.9 官方声明兼容 Spring Boot 3.4.x（2.0.x 只支持 Boot 4.x，不采用） -->
+        <spring-ai.version>1.0.9</spring-ai.version>
+    </properties>
+
+    <!-- Spring AI BOM（物料清单）：统一管理所有 Spring AI 组件版本，
+         以后新增其他 AI 依赖都不用写版本号，避免版本冲突 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Day 1：Spring Web —— 提供 REST 接口能力，内置 Tomcat 服务器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Day 1 引入 / Day 2 使用：MyBatis Plus，操作 MySQL 的持久层框架 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <!-- Day 1 引入 / Day 2 使用：MySQL 驱动（运行时才需要，故 scope=runtime） -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Day 1 引入 / Day 6 使用：Redis，聊天记录与缓存（今天先把依赖备齐） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- Day 3：Spring AI DeepSeek 官方 starter —— 对话模型自动配置
+             （版本由上方 BOM 统一管理，Day 4 的工具调用 Tool Calling 也基于它） -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-model-deepseek</artifactId>
+        </dependency>
+
+        <!-- Day 4：OpenAI 兼容模型 starter，用于调用阿里云百炼 text-embedding-v4 嵌入 API
+             （百炼提供 OpenAI 兼容接口，复用此 starter，base-url 在 application.yml 指向百炼 compatible-mode） -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-model-openai</artifactId>
+        </dependency>
+
+        <!-- Day 4：PGVector 向量存储 starter，配合 PostgreSQL + pgvector 扩展做向量相似度检索 -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-vector-store-pgvector</artifactId>
+        </dependency>
+
+        <!-- Day 4：PostgreSQL JDBC 驱动，连接 PG 向量库必备
+             （scope=runtime：编译不需要，运行时加载驱动类 org.postgresql.Driver） -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- 单元测试：JUnit 5 + AssertJ（RetryableChatModel 重试逻辑验证） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Spring Boot 打包插件：支持 mvn spring-boot:run 直接运行、打可执行 fat jar -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,808 @@
+/* ============================================================
+ * SmartSupport AI — 设计令牌与全局主题
+ *
+ * 视觉方向：简洁、精致、浅色背景，以蓝紫色作为点缀色。
+ *
+ * 设计原则：
+ *   1. 所有颜色/圆角/阴影集中在这里定义，组件内不写死色值；
+ *   2. 覆盖 Element Plus 的 CSS 变量，让原生组件自动跟随主题，
+ *      不需要引入 SCSS 重新编译；
+ *   3. 只用浅色背景 + 单一强调色（蓝紫），不做重渐变、不做玻璃拟态。
+ * ============================================================ */
+
+:root {
+  /* ============================================================
+   * 品牌主色：蓝紫
+   * 主色只保留一档，靠透明度层级（soft/softer/border）表达状态，
+   * 避免多色系导致的视觉杂乱。
+   * ============================================================ */
+  --ss-primary: #6366f1;
+  --ss-primary-hover: #7c7ff5;
+  --ss-primary-active: #5457e5;
+  --ss-primary-soft: #eef0fe;
+  --ss-primary-softer: #f5f6ff;
+  --ss-primary-border: #dcdffb;
+  /* 新增：主色渐变，全局唯一一处，不再在组件里各写一遍 */
+  --ss-gradient-brand: linear-gradient(135deg, #6366f1 0%, #8b7ff5 100%);
+  /* 新增：浅色渐变，用于欢迎态背景光晕 */
+  --ss-gradient-brand-soft: linear-gradient(135deg, #eef0fe 0%, #f6f2fe 100%);
+  /* 新增：主色文本色，用于浅底上的文字 */
+  --ss-primary-text: #4f52d8;
+
+  /* ============================================================
+   * 中性色：浅色背景体系
+   * bg(页面) → bg-subtle(区块) → bg-elevated(卡片/浮层)
+   * ============================================================ */
+  --ss-bg: #f7f8fb;
+  --ss-bg-elevated: #ffffff;
+  --ss-bg-subtle: #fafbfd;
+  --ss-bg-hover: #f1f3f9;
+  --ss-bg-active: var(--ss-primary-softer);
+  /* 新增：侧边栏专用底色，比页面底色略深一点，制造纵深 */
+  --ss-bg-sidebar: #fbfbfd;
+  /* 新增：代码 / 等宽内容底色 */
+  --ss-bg-code: #f4f5f9;
+
+  --ss-border: #e8eaf0;
+  --ss-border-light: #eef0f5;
+  --ss-border-strong: #dcdfe8;
+  /* 新增：虚线边框（上传拖拽区等） */
+  --ss-border-dashed: #d8dbe6;
+
+  /* ============================================================
+   * 文字色：四级梯度
+   * ============================================================ */
+  --ss-text: #1f2333;
+  --ss-text-secondary: #5b6178;
+  --ss-text-tertiary: #9399ad;
+  --ss-text-inverse: #ffffff;
+  /* 新增：更弱的第四级，用于极次要说明 */
+  --ss-text-disabled: #b4b9c7;
+
+  /* ---------- 功能色 ---------- */
+  --ss-success: #16a34a;
+  --ss-success-soft: #e8f7ee;
+  --ss-success-border: #c3e9d3;
+  --ss-success-text: #14803a;
+  --ss-warning: #d97706;
+  --ss-warning-soft: #fef4e6;
+  --ss-warning-border: #f8e0bd;
+  --ss-warning-text: #b45309;
+  --ss-danger: #dc2626;
+  --ss-danger-soft: #fdecec;
+  --ss-danger-border: #f6cccc;
+  --ss-danger-text: #b91c1c;
+  --ss-info: #6366f1;
+  --ss-info-soft: var(--ss-primary-soft);
+  --ss-info-border: var(--ss-primary-border);
+  --ss-info-text: var(--ss-primary-text);
+
+  /* ============================================================
+   * 圆角：6 / 10 / 14 / 18 / 999
+   * ============================================================ */
+  --ss-radius-sm: 6px;
+  --ss-radius: 10px;
+  --ss-radius-lg: 14px;
+  --ss-radius-xl: 18px;
+  --ss-radius-2xl: 22px;
+  --ss-radius-pill: 999px;
+  /* 卡片统一圆角，供 .ss-card 使用 */
+  --ss-radius-card: 14px;
+
+  /* ============================================================
+   * 阴影：四级，全部冷调低透明度
+   * 原则：阴影只做"抬起"提示，不用来堆叠层级。
+   * ============================================================ */
+  --ss-shadow-xs: 0 1px 2px rgba(31, 35, 51, 0.04);
+  --ss-shadow-sm: 0 1px 3px rgba(31, 35, 51, 0.06);
+  --ss-shadow: 0 4px 16px rgba(31, 35, 51, 0.07);
+  --ss-shadow-lg: 0 12px 32px rgba(31, 35, 51, 0.1);
+  /* 新增：主色柔光环，用于聚焦态 */
+  --ss-ring-primary: 0 0 0 3px rgba(99, 102, 241, 0.12);
+  /* 新增：品牌图标投影 */
+  --ss-shadow-brand: 0 4px 14px rgba(99, 102, 241, 0.26);
+  /* 悬浮抬升：用于卡片 hover / 拖拽中的文件卡片 */
+  --ss-shadow-hover: 0 6px 20px rgba(31, 35, 51, 0.09);
+  /* 内阴影：用于输入框等凹陷区域 */
+  --ss-shadow-inset: inset 0 1px 2px rgba(31, 35, 51, 0.05);
+
+  /* ============================================================
+   * 间距：6 / 10 / 16 / 24 / 32
+   * ============================================================ */
+  --ss-gap-xs: 6px;
+  --ss-gap-sm: 10px;
+  --ss-gap: 16px;
+  --ss-gap-lg: 24px;
+  /* 新增：页面左右统一留白 */
+  --ss-pad-page: 32px;
+
+  /* ============================================================
+   * 字体
+   * ============================================================ */
+  --ss-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  --ss-font-mono: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+
+  /* ---------- 字号 ---------- */
+  --ss-fs-xs: 11.5px;
+  --ss-fs-sm: 12.5px;
+  --ss-fs-base: 14px;
+  --ss-fs-md: 15px;
+  --ss-fs-lg: 17px;
+  --ss-fs-xl: 21px;
+  --ss-fs-2xl: 24px;
+
+  /* ---------- 行高 ---------- */
+  --ss-lh-tight: 1.35;
+  --ss-lh-base: 1.6;
+  --ss-lh-relaxed: 1.75;
+
+  /* ============================================================
+   * 层级
+   * ============================================================ */
+  --ss-z-header: 100;
+  --ss-z-drawer: 2000;
+  /* 新增：侧边栏 / 主内容 之间的层级 */
+  --ss-z-sidebar: 50;
+
+  /* ============================================================
+   * 动效：统一时长与缓动
+   * ============================================================ */
+  --ss-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ss-dur-fast: 0.14s;
+  --ss-dur: 0.18s;
+  --ss-dur-slow: 0.28s;
+
+  /* ============================================================
+   * 布局尺寸
+   * ============================================================ */
+  --ss-sidebar-w: 240px;
+  --ss-header-h: 60px;
+  /* 消息流正文最大宽度，保证长文可读 */
+  --ss-content-max: 880px;
+  /* 右侧上下文面板宽度（可折叠） */
+  --ss-panel-w: 320px;
+  /* 聊天页会话栏宽度 */
+  --ss-rail-w: 252px;
+  /* 右侧面板折叠后仅剩图标条 */
+  --ss-panel-mini-w: 52px;
+
+  /* ============================================================
+   * 间距体系：4 的倍数阶梯
+   * 组件内一律使用这些变量，禁止写裸 px 间距。
+   * ============================================================ */
+  --ss-space-1: 4px;
+  --ss-space-2: 8px;
+  --ss-space-3: 12px;
+  --ss-space-4: 16px;
+  --ss-space-5: 20px;
+  --ss-space-6: 24px;
+  --ss-space-8: 32px;
+  --ss-space-10: 40px;
+
+  /* 语义化内边距：卡片 / 区块 / 页面 */
+  --ss-pad-card: 20px 22px 22px;
+  --ss-pad-block: 16px 20px;
+  --ss-pad-inline-sm: 4px 10px;
+  --ss-pad-inline: 8px 12px;
+
+  /* ============================================================
+   * 描边宽度
+   * ============================================================ */
+  --ss-border-w: 1px;
+  --ss-border-w-strong: 2px;
+  --ss-border-w-accent: 2.5px;
+
+  /* ---------- 滚动条 ---------- */
+  --ss-scrollbar: #d3d7e3;
+  --ss-scrollbar-hover: #bcc1d1;
+
+  /* ============================================================
+   * 透明度阶梯：用于 hover / disabled 等弱化场景
+   * ============================================================ */
+  --ss-opacity-disabled: 0.5;
+  --ss-opacity-muted: 0.72;
+  --ss-overlay-soft: rgba(31, 35, 51, 0.32);
+  --ss-overlay: rgba(31, 35, 51, 0.45);
+
+  /* ============================================================
+   * 图标尺寸
+   * ============================================================ */
+  --ss-icon-xs: 12px;
+  --ss-icon-sm: 14px;
+  --ss-icon: 16px;
+  --ss-icon-md: 18px;
+  --ss-icon-lg: 22px;
+  --ss-icon-xl: 34px;
+
+  /* ============================================================
+   * 焦点环（键盘可达性）
+   * ============================================================ */
+  --ss-ring: 0 0 0 3px rgba(99, 102, 241, 0.16);
+  --ss-ring-danger: 0 0 0 3px rgba(220, 38, 38, 0.14);
+
+  /* ============================================================
+   * 交互态统一过渡：所有可点击元素共用
+   * ============================================================ */
+  --ss-transition: background-color var(--ss-dur) var(--ss-ease),
+    border-color var(--ss-dur) var(--ss-ease), color var(--ss-dur) var(--ss-ease),
+    box-shadow var(--ss-dur) var(--ss-ease), transform var(--ss-dur) var(--ss-ease);
+}
+
+/* ============================================================
+ * Element Plus 主题变量覆盖
+ * 改这一层即可让 el-button / el-input / el-tag / el-table 等原生组件
+ * 统一跟随蓝紫主题，无需 SCSS 编译。
+ * ============================================================ */
+:root {
+  --el-color-primary: var(--ss-primary);
+  --el-color-primary-rgb: 99, 102, 241;
+  --el-color-primary-light-3: var(--ss-primary-hover);
+  --el-color-primary-light-5: #9a9cf5;
+  --el-color-primary-light-7: #c7c8f9;
+  --el-color-primary-light-8: #dedffc;
+  --el-color-primary-light-9: var(--ss-primary-soft);
+  --el-color-primary-dark-2: var(--ss-primary-active);
+
+  --el-color-success: var(--ss-success);
+  --el-color-warning: var(--ss-warning);
+  --el-color-danger: var(--ss-danger);
+  --el-color-error: var(--ss-danger);
+  --el-color-info: var(--ss-text-tertiary);
+
+  --el-text-color-primary: var(--ss-text);
+  --el-text-color-regular: var(--ss-text-secondary);
+  --el-text-color-secondary: var(--ss-text-tertiary);
+  --el-text-color-placeholder: var(--ss-text-disabled);
+
+  --el-border-color: var(--ss-border);
+  --el-border-color-light: var(--ss-border-light);
+  --el-border-color-lighter: var(--ss-border-light);
+  --el-border-color-extra-light: var(--ss-bg-subtle);
+  --el-border-color-hover: var(--ss-border-strong);
+
+  --el-fill-color-blank: var(--ss-bg-elevated);
+  --el-fill-color-light: var(--ss-bg-subtle);
+  --el-fill-color-lighter: var(--ss-bg-subtle);
+  --el-fill-color-extra-light: var(--ss-bg-elevated);
+
+  --el-bg-color: var(--ss-bg-elevated);
+  --el-bg-color-page: var(--ss-bg);
+  --el-bg-color-overlay: var(--ss-bg-elevated);
+
+  --el-border-radius-base: var(--ss-radius-sm);
+  --el-border-radius-small: var(--ss-radius-sm);
+  --el-font-family: var(--ss-font);
+  --el-font-size-base: 14px;
+}
+
+/* ============================================================
+ * 基础重置
+ * ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ss-bg);
+  color: var(--ss-text);
+  font-family: var(--ss-font);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================================
+ * 滚动条：细、浅、悬停才显色
+ * ============================================================ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+*:hover {
+  scrollbar-color: var(--ss-scrollbar) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: var(--ss-radius-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background-color var(--ss-dur) var(--ss-ease);
+}
+
+*:hover::-webkit-scrollbar-thumb {
+  background: var(--ss-scrollbar);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ss-scrollbar-hover);
+  background-clip: padding-box;
+}
+
+/* ============================================================
+ * 通用工具类
+ * ============================================================ */
+
+/* 页面级滚动容器 */
+.ss-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 统一的页面标题区 */
+.ss-page-header {
+  padding: 26px 32px 18px;
+}
+
+.ss-page-header h2 {
+  margin: 0 0 6px;
+  font-size: 21px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--ss-text);
+}
+
+.ss-page-header .subtitle {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--ss-text-tertiary);
+}
+
+/* 卡片容器 */
+.ss-card {
+  background: var(--ss-bg-elevated);
+  border: 1px solid var(--ss-border);
+  border-radius: var(--ss-radius-lg);
+  box-shadow: var(--ss-shadow-xs);
+}
+
+/* 卡片标题 */
+.ss-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 620;
+  font-size: 14.5px;
+  color: var(--ss-text);
+}
+
+/* 步骤序号圆点 */
+.ss-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--ss-primary-soft);
+  color: var(--ss-primary);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+/* 柔和标签 */
+.ss-soft-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: var(--ss-radius-pill);
+  background: var(--ss-bg-hover);
+  color: var(--ss-text-secondary);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ============================================================
+ * 组件通用类（供 src/components/ 复用）
+ * ============================================================ */
+
+/* 品牌图标方块：统一 蓝紫渐变 + 圆角 + 投影 */
+.ss-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--ss-gradient-brand);
+  color: var(--ss-text-inverse);
+  box-shadow: var(--ss-shadow-brand);
+}
+
+/* 浅色图标方块：次级功能入口（上传、统计等） */
+.ss-icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--ss-primary-soft);
+  color: var(--ss-primary);
+  font-size: 14px;
+}
+
+/* 大号浅色图标方块：欢迎态 / 空状态 */
+.ss-icon-tile-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--ss-primary-soft);
+  color: var(--ss-primary);
+  font-size: 21px;
+}
+
+/* 空状态容器 */
+.ss-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 34px 0 18px;
+  color: var(--ss-text-tertiary);
+}
+
+.ss-empty .el-icon {
+  font-size: 34px;
+  opacity: 0.5;
+}
+
+.ss-empty p {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* 区块标题行：图标 + 标题 + 右侧操作 */
+.ss-section-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.ss-section-head .head-action {
+  margin-left: auto;
+  font-weight: 500;
+}
+
+/* 区块标题右侧说明文字 */
+.ss-section-note {
+  font-size: 12.5px;
+  color: var(--ss-text-tertiary);
+}
+
+/* 统计数值：等宽数字，避免跳动 */
+.ss-stat-value {
+  font-size: 21px;
+  font-weight: 650;
+  line-height: 1.2;
+  color: var(--ss-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.ss-stat-label {
+  font-size: 12px;
+  color: var(--ss-text-tertiary);
+}
+
+/* 数字/编号等宽展示 */
+.ss-mono {
+  font-family: var(--ss-font-mono);
+  font-size: 12.5px;
+  color: var(--ss-text-secondary);
+}
+
+/* ============================================================
+ * 布局 / 排版 工具类
+ * ============================================================ */
+
+/* 页面内容容器：统一左右留白与最大宽度 */
+.ss-page-container {
+  padding: 0 var(--ss-pad-page) var(--ss-pad-page);
+  width: 100%;
+  box-sizing: border-box;
+  align-self: center;
+}
+
+/* 纵向 flex 列表，间距用 --ss-space-* */
+.ss-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-4);
+}
+
+/* 横向 flex 行 */
+.ss-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ss-space-2);
+}
+
+/* 垂直居中的图标方块（尺寸由 .ss-icon-tile / --lg 决定） */
+.ss-icon-tile--muted {
+  background: var(--ss-bg-hover);
+  color: var(--ss-text-tertiary);
+}
+
+/* 单行省略 */
+.ss-truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 弱化文字 */
+.ss-text-muted {
+  color: var(--ss-text-tertiary);
+}
+
+/* 细分隔线 */
+.ss-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--ss-border);
+}
+
+/* 焦点可见：键盘导航时给出主色描边 */
+.ss-focusable:focus-visible {
+  outline: none;
+  box-shadow: var(--ss-ring);
+}
+
+/* 细滚动容器 */
+.ss-scroll-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+ * 面板（右侧上下文栏 / 会话栏）
+ * ============================================================ */
+
+/* 面板容器：带左侧细分隔线的竖向面板 */
+.ss-panel {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  width: var(--ss-panel-w);
+  background: var(--ss-bg-elevated);
+  border-left: 1px solid var(--ss-border);
+  overflow: hidden;
+  transition: width var(--ss-dur-slow) var(--ss-ease);
+}
+
+/* 折叠态：只留图标条 */
+.ss-panel--collapsed {
+  width: var(--ss-panel-mini-w);
+}
+
+/* 面板标题栏 */
+.ss-panel-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--ss-space-2);
+  height: var(--ss-header-h);
+  padding: 0 var(--ss-space-4);
+  border-bottom: 1px solid var(--ss-border);
+  color: var(--ss-text);
+  font-size: var(--ss-fs-sm);
+  font-weight: 620;
+}
+
+.ss-panel-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--ss-space-4);
+}
+
+/* 折叠时竖排图标条 */
+.ss-panel-rail {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ss-space-3);
+  padding: var(--ss-space-3) 0;
+}
+
+/* 面板内的小节标题 */
+.ss-panel-section {
+  margin-bottom: var(--ss-space-2);
+  font-size: var(--ss-fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ss-text-tertiary);
+}
+
+/* 面板内的键值行 */
+.ss-kv {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ss-space-3);
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--ss-border-light);
+  font-size: var(--ss-fs-sm);
+}
+
+.ss-kv:last-child {
+  border-bottom: none;
+}
+
+.ss-kv-label {
+  color: var(--ss-text-tertiary);
+  flex: none;
+}
+
+.ss-kv-value {
+  color: var(--ss-text);
+  font-weight: 550;
+  text-align: right;
+  word-break: break-all;
+}
+
+/* ============================================================
+ * Element Plus 细节微调
+ * ============================================================ */
+
+/* 主按钮：轻微渐变，圆角统一 */
+.el-button--primary {
+  --el-button-bg-color: var(--ss-primary);
+  --el-button-border-color: var(--ss-primary);
+  --el-button-hover-bg-color: var(--ss-primary-hover);
+  --el-button-hover-border-color: var(--ss-primary-hover);
+  --el-button-active-bg-color: var(--ss-primary-active);
+  --el-button-active-border-color: var(--ss-primary-active);
+  font-weight: 550;
+}
+
+.el-button {
+  transition: var(--ss-transition);
+}
+
+/* 卡片：去掉默认边框，用我们的 token */
+.el-card {
+  --el-card-border-color: var(--ss-border);
+  --el-card-border-radius: var(--ss-radius-lg);
+  --el-card-padding: var(--ss-space-5);
+  border-color: var(--ss-border);
+  box-shadow: var(--ss-shadow-xs);
+}
+
+/* 输入框：聚焦环用主色 */
+.el-input__wrapper,
+.el-textarea__inner {
+  box-shadow: 0 0 0 1px var(--ss-border) inset;
+  transition: box-shadow var(--ss-dur) var(--ss-ease);
+}
+
+.el-input__wrapper:hover,
+.el-textarea__inner:hover {
+  box-shadow: 0 0 0 1px var(--ss-border-strong) inset;
+}
+
+.el-input__wrapper.is-focus,
+.el-textarea__inner:focus {
+  box-shadow: 0 0 0 1px var(--ss-primary) inset;
+}
+
+/* 表格：表头浅底、行悬停 */
+.el-table th.el-table__cell {
+  background: var(--ss-bg-subtle) !important;
+  font-weight: 600;
+  color: var(--ss-text-secondary);
+}
+
+.el-table .el-table__row:hover > td.el-table__cell {
+  background: var(--ss-primary-softer) !important;
+}
+
+/* 标签：圆角胶囊 */
+.el-tag {
+  border-radius: var(--ss-radius-pill);
+  font-weight: 500;
+}
+
+/* 对话框 / 抽屉 */
+.el-dialog {
+  border-radius: var(--ss-radius-lg);
+  box-shadow: var(--ss-shadow-lg);
+}
+
+.el-drawer {
+  --el-drawer-padding-primary: var(--ss-space-6);
+}
+
+.el-drawer__header {
+  margin-bottom: var(--ss-space-4);
+  padding: var(--ss-space-5) var(--ss-space-6) 0;
+  color: var(--ss-text);
+  font-weight: 620;
+}
+
+/* 消息提示 */
+.el-message {
+  border-radius: var(--ss-radius);
+  box-shadow: var(--ss-shadow);
+  border-color: var(--ss-border);
+}
+
+/* 空状态 */
+.el-empty__description p {
+  color: var(--ss-text-tertiary);
+  font-size: 13px;
+}
+
+/* 上传拖拽区：虚线边框 + 浅底，与整体卡片体系一致 */
+.el-upload-dragger {
+  border-color: var(--ss-border-dashed);
+  background: var(--ss-bg-subtle);
+  border-radius: var(--ss-radius-lg);
+  transition: var(--ss-transition);
+}
+
+.el-upload-dragger:hover {
+  border-color: var(--ss-primary-border);
+  background: var(--ss-primary-softer);
+}
+
+/* 进度条：跟随主色 */
+.el-progress-bar__outer {
+  background: var(--ss-bg-hover);
+}
+
+.el-progress-bar__inner {
+  background: var(--ss-primary);
+}
+
+/* 标签（plain 效果）弱化边框 */
+.el-tag.is-plain {
+  border-color: var(--ss-border);
+  color: var(--ss-text-secondary);
+  background: var(--ss-bg-subtle);
+}
+
+/* 描述列表 / 分隔线 */
+.el-divider {
+  border-color: var(--ss-border);
+}
+
+/* 滚动容器内的表格边框贴合 */
+.el-table {
+  --el-table-border-color: var(--ss-border-light);
+  --el-table-header-bg-color: var(--ss-bg-subtle);
+  --el-table-row-hover-bg-color: var(--ss-primary-softer);
+  font-size: var(--ss-fs-base);
+}
