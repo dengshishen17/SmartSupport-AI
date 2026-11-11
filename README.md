@@ -1,6 +1,7 @@
 # SmartSupport AI —— 企业智能售后助手
 
-> 基于 **Spring AI + RAG + Tool Calling** 的企业售后智能客服系统。
+> 基于 **Java + Python 双栈（Spring AI + FastAPI + LangChain/LangGraph + RAG + Tool Calling + MCP）** 的企业售后智能客服系统。
+> Java 版（`backend`，8080）保障主链路稳定；Python 版（`python-service`，8001）承载 ReAct Agent、知识运营（512/50 切分入库）、MCP 对外接入与 LLM 生成评估。两栈共用同一批 MySQL / Redis / pgvector / DeepSeek / 百炼 Key。
 > 把售后政策文档导入向量库，让 AI 基于真实政策回答问题；再挂载订单 / 退款 / 工单查询工具，让 AI 说出**真实业务数据**而不是编造。
 
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.1-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
@@ -9,6 +10,11 @@
 [![Java](https://img.shields.io/badge/JDK-17-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![pgvector](https://img.shields.io/badge/pgvector-PostgreSQL%2016-336791?logo=postgresql&logoColor=white)](https://github.com/pgvector/pgvector)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![LangChain](https://img.shields.io/badge/LangChain-0.3-1C3C3C?logo=langchain&logoColor=white)](https://www.langchain.com/)
+[![LangGraph](https://img.shields.io/badge/LangGraph-0.2-1C3C3C)](https://langchain-ai.github.io/langgraph/)
+[![MCP](https://img.shields.io/badge/MCP-stdio-7C3AED)](https://modelcontextprotocol.io/)
 
 ---
 
@@ -202,6 +208,19 @@
 | Embedding | 阿里云百炼 `text-embedding-v4`（1024 维） | — |
 | 构建 | Maven | 3.9+ |
 
+### Python 双栈（AI 应用能力扩展）
+
+| 类别 | 技术 | 说明 |
+|---|---|---|
+| 框架 | FastAPI + uvicorn | 端口 8001，与 Java 版共用同一批中间件与 Key |
+| 编排 | LangChain 0.3+ / LangGraph 0.2+ | 固定 RAG 管线 + `create_react_agent` 自主规划 |
+| 切分 | LangChain Text Splitters | 按 `##` 粗切、超长按 512/50 细切入库，支持切分预览 |
+| 协议 | MCP（FastMCP / MCPServer 2.x，stdio） | 4 个查询工具对外暴露，可供 Dify / Claude Desktop 接入 |
+| 评估 | 自研检索评测 + LLM-as-Judge 生成评估 | 33 条检索 + 30 条端到端，Hit@K / MRR / 忠实度 / 工具选型 / 越界拒答 |
+| 可观测 | SQLite（`ops.db`）+ `/py/ops/*` | 延迟 p50/p95、Token、工具数、成功率、分链路统计 |
+
+> 📁 Python 服务详情见 [`python-service/README.md`](python-service/README.md)。
+
 ### 前端
 
 | 类别 | 技术 | 版本 |
@@ -330,6 +349,21 @@ JDK HttpClient 复用被对端关闭的连接会收到 RST（表现为 `Connecti
 │       ├── components/             # 17 个通用组件
 │       ├── views/                  # ChatView / KnowledgeView / TicketView
 │       └── styles/                 # theme / chat / index
+│
+├── python-service/                 # ===== Python 双栈（FastAPI，端口 8001）=====
+│   ├── README.md                   # Python 服务说明（含接口/评测/可观测/MCP）
+│   ├── requirements.txt
+│   ├── app/                        # FastAPI 应用
+│   │   ├── main.py                 # /py/* 接口（RAG/Agent/知识运营/ops）
+│   │   ├── agent.py                # 固定 RAG 管线（与 Java 同语义）
+│   │   ├── workflow.py             # LangGraph ReAct Agent
+│   │   ├── ingest.py               # ## 粗切 + 512/50 细切入库
+│   │   ├── tools.py                # 订单/退款/工单/保修 4 工具
+│   │   ├── vectorstore.py          # pgvector 检索（topK/threshold）
+│   │   ├── memory.py               # Redis 会话记忆（与 Java 共用 key）
+│   │   ├── metrics.py              # SQLite 可观测落库
+│   │   └── mcp_server.py           # MCP stdio 服务（4 工具对外）
+│   └── eval/                       # eval_rag.py（检索）+ eval_answer.py（LLM-as-Judge 生成评估）
 │
 └── docs/
     └── screenshots/                # ★ README 截图（需自行放置）
@@ -584,6 +618,24 @@ mvn test
 
 `RetryableChatModelTest` 覆盖流式重试逻辑（JUnit 5 + AssertJ）。
 
+### 步骤 7 — 启动 Python 双栈服务（FastAPI，端口 8001，可选但推荐）
+
+Python 版与 Java 版共用同一批中间件与 Key（MySQL / Redis / pgvector / DeepSeek / 百炼），提供 ReAct Agent、知识运营、MCP 与生成评估能力。
+
+```powershell
+cd python-service
+pip install -r requirements.txt
+
+$env:DEEPSEEK_API_KEY="sk-..."   # 或 DEEPSEEK-KEY（二选一）
+$env:ALIYUN_API_KEY="sk-..."     # 或 ALIYUN-KEY（二选一）
+$env:MYSQL_PASSWORD="..."
+$env:PG_PASSWORD="..."
+
+python -m uvicorn app.main:app --port 8001
+```
+
+验证：`curl http://localhost:8001/health`，详情见 [`python-service/README.md`](python-service/README.md)。
+
 ---
 
 ## API 一览
@@ -639,6 +691,20 @@ mvn test
 | GET | `/eval/rag/knowledge-base` | 知识库信息 |
 | GET | `/eval/rag/dataset` | 评测用例集 |
 | POST | `/eval/rag/run?topKs=&thresholds=` | 批量评测（**只读**，仅对 `vector_store` 做 SELECT） |
+
+### Python 双栈（FastAPI 8001，`/py/*`）
+
+| 方法 | 路径 | 说明 |
+|---|---|---|
+| GET | `/health` | Python 服务存活检查 |
+| GET | `/py/knowledge/search?query=&topK=` | 向量检索测试 |
+| POST | `/py/knowledge/chat` / `/py/knowledge/chat/stream` | 固定 RAG 管线（与 Java 同语义，SSE 含 reference/tool/content/done） |
+| POST | `/py/agent/chat` / `/py/agent/chat/stream` | LangGraph ReAct Agent（自主规划多工具调用） |
+| POST | `/py/knowledge/preview-split` | 只切分不入库，预览 chunk 效果 |
+| POST | `/py/knowledge/import-text` | 文本切分→embedding→pgvector 入库 |
+| POST | `/py/knowledge/upload` | 上传 md/txt 并入库（multipart，字段名 `file`） |
+| GET | `/py/ops/stats` | 调用量/成功率/延迟 p50/p95/Token/工具均值/分链路统计 |
+| GET | `/py/ops/recent?limit=` | 最近调用明细 |
 
 ---
 
@@ -733,6 +799,17 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 - **严格只读**：对 `vector_store` 只有 `SELECT`，不做任何写入 / 删除 / 重置
 
 **完整报告：** [`backend/eval/RAG-评测报告.md`](backend/eval/RAG-评测报告.md)
+
+### Python 双栈评测（`python-service/eval/`，与 Java 同口径）
+
+- **检索评测**（`eval_rag.py`，33 条 = 29 可答 + 4 越界探针，ground truth=章节标题，只读 `vector_store`）：
+  生产参数 topK=5 下 **Hit@1 89.7%、Hit@3 100%、MRR 0.9483**（见 `python-service/eval/eval-py-result.json`），与 Java 版一致。
+- **端到端生成评估**（`eval_answer.py`，LLM-as-Judge，30 条 = 政策10 + 工具12 + 越界4 + 口语4）：
+  **引用忠实度 83.3%、工具选型准确率 100%、越界拒答 4/4**（见 `python-service/eval/eval-answer-result.json`），
+  覆盖固定 RAG 管线（`--mode=rag`）与 LangGraph ReAct（`--mode=react`）两条链路。
+- **知识运营**：文档按 `##` 粗切、超长按 512/50 细切入库，支持切分预览（`/py/knowledge/preview-split`）、文本/文件上传入库。
+- **可观测**：每次 `/py/knowledge/chat` 与 `/py/agent/chat` 落库 SQLite（`ops.db`），`/py/ops/stats` 看调用量/成功率/延迟 p50/p95/Token/工具均值/RAG 命中率/分链路统计。
+- **MCP**：`python -m app.mcp_server`（stdio）暴露订单/退款/工单/保修 4 工具，可供 Dify / Claude Desktop 接入。
 
 > 📌 报告已明确列出局限：未评测答案生成质量、未评测生成层拒答、未把 `@Tool` 业务查询纳入评测、未做并发压测。样本量小，指标置信区间较宽。
 
