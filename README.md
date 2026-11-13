@@ -4,6 +4,7 @@
 > Java 版（`backend`，8080）保障主链路稳定；Python 版（`python-service`，8001）承载 ReAct Agent、知识运营（512/50 切分入库）、MCP 对外接入与 LLM 生成评估。两栈共用同一批 MySQL / Redis / pgvector / DeepSeek / 百炼 Key。
 > 把售后政策文档导入向量库，让 AI 基于真实政策回答问题；再挂载订单 / 退款 / 工单查询工具，让 AI 说出**真实业务数据**而不是编造。
 
+> 🤝 **开发方式**：本项目由本人在 Cursor、Claude Code 等 AI 编程工具辅助下完成 —— 需求拆解、技术选型、架构设计、数据库与接口设计、代码审查与本地调试验收均由本人负责；AI 工具用于代码生成、问题排查与文档整理。
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.1-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0.9-6DB33F?logo=spring&logoColor=white)](https://docs.spring.io/spring-ai/reference/)
 [![Vue](https://img.shields.io/badge/Vue-3.5-42b883?logo=vuedotjs&logoColor=white)](https://vuejs.org/)
@@ -32,6 +33,7 @@
 - [API 一览](#api-一览)
 - [数据库说明](#数据库说明)
 - [RAG 评测](#rag-评测)
+- [开发方式与 AI 工具使用](#开发方式与-ai-工具使用)
 - [注意事项](#注意事项)
 - [许可证](#许可证)
 
@@ -812,6 +814,28 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 - **MCP**：`python -m app.mcp_server`（stdio）暴露订单/退款/工单/保修 4 工具，可供 Dify / Claude Desktop 接入。
 
 > 📌 报告已明确列出局限：未评测答案生成质量、未评测生成层拒答、未把 `@Tool` 业务查询纳入评测、未做并发压测。样本量小，指标置信区间较宽。
+
+---
+
+## 开发方式与 AI 工具使用
+
+本项目**不是**纯手写，也不是完全交给 AI 生成，而是"人做决策、AI 做加速"的协作方式：
+
+| 环节 | 由谁负责 |
+| --- | --- |
+| 需求拆解与场景定义（退换货政策问答 / 订单数据查询 / 越界拒答） | 本人 |
+| 技术选型（Spring Boot + Spring AI 主链路、FastAPI + LangGraph 双栈、pgvector 向量库） | 本人 |
+| 架构设计（Java / Python 双栈职责划分、共享 MySQL / Redis / pgvector） | 本人 |
+| 数据库表结构与接口契约设计 | 本人 |
+| Prompt 策略、检索切分参数（512/50）、topK / 阈值、越界兜底策略 | 本人 |
+| RAG 评测集构建（33 条）与评测方法设计 | 本人 |
+| 代码生成与重构 | 本人主导，AI 工具辅助 |
+| 问题排查、性能调优、本地联调与验收 | 本人主导，AI 工具辅助 |
+| README 与评测报告撰写 | 本人主导，AI 工具辅助 |
+
+**实际使用的 AI 工具**：Cursor（Agent / Composer）、Claude Code —— 主要用于模板生成、重复代码编写、单测补全、报错定位与文档整理。
+
+**为什么把这个写出来**：现在绝大多数开发者都在用 AI 编程工具，能主动讲清楚"哪些是我决定的、哪些是 AI 做的"，比声称"全部手写"更真实，也更能体现工程判断力。
 
 ---
 
