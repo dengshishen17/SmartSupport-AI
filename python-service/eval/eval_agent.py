@@ -169,7 +169,9 @@ def build_trace(tool_events: list[dict], max_steps: int) -> list[dict]:
 
     tool_events 结构：
         {"stage": "start",  "toolName": str, "args": dict}
-        {"stage": "result", "toolName": str, "result": str}
+        {"stage": "result", "toolName": str, "result": str,
+         "durationMs": float, "ok": bool, "degraded": bool, "attempts": int}
+    后面几个字段由 app.tool_runtime 的可靠性层提供，缺失时为 None。
     """
     trace: list[dict] = []
     pending: dict | None = None
@@ -183,6 +185,10 @@ def build_trace(tool_events: list[dict], max_steps: int) -> list[dict]:
                 "args": ev.get("args", {}) or {},
                 "result": "",
                 "status": "ok",
+                "durationMs": None,
+                "ok": None,
+                "degraded": False,
+                "attempts": 1,
             }
             trace.append(pending)
         elif stage == "result" and pending is not None:
@@ -190,6 +196,12 @@ def build_trace(tool_events: list[dict], max_steps: int) -> list[dict]:
             pending["status"] = _classify_call(
                 pending["tool"], pending["args"], pending["result"]
             )
+            # 可靠性层提供的执行元信息
+            dur = ev.get("durationMs")
+            pending["durationMs"] = float(dur) if isinstance(dur, (int, float)) else None
+            pending["ok"] = ev.get("ok")
+            pending["degraded"] = bool(ev.get("degraded", False))
+            pending["attempts"] = int(ev.get("attempts", 1) or 1)
 
     # 标记循环与超步
     seen: Counter = Counter()
@@ -294,12 +306,12 @@ def run_agent_case(case: dict, max_steps: int, mode: str = "react") -> dict:
 
     try:
         if mode == "react":
-            reply, tool_events = eval_answer.run_coroutine(_run_react(q, sid))
+            reply, tool_events, usage = eval_answer.run_coroutine(_run_react(q, sid))
             sources, rag_hit = [], True
         else:
             from app import agent as agent_mod
 
-            reply, sources, rag_hit, tool_events, _u = agent_mod.chat_once(q, sid)
+            reply, sources, rag_hit, tool_events, usage = agent_mod.chat_once(q, sid)
     except Exception as exc:
         return {
             "id": case["id"], "question": q, "success": False,
@@ -347,6 +359,7 @@ def run_agent_case(case: dict, max_steps: int, mode: str = "react") -> dict:
         "steps": steps_used,
         "tools": actual_tools,
         "trace": trace,
+        "usage": usage or {},
         "judge": judge,
         "faithful": faithful,
         "passAt1": pass_at_1,
@@ -391,6 +404,27 @@ def aggregate(rows: list[dict]) -> dict:
         c["passAt3"] += int(r["passAt3"])
         c["faithful"] += int(r["faithful"])
 
+    # ---- Token 用量（react 链路现在能拿到真实数据）----
+    prompt_tokens = sum((r.get("usage") or {}).get("prompt_tokens", 0) for r in ok)
+    completion_tokens = sum((r.get("usage") or {}).get("completion_tokens", 0) for r in ok)
+    total_tokens = sum((r.get("usage") or {}).get("total_tokens", 0) for r in ok)
+    llm_rounds = sum((r.get("usage") or {}).get("llmRounds", 0) for r in ok)
+
+    # ---- 工具执行耗时与降级统计 ----
+    tool_durations: list[float] = []
+    degraded_calls = 0
+    per_tool_calls: Counter = Counter()
+    per_tool_duration: dict[str, list[float]] = defaultdict(list)
+    for r in ok:
+        for s in r.get("trace", []):
+            if s.get("durationMs") is not None:
+                tool_durations.append(float(s["durationMs"]))
+                per_tool_duration[s["tool"]].append(float(s["durationMs"]))
+            per_tool_calls[s["tool"]] += 1
+            # 降级调用：可靠性层判定为失败/熔断/超时，或显式标记 degraded
+            if s.get("degraded") or (s.get("ok") is False) or s["status"] not in ("ok", "empty_result"):
+                degraded_calls += 1
+
     def rate(x, d):
         return round(x / d, 4) if d else None
 
@@ -409,6 +443,31 @@ def aggregate(rows: list[dict]) -> dict:
         "wastedCalls": wasted_calls,
         "wastedCallRate": rate(wasted_calls, total_calls),
         "avgLatencyMs": round(sum(r.get("latencyMs", 0) for r in ok) / n, 1) if n else 0,
+        # Token 用量
+        "tokenUsage": {
+            "promptTokens": prompt_tokens,
+            "completionTokens": completion_tokens,
+            "totalTokens": total_tokens,
+            "avgPromptTokens": round(prompt_tokens / n, 1) if n else 0,
+            "avgCompletionTokens": round(completion_tokens / n, 1) if n else 0,
+            "avgTotalTokens": round(total_tokens / n, 1) if n else 0,
+            "llmRounds": llm_rounds,
+            "avgLlmRounds": round(llm_rounds / n, 2) if n else 0,
+        },
+        # 工具执行耗时
+        "toolLatency": {
+            "avgMs": round(sum(tool_durations) / len(tool_durations), 1) if tool_durations else None,
+            "maxMs": round(max(tool_durations), 1) if tool_durations else None,
+            "perTool": {
+                t: {
+                    "calls": per_tool_calls[t],
+                    "avgMs": round(sum(v) / len(v), 1) if v else None,
+                    "maxMs": round(max(v), 1) if v else None,
+                }
+                for t, v in sorted(per_tool_duration.items())
+            },
+        },
+        "degradedToolCalls": degraded_calls,
         "stepsDistribution": {str(k): v for k, v in sorted(steps_dist.items())},
         "failureTaxonomy": dict(fail_counter.most_common()),
         "perCategory": {

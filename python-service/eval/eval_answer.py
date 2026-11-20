@@ -166,7 +166,7 @@ def run_case(c: dict, mode: str):
     t0 = time.time()
     try:
         if mode == "react":
-            reply, tool_events = run_coroutine(workflow.run_react(q, sid))
+            reply, tool_events, _usage = run_coroutine(workflow.run_react(q, sid))
             sources, rag_hit = [], True
         else:
             reply, sources, rag_hit, tool_events, _u = _call_with_retry(

@@ -95,6 +95,88 @@ MySQL 用本机 Windows 服务 `MySQL80`（3306），无需容器。
 $env:RETRIEVAL_MODE="hybrid"   # dense(默认) | bm25 | hybrid | rerank
 ```
 
+## 工具执行可靠性（app/tool_runtime.py）
+
+Agent 调工具时，工具可能卡住不返回、偶发失败、持续宕机。没有保护层，一次工具故障会拖垮整个请求。
+
+`tool_runtime.ToolExecutor` 提供四层保护，**作用在 Agent 工具执行路径上，不改变 `tools.py` 里的纯函数**
+（MCP server 直接复用那些纯函数，不能引入副作用）：
+
+| 保护 | 实现 | 参数（config） |
+|---|---|---|
+| **超时控制** | `asyncio.wait_for` + 自管线程池 | `TOOL_TIMEOUT`（默认 8s） |
+| **重试** | 指数退避 `backoff * 第几次` | `TOOL_RETRIES`（默认 2）、`TOOL_RETRY_BACKOFF`（默认 0.3s） |
+| **熔断降级** | `CircuitBreaker`：CLOSED→OPEN→HALF_OPEN→CLOSED | `TOOL_BREAKER_THRESHOLD`（3）、`TOOL_BREAKER_COOLDOWN`（30s） |
+| **并发限流** | `asyncio.Semaphore` | `TOOL_MAX_CONCURRENCY`（8） |
+
+### 关键实现细节
+
+**同步阻塞工具必须放线程池**。业务工具是阻塞式 MySQL 查询，直接调用会卡死事件循环，
+`asyncio.wait_for` 完全无法中断它（实测 0.5s 超时实际跑了 3s）。
+
+但**不能用 `asyncio.to_thread`** —— 它用 asyncio 默认线程池，事件循环关闭时会等待池内线程结束，
+导致「超时后总耗时仍被拖长」。所以用自管 `ThreadPoolExecutor` + `loop.run_in_executor`，
+超时后 `wait_for` 立即放弃等待并返回降级话术。
+
+**失败必须返回字符串而不是抛异常**。模型需要看到「工具失败了，请转人工」才能正确处理；
+抛异常会导致整条 ReAct 链路崩溃。
+
+### 接入方式
+
+LangGraph 的 `ToolNode` 会直接调用 `tool.invoke()`，绕过外部装饰。因此可靠性包在
+`ToolNode` 的 `awrap_tool_call` 钩子上（`app/workflow.py` 的 `_guarded_wrapper`），
+并把 `ToolNode` 实例直接传给 `create_react_agent`（该函数接受 ToolNode 实例，此时不会重建节点）。
+
+```
+LangGraph ToolNode → awrap_tool_call 钩子 → ToolExecutor（超时/重试/熔断/限流）→ 底层工具
+```
+
+### 降级话术
+
+| 场景 | 返回给模型的话术 |
+|---|---|
+| 超时 | `工具 {name} 调用超时（超过 {limit}s），暂时无法获取数据，建议稍后重试或转人工客服。` |
+| 执行失败 | `工具 {name} 执行失败（{err}），暂时无法获取数据，建议稍后重试或转人工客服。` |
+| 熔断中 | `工具 {name} 当前处于熔断状态（连续失败次数达阈值），暂时不可用，建议转人工客服。` |
+
+### 实测验证（`python -m eval.test_tool_runtime`，13/13 通过）
+
+| 场景 | 结果 |
+|---|---|
+| 正常调用 | ok=true，耗时 35ms（订单查询）|
+| 同步阻塞工具超时 | **503ms 返回降级话术**（工具本身要跑 3s），Agent 回复「系统超时…建议转人工」，**未编造数据** |
+| 连续失败 | 第 1 次真实失败 → 第 2、3 次 `circuit_open` 快速失败，不再打 DB |
+| 熔断恢复 | 冷却后进入 HALF_OPEN，探测成功即回到 CLOSED |
+| 并行执行 | 5 个 300ms 工具并行耗时 < 1s（串行需 1.5s）|
+| 并发限流 | 6 个工具、限流 2，观测到的并发峰值 = 2 |
+
+### 工具执行耗时实测（30 条用例，27 次调用）
+
+| 工具 | 调用数 | 平均耗时 | 最大 |
+|---|---|---|---|
+| queryOrderByOrderNo | 5 | 31.7ms | 38.0ms |
+| queryRefundByOrderNo | 3 | 32.0ms | 38.5ms |
+| queryTicketByOrderNo | 3 | 23.9ms | 34.0ms |
+| queryWarrantyByOrderNo | 2 | 36.5ms | 36.5ms |
+| **searchPolicyKnowledge** | 14 | **295.2ms** | **453.3ms** |
+
+**检索比业务查询慢 9~12 倍** —— 差距来自 Embedding 调用（百炼 API）+ pgvector 查询。
+业务工具是本地 MySQL，30ms 很快。
+
+## Token 用量观测
+
+ReAct 链路的 Token 用量此前全记 0（`metrics.log_call` 硬编码 0,0），可观测性对 react 链路失明。
+现从 LangGraph 消息流的 `usage_metadata` 累加各轮 LLM 调用：
+
+| 指标 | 值（30 条用例）|
+|---|---|
+| prompt tokens 总计 | 58303 |
+| completion tokens 总计 | 3923 |
+| 单请求平均 prompt | 1943 |
+| 单请求平均 completion | 131 |
+| 单请求平均 total | 2074 |
+| LLM 轮次总计 / 平均 | 54 / 1.8 |
+
 ## 评测
 
 ```powershell
@@ -104,8 +186,9 @@ python -m eval.eval_retrieval     # 检索策略横向对比：dense/bm25/hybrid
 python -m eval.eval_answer --mode=rag    # 端到端生成评估：LLM-as-Judge（忠实度/拒答率/工具选型）
 python -m eval.eval_answer --mode=react  # 同上，测 ReAct 链路
 python -m eval.eval_stability --rounds 3 --mode rag    # 同配置跑 N 轮，统计指标波动（中位数）
-python -m eval.eval_agent --mode react   # Agent 轨迹级评测：pass@1/步数分布/无效调用率/失败归因
+python -m eval.eval_agent --mode react   # Agent 轨迹级评测：pass@1/步数分布/无效调用率/失败归因/Token/工具耗时
 python -m eval.test_eval_agent            # 轨迹解析与失败分类的离线单测（15/15，零 API 消耗）
+python -m eval.test_tool_runtime          # 工具可靠性层离线单测（13/13，零 API 消耗）
 ```
 
 > **完整基线见 [`eval/baseline-report.md`](eval/baseline-report.md)** —— 后续所有改造的对照基准。
@@ -118,18 +201,22 @@ python -m eval.test_eval_agent            # 轨迹解析与失败分类的离线
 
 | 指标 | react 实测（30 条） |
 |---|---|
-| pass@1 / pass@3 | 80.0% / 83.3% |
-| 平均步数 | 0.9（0 步 4 条、1 步 25 条、2 步 1 条） |
+| pass@1 / pass@3 | 86.7% / 93.3% |
+| 平均步数 | 0.9（0 步 5 条、1 步 23 条、2 步 2 条） |
 | 工具调用总数 | 27 |
 | **无效调用率** | **0.0%** |
 | **浪费调用率** | **0.0%** |
-| 失败归类 | HALLUCINATION 5、RETRIEVAL_EMPTY 3，其余 7 类均为 0 |
+| **降级调用数** | **0** |
+| 失败归类 | HALLUCINATION 4、RETRIEVAL_EMPTY 3，其余 7 类均为 0 |
+| 平均单请求 Token | prompt 1943 / completion 131 / total 2074 |
 
 失败归因 taxonomy 共 9 类：`RETRIEVAL_EMPTY` / `TOOL_ERROR` / `INVALID_ARGS` /
 `DUPLICATE_CALL` / `LOOP` / `MAX_STEP` / `HALLUCINATION` / `REFUSAL_OVER` / `REFUSAL_UNDER`。
 
 按类别看：业务工具类忠实度 100%、越界类 100% 且无数据泄漏（`REFUSAL_UNDER`=0）；
-**政策类 70% / 口语化类 50% 是短板**，根因是知识库仅 6 个 chunk，召回覆盖不足。
+**政策类 70% / 口语化类 75% 是短板**，根因是知识库仅 6 个 chunk，召回覆盖不足。
+
+> 完整分析见 [`eval/eval-agent-report.md`](eval/eval-agent-report.md)。
 
 - 检索：与 Java 版 `RagEvalService` 同一口径，ground truth=章节标题。
   已验证：生产参数 topK=5 下 Hit@1=89.7%、Hit@3=100%、MRR=0.9483（`eval/eval-py-result.json`）。

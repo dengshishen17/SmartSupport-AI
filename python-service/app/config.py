@@ -104,3 +104,17 @@ BM25_K1 = float(getenv("BM25_K1", default="1.5"))
 BM25_B = float(getenv("BM25_B", default="0.75"))
 # 重排候选池放大倍数（先召回 N 倍候选再精排）
 RERANK_CANDIDATE_MULTIPLIER = int(getenv("RERANK_CANDIDATE_MULTIPLIER", default="4"))
+
+# ---- 工具执行可靠性 ----
+# 单次工具调用超时（秒）
+TOOL_TIMEOUT = float(getenv("TOOL_TIMEOUT", default="8.0"))
+# 瞬时失败重试次数（不含首次）
+TOOL_RETRIES = int(getenv("TOOL_RETRIES", default="2"))
+# 重试退避基数（秒），实际等待 = backoff * 第几次
+TOOL_RETRY_BACKOFF = float(getenv("TOOL_RETRY_BACKOFF", default="0.3"))
+# 同时执行的工具调用数上限
+TOOL_MAX_CONCURRENCY = int(getenv("TOOL_MAX_CONCURRENCY", default="8"))
+# 熔断阈值：连续失败达该次数后熔断
+TOOL_BREAKER_THRESHOLD = int(getenv("TOOL_BREAKER_THRESHOLD", default="3"))
+# 熔断冷却时间（秒），到期后半开探测
+TOOL_BREAKER_COOLDOWN = float(getenv("TOOL_BREAKER_COOLDOWN", default="30.0"))

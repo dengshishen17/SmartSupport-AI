@@ -139,10 +139,11 @@ def test_aggregate():
     rows = [
         {"id": "a", "success": True, "category": "policy", "steps": 1, "passAt1": True,
          "passAt3": True, "faithful": True, "invalidCalls": 0, "wastedCalls": 0,
-         "failures": [], "latencyMs": 100},
+         "failures": [], "latencyMs": 100, "usage": {"prompt_tokens": 100, "completion_tokens": 10, "total_tokens": 110}},
         {"id": "b", "success": True, "category": "policy", "steps": 3, "passAt1": False,
          "passAt3": True, "faithful": True, "invalidCalls": 1, "wastedCalls": 1,
-         "failures": ["DUPLICATE_CALL"], "latencyMs": 200},
+         "failures": ["DUPLICATE_CALL"], "latencyMs": 200,
+         "usage": {"prompt_tokens": 300, "completion_tokens": 30, "total_tokens": 330}},
     ]
     agg = aggregate(rows)
     assert agg["passAt1"] == 0.5
@@ -151,6 +152,10 @@ def test_aggregate():
     assert agg["invalidCallRate"] == 0.25
     assert agg["failureTaxonomy"] == {"DUPLICATE_CALL": 1}
     assert agg["perCategory"]["policy"]["total"] == 2
+    # Token 聚合
+    assert agg["tokenUsage"]["promptTokens"] == 400
+    assert agg["tokenUsage"]["completionTokens"] == 40
+    assert agg["tokenUsage"]["avgTotalTokens"] == 220.0
 
 
 if __name__ == "__main__":

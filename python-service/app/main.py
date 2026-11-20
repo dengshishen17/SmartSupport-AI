@@ -108,10 +108,15 @@ async def agent_chat(req: ChatReq):
     import time
     t0 = time.time()
     try:
-        reply, tool_events = await workflow.run_react(req.question, session_id)
+        reply, tool_events, usage = await workflow.run_react(req.question, session_id)
+        # 工具调用次数统一从 stage=="start" 计数，不再用 len(events)//2 的脆弱假设
+        tool_count = sum(1 for e in tool_events if e.get("stage") == "start")
         metrics.log_call("react", session_id, req.question, (time.time() - t0) * 1000,
-                         True, len(tool_events) // 2, True, "", 0, 0, len(reply or ""))
-        return ok({"reply": reply, "toolEvents": tool_events, "sessionId": session_id, "mode": "react"})
+                         True, tool_count, True, "",
+                         usage.get("prompt_tokens", 0), usage.get("completion_tokens", 0),
+                         len(reply or ""))
+        return ok({"reply": reply, "toolEvents": tool_events, "sessionId": session_id, "mode": "react",
+                   "usage": usage})
     except Exception as e:
         metrics.log_call("react", session_id, req.question, (time.time() - t0) * 1000,
                          False, 0, False, str(e)[:300])
@@ -128,18 +133,20 @@ async def agent_chat_stream(req: ChatReq):
 
     async def gen():
         try:
-            reply, tool_events = await workflow.run_react(req.question, session_id)
+            reply, tool_events, usage = await workflow.run_react(req.question, session_id)
         except Exception as e:
             yield {"event": "message", "data": json.dumps({"type": "error", "message": f"Agent 失败：{e}"}, ensure_ascii=False)}
             return
         for ev in tool_events:
             yield {"event": "message", "data": json.dumps(
                 {"type": "tool", "stage": ev["stage"], "toolName": ev["toolName"],
-                 "args": ev.get("args", {}), "result": ev.get("result", "")}, ensure_ascii=False)}
+                 "args": ev.get("args", {}), "result": ev.get("result", ""),
+                 "durationMs": ev.get("durationMs")}, ensure_ascii=False)}
         # ReAct 结果整体一次性是文本：按 20 字切片模拟流式，保持前端同一渲染链路
         for i in range(0, len(reply), 20):
             yield {"event": "message", "data": json.dumps({"type": "content", "content": reply[i:i+20]}, ensure_ascii=False)}
-        yield {"event": "message", "data": json.dumps({"type": "done", "sessionId": session_id}, ensure_ascii=False)}
+        yield {"event": "message", "data": json.dumps(
+            {"type": "done", "sessionId": session_id, "usage": usage}, ensure_ascii=False)}
 
     return EventSourceResponse(gen(), headers={"X-Accel-Buffering": "no", "Cache-Control": "no-cache, no-transform"})
 
