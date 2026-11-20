@@ -1,0 +1,98 @@
+{
+  "summary": {
+    "mode": "rag",
+    "rounds": 3,
+    "metrics": {
+      "success": {
+        "values": [
+          30,
+          30,
+          30
+        ],
+        "min": 30,
+        "median": 30,
+        "max": 30,
+        "spread": 0
+      },
+      "faithfulRate": {
+        "values": [
+          0.8667,
+          0.9,
+          0.9
+        ],
+        "min": 0.8667,
+        "median": 0.9,
+        "max": 0.9,
+        "spread": 0.0333
+      },
+      "toolRuleRate": {
+        "values": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0,
+        "spread": 0.0
+      },
+      "refuseRate": {
+        "values": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0,
+        "spread": 0.0
+      },
+      "avgLatencyMs": {
+        "values": [
+          2295.6,
+          2205.8,
+          2099.1
+        ],
+        "min": 2099.1,
+        "median": 2205.8,
+        "max": 2295.6,
+        "spread": 196.5
+      }
+    }
+  },
+  "rounds": [
+    {
+      "mode": "rag",
+      "total": 30,
+      "executed": 30,
+      "success": 30,
+      "aborted": false,
+      "faithfulRate": 0.8667,
+      "toolRuleRate": 1.0,
+      "refuseRate": 1.0,
+      "avgLatencyMs": 2295.6
+    },
+    {
+      "mode": "rag",
+      "total": 30,
+      "executed": 30,
+      "success": 30,
+      "aborted": false,
+      "faithfulRate": 0.9,
+      "toolRuleRate": 1.0,
+      "refuseRate": 1.0,
+      "avgLatencyMs": 2205.8
+    },
+    {
+      "mode": "rag",
+      "total": 30,
+      "executed": 30,
+      "success": 30,
+      "aborted": false,
+      "faithfulRate": 0.9,
+      "toolRuleRate": 1.0,
+      "refuseRate": 1.0,
+      "avgLatencyMs": 2099.1
+    }
+  ]
+}

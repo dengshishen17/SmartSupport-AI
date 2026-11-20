@@ -1,0 +1,3710 @@
+{
+  "topK": 5,
+  "results": [
+    {
+      "mode": "dense",
+      "topK": 5,
+      "threshold": 0.0,
+      "hitRateAt1": 0.8966,
+      "hitRateAt3": 1.0,
+      "hitRateAt5": 1.0,
+      "mrr": 0.9483,
+      "avgLatencyMs": 244.5,
+      "maxLatencyMs": 558.9,
+      "oosAvgTopScore": 0.4408,
+      "cases": [
+        {
+          "id": "refund-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.6692
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.5465
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 0.5063
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.4977
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4717
+            }
+          ],
+          "latencyMs": 558.9
+        },
+        {
+          "id": "refund-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.6462
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.6273
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.5482
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.5341
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4944
+            }
+          ],
+          "latencyMs": 328.3
+        },
+        {
+          "id": "refund-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.5683
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.5425
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.4877
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.4827
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4584
+            }
+          ],
+          "latencyMs": 199.3
+        },
+        {
+          "id": "refund-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.5742
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.5707
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.515
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.4737
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.4316
+            }
+          ],
+          "latencyMs": 216.4
+        },
+        {
+          "id": "refund-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.7062
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5714
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.5668
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.5647
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.5423
+            }
+          ],
+          "latencyMs": 207.9
+        },
+        {
+          "id": "return-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.5781
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.5731
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.52
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.4838
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4738
+            }
+          ],
+          "latencyMs": 219.6
+        },
+        {
+          "id": "return-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.711
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.6456
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.6126
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.5991
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.5772
+            }
+          ],
+          "latencyMs": 220.3
+        },
+        {
+          "id": "return-03",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.5801
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.5633
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4956
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.4739
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.4681
+            }
+          ],
+          "latencyMs": 231.9
+        },
+        {
+          "id": "return-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.699
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.6808
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.6009
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.5436
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5119
+            }
+          ],
+          "latencyMs": 296.0
+        },
+        {
+          "id": "return-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.5961
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.5823
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 0.5156
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4755
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.4754
+            }
+          ],
+          "latencyMs": 188.4
+        },
+        {
+          "id": "logistics-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.6472
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.5392
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.5254
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5142
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.5005
+            }
+          ],
+          "latencyMs": 166.3
+        },
+        {
+          "id": "logistics-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.5886
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.4474
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 0.4419
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.4356
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4339
+            }
+          ],
+          "latencyMs": 176.3
+        },
+        {
+          "id": "logistics-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.4824
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.4441
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.3409
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.3032
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.303
+            }
+          ],
+          "latencyMs": 208.7
+        },
+        {
+          "id": "logistics-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.6229
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.5114
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5049
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.4667
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.4346
+            }
+          ],
+          "latencyMs": 224.1
+        },
+        {
+          "id": "logistics-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.5022
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.443
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.4113
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.3938
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.3895
+            }
+          ],
+          "latencyMs": 179.8
+        },
+        {
+          "id": "warranty-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.6778
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4922
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.4133
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.3788
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.368
+            }
+          ],
+          "latencyMs": 223.6
+        },
+        {
+          "id": "warranty-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.6933
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5169
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.4393
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.4244
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.3851
+            }
+          ],
+          "latencyMs": 232.5
+        },
+        {
+          "id": "warranty-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.6406
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5535
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.523
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.4596
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.4489
+            }
+          ],
+          "latencyMs": 265.0
+        },
+        {
+          "id": "warranty-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.6112
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.534
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.4327
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.4103
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.3802
+            }
+          ],
+          "latencyMs": 202.8
+        },
+        {
+          "id": "warranty-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.6379
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5407
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.4731
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.4206
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.3957
+            }
+          ],
+          "latencyMs": 157.6
+        },
+        {
+          "id": "ticket-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.8139
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.6419
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.5646
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.5272
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.489
+            }
+          ],
+          "latencyMs": 370.3
+        },
+        {
+          "id": "ticket-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.6729
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.6487
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.6359
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.5496
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.5454
+            }
+          ],
+          "latencyMs": 212.0
+        },
+        {
+          "id": "quickref-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "六、快速参考表",
+              "score": 0.7113
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.7088
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.6215
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5272
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.4966
+            }
+          ],
+          "latencyMs": 231.7
+        },
+        {
+          "id": "quickref-02",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.6066
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.5174
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.453
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.4328
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.3983
+            }
+          ],
+          "latencyMs": 216.2
+        },
+        {
+          "id": "colloquial-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.5532
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.5282
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.487
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.4749
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.4355
+            }
+          ],
+          "latencyMs": 424.0
+        },
+        {
+          "id": "colloquial-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.5041
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.4828
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.4566
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.4412
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4263
+            }
+          ],
+          "latencyMs": 231.7
+        },
+        {
+          "id": "colloquial-03",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4161
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.3867
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.3785
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.2711
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.2578
+            }
+          ],
+          "latencyMs": 220.2
+        },
+        {
+          "id": "colloquial-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.5335
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.3727
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.3689
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.3355
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.3347
+            }
+          ],
+          "latencyMs": 264.0
+        },
+        {
+          "id": "colloquial-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.579
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.5164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5006
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.4734
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.4411
+            }
+          ],
+          "latencyMs": 216.0
+        }
+      ],
+      "oos": [
+        {
+          "id": "oos-01",
+          "query": "你们的客服电话是多少",
+          "topScore": 0.4612,
+          "topSection": "六、快速参考表"
+        },
+        {
+          "id": "oos-02",
+          "query": "我要投诉刚才接待我的客服",
+          "topScore": 0.4903,
+          "topSection": "六、快速参考表"
+        },
+        {
+          "id": "oos-03",
+          "query": "你们公司的股票代码是多少",
+          "topScore": 0.3661,
+          "topSection": "六、快速参考表"
+        },
+        {
+          "id": "oos-04",
+          "query": "能不能给我发一张优惠券",
+          "topScore": 0.4458,
+          "topSection": "六、快速参考表"
+        }
+      ]
+    },
+    {
+      "mode": "bm25",
+      "topK": 5,
+      "threshold": 0.0,
+      "hitRateAt1": 0.7586,
+      "hitRateAt3": 0.8966,
+      "hitRateAt5": 0.8966,
+      "mrr": 0.8161,
+      "avgLatencyMs": 23.7,
+      "maxLatencyMs": 45.5,
+      "oosAvgTopScore": 0.2263,
+      "cases": [
+        {
+          "id": "refund-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 7.9566
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 2.6765
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.8224
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 1.2643
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.4526
+            }
+          ],
+          "latencyMs": 12.1
+        },
+        {
+          "id": "refund-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 5.0683
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 2.4696
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 1.4478
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.4817
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4643
+            }
+          ],
+          "latencyMs": 9.9
+        },
+        {
+          "id": "refund-03",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 3.1612
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 2.1932
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.2273
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.7269
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.673
+            }
+          ],
+          "latencyMs": 26.1
+        },
+        {
+          "id": "refund-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 7.1845
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 6.3936
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 5.0828
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 3.655
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.4817
+            }
+          ],
+          "latencyMs": 10.6
+        },
+        {
+          "id": "refund-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 6.4795
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 2.7367
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 2.6295
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.4817
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.4526
+            }
+          ],
+          "latencyMs": 20.9
+        },
+        {
+          "id": "return-01",
+          "rank": 3,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 3.9027
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 1.1619
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.5483
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5113
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.4817
+            }
+          ],
+          "latencyMs": 23.3
+        },
+        {
+          "id": "return-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 4.3628
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 3.7544
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 3.0778
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 2.8428
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.9195
+            }
+          ],
+          "latencyMs": 10.8
+        },
+        {
+          "id": "return-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 4.7862
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 3.2392
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 3.1747
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5113
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.4817
+            }
+          ],
+          "latencyMs": 17.9
+        },
+        {
+          "id": "return-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 5.7953
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 5.1189
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 4.146
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 2.5639
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 2.25
+            }
+          ],
+          "latencyMs": 33.8
+        },
+        {
+          "id": "return-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.6638
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.5457
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.429
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.404
+            }
+          ],
+          "latencyMs": 30.6
+        },
+        {
+          "id": "logistics-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 3.3241
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 2.936
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 2.5384
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 2.515
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.4476
+            }
+          ],
+          "latencyMs": 10.8
+        },
+        {
+          "id": "logistics-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 5.5331
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 3.4046
+            }
+          ],
+          "latencyMs": 20.2
+        },
+        {
+          "id": "logistics-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 6.4102
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.3581
+            }
+          ],
+          "latencyMs": 25.4
+        },
+        {
+          "id": "logistics-04",
+          "rank": 3,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "六、快速参考表",
+              "score": 2.9967
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 1.4084
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.9229
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.763
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.5534
+            }
+          ],
+          "latencyMs": 28.4
+        },
+        {
+          "id": "logistics-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 4.2148
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 2.1211
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.9044
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.7705
+            }
+          ],
+          "latencyMs": 33.3
+        },
+        {
+          "id": "warranty-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 6.5591
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.9987
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 1.3846
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.8794
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.6638
+            }
+          ],
+          "latencyMs": 10.0
+        },
+        {
+          "id": "warranty-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 5.8311
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 3.5793
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 2.7741
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 1.2716
+            }
+          ],
+          "latencyMs": 20.0
+        },
+        {
+          "id": "warranty-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 4.3171
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 4.0307
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 3.5793
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 2.0646
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.3692
+            }
+          ],
+          "latencyMs": 34.6
+        },
+        {
+          "id": "warranty-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 12.4023
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 4.5521
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 1.3846
+            }
+          ],
+          "latencyMs": 28.5
+        },
+        {
+          "id": "warranty-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 5.9516
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 2.9604
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.4159
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 1.3846
+            }
+          ],
+          "latencyMs": 45.5
+        },
+        {
+          "id": "ticket-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 7.0612
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 2.3813
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 2.284
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 1.89
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 1.3132
+            }
+          ],
+          "latencyMs": 32.0
+        },
+        {
+          "id": "ticket-02",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 2.9881
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.0459
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.9195
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.441
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.3953
+            }
+          ],
+          "latencyMs": 10.3
+        },
+        {
+          "id": "quickref-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "六、快速参考表",
+              "score": 6.0759
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.8224
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 1.5885
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 1.4844
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.6458
+            }
+          ],
+          "latencyMs": 20.4
+        },
+        {
+          "id": "quickref-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "六、快速参考表",
+              "score": 3.3403
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 1.4266
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.763
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.7549
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.4495
+            }
+          ],
+          "latencyMs": 28.7
+        },
+        {
+          "id": "colloquial-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 1.2633
+            }
+          ],
+          "latencyMs": 34.4
+        },
+        {
+          "id": "colloquial-02",
+          "rank": 0,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "六、快速参考表",
+              "score": 2.1948
+            }
+          ],
+          "latencyMs": 10.3
+        },
+        {
+          "id": "colloquial-03",
+          "rank": 0,
+          "retrieved": [],
+          "latencyMs": 35.7
+        },
+        {
+          "id": "colloquial-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 2.1013
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.3581
+            }
+          ],
+          "latencyMs": 29.8
+        },
+        {
+          "id": "colloquial-05",
+          "rank": 0,
+          "retrieved": [],
+          "latencyMs": 31.7
+        }
+      ],
+      "oos": [
+        {
+          "id": "oos-01",
+          "query": "你们的客服电话是多少",
+          "topScore": 0.4526,
+          "topSection": "二、退货政策"
+        },
+        {
+          "id": "oos-02",
+          "query": "我要投诉刚才接待我的客服",
+          "topScore": 0.4526,
+          "topSection": "二、退货政策"
+        },
+        {
+          "id": "oos-03",
+          "query": "你们公司的股票代码是多少",
+          "topScore": 0.0,
+          "topSection": null
+        },
+        {
+          "id": "oos-04",
+          "query": "能不能给我发一张优惠券",
+          "topScore": 0.0,
+          "topSection": null
+        }
+      ]
+    },
+    {
+      "mode": "hybrid",
+      "topK": 5,
+      "threshold": 0.0,
+      "hitRateAt1": 0.8966,
+      "hitRateAt3": 1.0,
+      "hitRateAt5": 1.0,
+      "mrr": 0.9483,
+      "avgLatencyMs": 329.6,
+      "maxLatencyMs": 892.8,
+      "oosAvgTopScore": 0.0164,
+      "cases": [
+        {
+          "id": "refund-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 223.6
+        },
+        {
+          "id": "refund-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 215.5
+        },
+        {
+          "id": "refund-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 257.0
+        },
+        {
+          "id": "refund-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 269.7
+        },
+        {
+          "id": "refund-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 487.8
+        },
+        {
+          "id": "return-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 242.5
+        },
+        {
+          "id": "return-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 505.0
+        },
+        {
+          "id": "return-03",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 387.1
+        },
+        {
+          "id": "return-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 348.8
+        },
+        {
+          "id": "return-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 259.5
+        },
+        {
+          "id": "logistics-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 199.0
+        },
+        {
+          "id": "logistics-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 892.8
+        },
+        {
+          "id": "logistics-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 203.8
+        },
+        {
+          "id": "logistics-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 371.0
+        },
+        {
+          "id": "logistics-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 250.0
+        },
+        {
+          "id": "warranty-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 357.4
+        },
+        {
+          "id": "warranty-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 295.8
+        },
+        {
+          "id": "warranty-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 320.4
+        },
+        {
+          "id": "warranty-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 266.4
+        },
+        {
+          "id": "warranty-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 322.7
+        },
+        {
+          "id": "ticket-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 658.0
+        },
+        {
+          "id": "ticket-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 261.6
+        },
+        {
+          "id": "quickref-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "六、快速参考表",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 244.6
+        },
+        {
+          "id": "quickref-02",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 218.0
+        },
+        {
+          "id": "colloquial-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0159
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.0156
+            }
+          ],
+          "latencyMs": 253.3
+        },
+        {
+          "id": "colloquial-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.0156
+            }
+          ],
+          "latencyMs": 212.0
+        },
+        {
+          "id": "colloquial-03",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.0156
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.0154
+            }
+          ],
+          "latencyMs": 246.8
+        },
+        {
+          "id": "colloquial-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 496.1
+        },
+        {
+          "id": "colloquial-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0159
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.0156
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.0154
+            }
+          ],
+          "latencyMs": 291.5
+        }
+      ],
+      "oos": [
+        {
+          "id": "oos-01",
+          "query": "你们的客服电话是多少",
+          "topScore": 0.0164,
+          "topSection": "六、快速参考表"
+        },
+        {
+          "id": "oos-02",
+          "query": "我要投诉刚才接待我的客服",
+          "topScore": 0.0164,
+          "topSection": "六、快速参考表"
+        },
+        {
+          "id": "oos-03",
+          "query": "你们公司的股票代码是多少",
+          "topScore": 0.0164,
+          "topSection": "六、快速参考表"
+        },
+        {
+          "id": "oos-04",
+          "query": "能不能给我发一张优惠券",
+          "topScore": 0.0164,
+          "topSection": "六、快速参考表"
+        }
+      ]
+    },
+    {
+      "mode": "rerank",
+      "topK": 5,
+      "threshold": 0.0,
+      "hitRateAt1": 0.7931,
+      "hitRateAt3": 1.0,
+      "hitRateAt5": 1.0,
+      "mrr": 0.8966,
+      "avgLatencyMs": 248.6,
+      "maxLatencyMs": 516.2,
+      "oosAvgTopScore": 0.8956,
+      "cases": [
+        {
+          "id": "refund-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.3698
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 0.3223
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.3033
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.2456
+            }
+          ],
+          "latencyMs": 199.5
+        },
+        {
+          "id": "refund-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.722
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.3682
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.3348
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.2412
+            }
+          ],
+          "latencyMs": 235.7
+        },
+        {
+          "id": "refund-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.9167
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.7523
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.2941
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.275
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.2661
+            }
+          ],
+          "latencyMs": 292.2
+        },
+        {
+          "id": "refund-04",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.9872
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.85
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5736
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.3621
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.1161
+            }
+          ],
+          "latencyMs": 244.0
+        },
+        {
+          "id": "refund-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4651
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 0.4091
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.373
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.3688
+            }
+          ],
+          "latencyMs": 219.6
+        },
+        {
+          "id": "return-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.8333
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.8312
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.465
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.4121
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.2913
+            }
+          ],
+          "latencyMs": 231.9
+        },
+        {
+          "id": "return-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.6775
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.4489
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.4478
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.3335
+            }
+          ],
+          "latencyMs": 232.0
+        },
+        {
+          "id": "return-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.9157
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.8
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 0.2358
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.2242
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.1148
+            }
+          ],
+          "latencyMs": 328.2
+        },
+        {
+          "id": "return-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.9589
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.5659
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.2491
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.2398
+            }
+          ],
+          "latencyMs": 516.2
+        },
+        {
+          "id": "return-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.932
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 0.6037
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.4059
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.1567
+            }
+          ],
+          "latencyMs": 224.2
+        },
+        {
+          "id": "logistics-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.712
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.6753
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.5256
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.3955
+            }
+          ],
+          "latencyMs": 211.8
+        },
+        {
+          "id": "logistics-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.3457
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.2229
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.2026
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.1728
+            }
+          ],
+          "latencyMs": 146.4
+        },
+        {
+          "id": "logistics-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.652
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.471
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.291
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.2906
+            }
+          ],
+          "latencyMs": 205.4
+        },
+        {
+          "id": "logistics-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.875
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.5837
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4434
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.3522
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.1505
+            }
+          ],
+          "latencyMs": 327.7
+        },
+        {
+          "id": "logistics-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.6136
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.2845
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.2564
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.2333
+            }
+          ],
+          "latencyMs": 368.2
+        },
+        {
+          "id": "warranty-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.3502
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.1516
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.0866
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.0662
+            }
+          ],
+          "latencyMs": 232.0
+        },
+        {
+          "id": "warranty-02",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4682
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.3368
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.2282
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.0784
+            }
+          ],
+          "latencyMs": 166.8
+        },
+        {
+          "id": "warranty-03",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5641
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.4235
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.2334
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.1985
+            }
+          ],
+          "latencyMs": 249.2
+        },
+        {
+          "id": "warranty-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5631
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.2675
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.1789
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.1158
+            }
+          ],
+          "latencyMs": 243.8
+        },
+        {
+          "id": "warranty-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4685
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.3535
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.3335
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.1164
+            }
+          ],
+          "latencyMs": 215.6
+        },
+        {
+          "id": "ticket-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.3598
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.3269
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.2591
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.19
+            }
+          ],
+          "latencyMs": 168.8
+        },
+        {
+          "id": "ticket-02",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "二、退货政策",
+              "score": 0.8774
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.875
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.6446
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.3021
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.1909
+            }
+          ],
+          "latencyMs": 239.4
+        },
+        {
+          "id": "quickref-01",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.8694
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.85
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.5305
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.2642
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.1353
+            }
+          ],
+          "latencyMs": 182.8
+        },
+        {
+          "id": "quickref-02",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.875
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.6677
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.3698
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.2861
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.1742
+            }
+          ],
+          "latencyMs": 397.2
+        },
+        {
+          "id": "colloquial-01",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.6578
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5059
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.4613
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.3162
+            }
+          ],
+          "latencyMs": 228.1
+        },
+        {
+          "id": "colloquial-02",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "六、快速参考表",
+              "score": 0.7671
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.75
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.6458
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.4414
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.3685
+            }
+          ],
+          "latencyMs": 251.6
+        },
+        {
+          "id": "colloquial-03",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.8962
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.8677
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.4895
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.4428
+            }
+          ],
+          "latencyMs": 227.8
+        },
+        {
+          "id": "colloquial-04",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5437
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.3042
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.201
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.1988
+            }
+          ],
+          "latencyMs": 204.2
+        },
+        {
+          "id": "colloquial-05",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 0.7726
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.7149
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.6161
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.4988
+            }
+          ],
+          "latencyMs": 219.9
+        }
+      ],
+      "oos": [
+        {
+          "id": "oos-01",
+          "query": "你们的客服电话是多少",
+          "topScore": 0.75,
+          "topSection": "六、快速参考表"
+        },
+        {
+          "id": "oos-02",
+          "query": "我要投诉刚才接待我的客服",
+          "topScore": 0.8325,
+          "topSection": "五、售后工单问题类型汇总"
+        },
+        {
+          "id": "oos-03",
+          "query": "你们公司的股票代码是多少",
+          "topScore": 1.0,
+          "topSection": "六、快速参考表"
+        },
+        {
+          "id": "oos-04",
+          "query": "能不能给我发一张优惠券",
+          "topScore": 1.0,
+          "topSection": "六、快速参考表"
+        }
+      ]
+    }
+  ]
+}

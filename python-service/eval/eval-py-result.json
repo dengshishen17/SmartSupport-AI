@@ -6,8 +6,8 @@
     "hitRateAt3": 0.8966,
     "hitRateAt5": 0.8966,
     "mrr": 0.8966,
-    "avgLatencyMs": 233.0,
-    "maxLatencyMs": 485.5,
+    "avgLatencyMs": 273.7,
+    "maxLatencyMs": 561.2,
     "oosAvgTopScore": 0.4408,
     "cases": [
       {
@@ -20,7 +20,7 @@
             "score": 0.6692
           }
         ],
-        "latencyMs": 485.5
+        "latencyMs": 561.2
       },
       {
         "id": "refund-02",
@@ -32,7 +32,7 @@
             "score": 0.6462
           }
         ],
-        "latencyMs": 276.1
+        "latencyMs": 255.9
       },
       {
         "id": "refund-03",
@@ -44,7 +44,7 @@
             "score": 0.5683
           }
         ],
-        "latencyMs": 219.3
+        "latencyMs": 316.0
       },
       {
         "id": "refund-04",
@@ -56,7 +56,7 @@
             "score": 0.5742
           }
         ],
-        "latencyMs": 276.2
+        "latencyMs": 284.1
       },
       {
         "id": "refund-05",
@@ -68,7 +68,7 @@
             "score": 0.7062
           }
         ],
-        "latencyMs": 203.8
+        "latencyMs": 275.8
       },
       {
         "id": "return-01",
@@ -80,7 +80,7 @@
             "score": 0.5781
           }
         ],
-        "latencyMs": 228.5
+        "latencyMs": 294.7
       },
       {
         "id": "return-02",
@@ -92,7 +92,7 @@
             "score": 0.711
           }
         ],
-        "latencyMs": 243.3
+        "latencyMs": 245.9
       },
       {
         "id": "return-03",
@@ -104,7 +104,7 @@
             "score": 0.5801
           }
         ],
-        "latencyMs": 208.2
+        "latencyMs": 243.4
       },
       {
         "id": "return-04",
@@ -116,7 +116,7 @@
             "score": 0.699
           }
         ],
-        "latencyMs": 166.6
+        "latencyMs": 272.0
       },
       {
         "id": "return-05",
@@ -128,7 +128,7 @@
             "score": 0.5961
           }
         ],
-        "latencyMs": 201.3
+        "latencyMs": 380.1
       },
       {
         "id": "logistics-01",
@@ -140,7 +140,7 @@
             "score": 0.6472
           }
         ],
-        "latencyMs": 240.8
+        "latencyMs": 203.8
       },
       {
         "id": "logistics-02",
@@ -152,7 +152,7 @@
             "score": 0.5886
           }
         ],
-        "latencyMs": 203.2
+        "latencyMs": 256.2
       },
       {
         "id": "logistics-03",
@@ -164,7 +164,7 @@
             "score": 0.4824
           }
         ],
-        "latencyMs": 232.5
+        "latencyMs": 239.8
       },
       {
         "id": "logistics-04",
@@ -176,7 +176,7 @@
             "score": 0.6229
           }
         ],
-        "latencyMs": 227.8
+        "latencyMs": 219.9
       },
       {
         "id": "logistics-05",
@@ -188,7 +188,7 @@
             "score": 0.5022
           }
         ],
-        "latencyMs": 255.4
+        "latencyMs": 224.0
       },
       {
         "id": "warranty-01",
@@ -200,7 +200,7 @@
             "score": 0.6778
           }
         ],
-        "latencyMs": 236.1
+        "latencyMs": 248.3
       },
       {
         "id": "warranty-02",
@@ -212,7 +212,7 @@
             "score": 0.6933
           }
         ],
-        "latencyMs": 146.9
+        "latencyMs": 239.5
       },
       {
         "id": "warranty-03",
@@ -224,7 +224,7 @@
             "score": 0.6406
           }
         ],
-        "latencyMs": 232.9
+        "latencyMs": 491.9
       },
       {
         "id": "warranty-04",
@@ -236,7 +236,7 @@
             "score": 0.6112
           }
         ],
-        "latencyMs": 188.0
+        "latencyMs": 232.0
       },
       {
         "id": "warranty-05",
@@ -248,7 +248,7 @@
             "score": 0.6379
           }
         ],
-        "latencyMs": 223.8
+        "latencyMs": 212.1
       },
       {
         "id": "ticket-01",
@@ -260,7 +260,7 @@
             "score": 0.8139
           }
         ],
-        "latencyMs": 220.2
+        "latencyMs": 235.9
       },
       {
         "id": "ticket-02",
@@ -272,7 +272,7 @@
             "score": 0.6729
           }
         ],
-        "latencyMs": 202.9
+        "latencyMs": 312.0
       },
       {
         "id": "quickref-01",
@@ -284,7 +284,7 @@
             "score": 0.7113
           }
         ],
-        "latencyMs": 245.0
+        "latencyMs": 231.7
       },
       {
         "id": "quickref-02",
@@ -296,7 +296,7 @@
             "score": 0.6066
           }
         ],
-        "latencyMs": 244.1
+        "latencyMs": 344.4
       },
       {
         "id": "colloquial-01",
@@ -308,7 +308,7 @@
             "score": 0.5532
           }
         ],
-        "latencyMs": 176.1
+        "latencyMs": 263.7
       },
       {
         "id": "colloquial-02",
@@ -320,7 +320,7 @@
             "score": 0.5041
           }
         ],
-        "latencyMs": 220.2
+        "latencyMs": 158.0
       },
       {
         "id": "colloquial-03",
@@ -332,7 +332,7 @@
             "score": 0.4161
           }
         ],
-        "latencyMs": 174.0
+        "latencyMs": 269.9
       },
       {
         "id": "colloquial-04",
@@ -344,7 +344,7 @@
             "score": 0.5335
           }
         ],
-        "latencyMs": 329.5
+        "latencyMs": 216.3
       },
       {
         "id": "colloquial-05",
@@ -356,7 +356,7 @@
             "score": 0.579
           }
         ],
-        "latencyMs": 248.3
+        "latencyMs": 207.5
       }
     ],
     "oos": [
@@ -393,8 +393,8 @@
     "hitRateAt3": 0.8621,
     "hitRateAt5": 0.8621,
     "mrr": 0.8621,
-    "avgLatencyMs": 225.2,
-    "maxLatencyMs": 352.8,
+    "avgLatencyMs": 236.0,
+    "maxLatencyMs": 360.2,
     "oosAvgTopScore": 0.0,
     "cases": [
       {
@@ -407,7 +407,7 @@
             "score": 0.6692
           }
         ],
-        "latencyMs": 203.8
+        "latencyMs": 175.7
       },
       {
         "id": "refund-02",
@@ -419,7 +419,7 @@
             "score": 0.6462
           }
         ],
-        "latencyMs": 220.3
+        "latencyMs": 244.5
       },
       {
         "id": "refund-03",
@@ -431,7 +431,7 @@
             "score": 0.5683
           }
         ],
-        "latencyMs": 200.0
+        "latencyMs": 303.9
       },
       {
         "id": "refund-04",
@@ -443,7 +443,7 @@
             "score": 0.5742
           }
         ],
-        "latencyMs": 283.9
+        "latencyMs": 243.6
       },
       {
         "id": "refund-05",
@@ -455,7 +455,7 @@
             "score": 0.7062
           }
         ],
-        "latencyMs": 256.4
+        "latencyMs": 360.2
       },
       {
         "id": "return-01",
@@ -467,7 +467,7 @@
             "score": 0.5781
           }
         ],
-        "latencyMs": 203.2
+        "latencyMs": 200.1
       },
       {
         "id": "return-02",
@@ -479,7 +479,7 @@
             "score": 0.711
           }
         ],
-        "latencyMs": 236.3
+        "latencyMs": 203.7
       },
       {
         "id": "return-03",
@@ -491,7 +491,7 @@
             "score": 0.5801
           }
         ],
-        "latencyMs": 211.9
+        "latencyMs": 252.0
       },
       {
         "id": "return-04",
@@ -503,7 +503,7 @@
             "score": 0.699
           }
         ],
-        "latencyMs": 168.4
+        "latencyMs": 220.0
       },
       {
         "id": "return-05",
@@ -515,7 +515,7 @@
             "score": 0.5961
           }
         ],
-        "latencyMs": 178.9
+        "latencyMs": 240.6
       },
       {
         "id": "logistics-01",
@@ -527,7 +527,7 @@
             "score": 0.6472
           }
         ],
-        "latencyMs": 236.7
+        "latencyMs": 247.3
       },
       {
         "id": "logistics-02",
@@ -539,13 +539,13 @@
             "score": 0.5886
           }
         ],
-        "latencyMs": 352.8
+        "latencyMs": 236.0
       },
       {
         "id": "logistics-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 218.9
+        "latencyMs": 236.0
       },
       {
         "id": "logistics-04",
@@ -557,7 +557,7 @@
             "score": 0.6229
           }
         ],
-        "latencyMs": 243.8
+        "latencyMs": 228.2
       },
       {
         "id": "logistics-05",
@@ -569,7 +569,7 @@
             "score": 0.5022
           }
         ],
-        "latencyMs": 224.3
+        "latencyMs": 203.9
       },
       {
         "id": "warranty-01",
@@ -581,7 +581,7 @@
             "score": 0.6778
           }
         ],
-        "latencyMs": 231.8
+        "latencyMs": 216.0
       },
       {
         "id": "warranty-02",
@@ -593,7 +593,7 @@
             "score": 0.6933
           }
         ],
-        "latencyMs": 220.1
+        "latencyMs": 267.0
       },
       {
         "id": "warranty-03",
@@ -605,7 +605,7 @@
             "score": 0.6406
           }
         ],
-        "latencyMs": 227.8
+        "latencyMs": 204.7
       },
       {
         "id": "warranty-04",
@@ -617,7 +617,7 @@
             "score": 0.6112
           }
         ],
-        "latencyMs": 228.3
+        "latencyMs": 224.1
       },
       {
         "id": "warranty-05",
@@ -629,7 +629,7 @@
             "score": 0.6379
           }
         ],
-        "latencyMs": 231.4
+        "latencyMs": 182.9
       },
       {
         "id": "ticket-01",
@@ -641,7 +641,7 @@
             "score": 0.8139
           }
         ],
-        "latencyMs": 158.9
+        "latencyMs": 201.1
       },
       {
         "id": "ticket-02",
@@ -653,7 +653,7 @@
             "score": 0.6729
           }
         ],
-        "latencyMs": 190.9
+        "latencyMs": 223.7
       },
       {
         "id": "quickref-01",
@@ -665,7 +665,7 @@
             "score": 0.7113
           }
         ],
-        "latencyMs": 238.3
+        "latencyMs": 200.2
       },
       {
         "id": "quickref-02",
@@ -677,7 +677,7 @@
             "score": 0.6066
           }
         ],
-        "latencyMs": 208.2
+        "latencyMs": 307.8
       },
       {
         "id": "colloquial-01",
@@ -689,7 +689,7 @@
             "score": 0.5532
           }
         ],
-        "latencyMs": 220.1
+        "latencyMs": 208.1
       },
       {
         "id": "colloquial-02",
@@ -701,13 +701,13 @@
             "score": 0.5041
           }
         ],
-        "latencyMs": 219.6
+        "latencyMs": 211.8
       },
       {
         "id": "colloquial-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 223.8
+        "latencyMs": 275.6
       },
       {
         "id": "colloquial-04",
@@ -719,7 +719,7 @@
             "score": 0.5335
           }
         ],
-        "latencyMs": 228.2
+        "latencyMs": 320.1
       },
       {
         "id": "colloquial-05",
@@ -731,7 +731,7 @@
             "score": 0.579
           }
         ],
-        "latencyMs": 264.0
+        "latencyMs": 204.4
       }
     ],
     "oos": [
@@ -768,33 +768,33 @@
     "hitRateAt3": 0.1379,
     "hitRateAt5": 0.1379,
     "mrr": 0.1379,
-    "avgLatencyMs": 233.6,
-    "maxLatencyMs": 392.2,
+    "avgLatencyMs": 238.9,
+    "maxLatencyMs": 452.1,
     "oosAvgTopScore": 0.0,
     "cases": [
       {
         "id": "refund-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 200.0
+        "latencyMs": 203.8
       },
       {
         "id": "refund-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 239.7
+        "latencyMs": 215.6
       },
       {
         "id": "refund-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 240.2
+        "latencyMs": 233.7
       },
       {
         "id": "refund-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 228.0
+        "latencyMs": 258.8
       },
       {
         "id": "refund-05",
@@ -806,13 +806,13 @@
             "score": 0.7062
           }
         ],
-        "latencyMs": 220.3
+        "latencyMs": 251.6
       },
       {
         "id": "return-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 219.6
+        "latencyMs": 187.9
       },
       {
         "id": "return-02",
@@ -824,85 +824,85 @@
             "score": 0.711
           }
         ],
-        "latencyMs": 207.8
+        "latencyMs": 268.4
       },
       {
         "id": "return-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 216.7
+        "latencyMs": 252.1
       },
       {
         "id": "return-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 231.3
+        "latencyMs": 215.9
       },
       {
         "id": "return-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 260.0
+        "latencyMs": 220.2
       },
       {
         "id": "logistics-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 204.4
+        "latencyMs": 199.5
       },
       {
         "id": "logistics-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 223.9
+        "latencyMs": 216.3
       },
       {
         "id": "logistics-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 171.7
+        "latencyMs": 219.6
       },
       {
         "id": "logistics-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 392.2
+        "latencyMs": 452.1
       },
       {
         "id": "logistics-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 191.8
+        "latencyMs": 211.7
       },
       {
         "id": "warranty-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 311.9
+        "latencyMs": 236.2
       },
       {
         "id": "warranty-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 212.1
+        "latencyMs": 224.0
       },
       {
         "id": "warranty-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 252.4
+        "latencyMs": 223.9
       },
       {
         "id": "warranty-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 196.3
+        "latencyMs": 224.0
       },
       {
         "id": "warranty-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 255.2
+        "latencyMs": 299.9
       },
       {
         "id": "ticket-01",
@@ -914,13 +914,13 @@
             "score": 0.8139
           }
         ],
-        "latencyMs": 219.9
+        "latencyMs": 196.0
       },
       {
         "id": "ticket-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 216.1
+        "latencyMs": 231.9
       },
       {
         "id": "quickref-01",
@@ -932,43 +932,43 @@
             "score": 0.7113
           }
         ],
-        "latencyMs": 236.1
+        "latencyMs": 203.9
       },
       {
         "id": "quickref-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 251.9
+        "latencyMs": 231.8
       },
       {
         "id": "colloquial-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 190.6
+        "latencyMs": 352.3
       },
       {
         "id": "colloquial-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 241.5
+        "latencyMs": 256.0
       },
       {
         "id": "colloquial-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 200.1
+        "latencyMs": 195.7
       },
       {
         "id": "colloquial-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 251.7
+        "latencyMs": 252.3
       },
       {
         "id": "colloquial-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 289.9
+        "latencyMs": 191.8
       }
     ],
     "oos": [
@@ -1005,8 +1005,8 @@
     "hitRateAt3": 1.0,
     "hitRateAt5": 1.0,
     "mrr": 0.9483,
-    "avgLatencyMs": 242.2,
-    "maxLatencyMs": 808.0,
+    "avgLatencyMs": 259.3,
+    "maxLatencyMs": 580.3,
     "oosAvgTopScore": 0.4408,
     "cases": [
       {
@@ -1029,7 +1029,7 @@
             "score": 0.5063
           }
         ],
-        "latencyMs": 308.1
+        "latencyMs": 212.9
       },
       {
         "id": "refund-02",
@@ -1051,7 +1051,7 @@
             "score": 0.5482
           }
         ],
-        "latencyMs": 200.0
+        "latencyMs": 235.9
       },
       {
         "id": "refund-03",
@@ -1073,7 +1073,7 @@
             "score": 0.4877
           }
         ],
-        "latencyMs": 227.8
+        "latencyMs": 196.2
       },
       {
         "id": "refund-04",
@@ -1095,7 +1095,7 @@
             "score": 0.515
           }
         ],
-        "latencyMs": 163.9
+        "latencyMs": 211.6
       },
       {
         "id": "refund-05",
@@ -1117,7 +1117,7 @@
             "score": 0.5668
           }
         ],
-        "latencyMs": 204.1
+        "latencyMs": 260.0
       },
       {
         "id": "return-01",
@@ -1139,7 +1139,7 @@
             "score": 0.52
           }
         ],
-        "latencyMs": 216.0
+        "latencyMs": 255.9
       },
       {
         "id": "return-02",
@@ -1161,7 +1161,7 @@
             "score": 0.6126
           }
         ],
-        "latencyMs": 200.2
+        "latencyMs": 376.1
       },
       {
         "id": "return-03",
@@ -1183,7 +1183,7 @@
             "score": 0.4956
           }
         ],
-        "latencyMs": 244.1
+        "latencyMs": 239.9
       },
       {
         "id": "return-04",
@@ -1205,7 +1205,7 @@
             "score": 0.6009
           }
         ],
-        "latencyMs": 284.5
+        "latencyMs": 248.4
       },
       {
         "id": "return-05",
@@ -1227,7 +1227,7 @@
             "score": 0.5156
           }
         ],
-        "latencyMs": 202.8
+        "latencyMs": 191.8
       },
       {
         "id": "logistics-01",
@@ -1249,7 +1249,7 @@
             "score": 0.5254
           }
         ],
-        "latencyMs": 219.9
+        "latencyMs": 284.2
       },
       {
         "id": "logistics-02",
@@ -1271,7 +1271,7 @@
             "score": 0.4419
           }
         ],
-        "latencyMs": 248.2
+        "latencyMs": 220.5
       },
       {
         "id": "logistics-03",
@@ -1293,7 +1293,7 @@
             "score": 0.3409
           }
         ],
-        "latencyMs": 200.0
+        "latencyMs": 215.6
       },
       {
         "id": "logistics-04",
@@ -1315,7 +1315,7 @@
             "score": 0.5049
           }
         ],
-        "latencyMs": 196.0
+        "latencyMs": 295.0
       },
       {
         "id": "logistics-05",
@@ -1337,7 +1337,7 @@
             "score": 0.4113
           }
         ],
-        "latencyMs": 183.6
+        "latencyMs": 196.3
       },
       {
         "id": "warranty-01",
@@ -1359,7 +1359,7 @@
             "score": 0.4133
           }
         ],
-        "latencyMs": 173.5
+        "latencyMs": 188.6
       },
       {
         "id": "warranty-02",
@@ -1381,7 +1381,7 @@
             "score": 0.4393
           }
         ],
-        "latencyMs": 410.6
+        "latencyMs": 355.1
       },
       {
         "id": "warranty-03",
@@ -1403,7 +1403,7 @@
             "score": 0.523
           }
         ],
-        "latencyMs": 203.8
+        "latencyMs": 240.0
       },
       {
         "id": "warranty-04",
@@ -1425,7 +1425,7 @@
             "score": 0.4327
           }
         ],
-        "latencyMs": 228.9
+        "latencyMs": 580.3
       },
       {
         "id": "warranty-05",
@@ -1447,7 +1447,7 @@
             "score": 0.4731
           }
         ],
-        "latencyMs": 199.2
+        "latencyMs": 232.3
       },
       {
         "id": "ticket-01",
@@ -1469,7 +1469,7 @@
             "score": 0.5646
           }
         ],
-        "latencyMs": 808.0
+        "latencyMs": 412.2
       },
       {
         "id": "ticket-02",
@@ -1491,7 +1491,7 @@
             "score": 0.6359
           }
         ],
-        "latencyMs": 211.6
+        "latencyMs": 223.6
       },
       {
         "id": "quickref-01",
@@ -1513,7 +1513,7 @@
             "score": 0.6215
           }
         ],
-        "latencyMs": 204.1
+        "latencyMs": 200.0
       },
       {
         "id": "quickref-02",
@@ -1535,7 +1535,7 @@
             "score": 0.453
           }
         ],
-        "latencyMs": 219.9
+        "latencyMs": 212.0
       },
       {
         "id": "colloquial-01",
@@ -1557,7 +1557,7 @@
             "score": 0.487
           }
         ],
-        "latencyMs": 212.3
+        "latencyMs": 224.0
       },
       {
         "id": "colloquial-02",
@@ -1579,7 +1579,7 @@
             "score": 0.4566
           }
         ],
-        "latencyMs": 216.1
+        "latencyMs": 207.9
       },
       {
         "id": "colloquial-03",
@@ -1601,7 +1601,7 @@
             "score": 0.3785
           }
         ],
-        "latencyMs": 219.3
+        "latencyMs": 247.9
       },
       {
         "id": "colloquial-04",
@@ -1623,7 +1623,7 @@
             "score": 0.3689
           }
         ],
-        "latencyMs": 220.1
+        "latencyMs": 203.6
       },
       {
         "id": "colloquial-05",
@@ -1645,7 +1645,7 @@
             "score": 0.5006
           }
         ],
-        "latencyMs": 196.0
+        "latencyMs": 352.0
       }
     ],
     "oos": [
@@ -1682,8 +1682,8 @@
     "hitRateAt3": 0.931,
     "hitRateAt5": 0.931,
     "mrr": 0.8966,
-    "avgLatencyMs": 222.7,
-    "maxLatencyMs": 308.2,
+    "avgLatencyMs": 235.3,
+    "maxLatencyMs": 424.9,
     "oosAvgTopScore": 0.0,
     "cases": [
       {
@@ -1706,7 +1706,7 @@
             "score": 0.5063
           }
         ],
-        "latencyMs": 219.7
+        "latencyMs": 243.9
       },
       {
         "id": "refund-02",
@@ -1728,7 +1728,7 @@
             "score": 0.5482
           }
         ],
-        "latencyMs": 279.9
+        "latencyMs": 191.9
       },
       {
         "id": "refund-03",
@@ -1745,7 +1745,7 @@
             "score": 0.5425
           }
         ],
-        "latencyMs": 204.5
+        "latencyMs": 236.0
       },
       {
         "id": "refund-04",
@@ -1767,7 +1767,7 @@
             "score": 0.515
           }
         ],
-        "latencyMs": 219.4
+        "latencyMs": 216.3
       },
       {
         "id": "refund-05",
@@ -1789,7 +1789,7 @@
             "score": 0.5668
           }
         ],
-        "latencyMs": 220.2
+        "latencyMs": 192.1
       },
       {
         "id": "return-01",
@@ -1811,7 +1811,7 @@
             "score": 0.52
           }
         ],
-        "latencyMs": 170.9
+        "latencyMs": 191.7
       },
       {
         "id": "return-02",
@@ -1833,7 +1833,7 @@
             "score": 0.6126
           }
         ],
-        "latencyMs": 237.0
+        "latencyMs": 211.5
       },
       {
         "id": "return-03",
@@ -1850,7 +1850,7 @@
             "score": 0.5633
           }
         ],
-        "latencyMs": 227.9
+        "latencyMs": 188.0
       },
       {
         "id": "return-04",
@@ -1872,7 +1872,7 @@
             "score": 0.6009
           }
         ],
-        "latencyMs": 227.7
+        "latencyMs": 204.5
       },
       {
         "id": "return-05",
@@ -1894,7 +1894,7 @@
             "score": 0.5156
           }
         ],
-        "latencyMs": 212.0
+        "latencyMs": 187.7
       },
       {
         "id": "logistics-01",
@@ -1916,7 +1916,7 @@
             "score": 0.5254
           }
         ],
-        "latencyMs": 236.4
+        "latencyMs": 424.9
       },
       {
         "id": "logistics-02",
@@ -1928,13 +1928,13 @@
             "score": 0.5886
           }
         ],
-        "latencyMs": 235.7
+        "latencyMs": 235.2
       },
       {
         "id": "logistics-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 204.0
+        "latencyMs": 215.4
       },
       {
         "id": "logistics-04",
@@ -1956,7 +1956,7 @@
             "score": 0.5049
           }
         ],
-        "latencyMs": 256.0
+        "latencyMs": 208.6
       },
       {
         "id": "logistics-05",
@@ -1968,7 +1968,7 @@
             "score": 0.5022
           }
         ],
-        "latencyMs": 145.7
+        "latencyMs": 287.3
       },
       {
         "id": "warranty-01",
@@ -1980,7 +1980,7 @@
             "score": 0.6778
           }
         ],
-        "latencyMs": 218.2
+        "latencyMs": 224.0
       },
       {
         "id": "warranty-02",
@@ -1997,7 +1997,7 @@
             "score": 0.5169
           }
         ],
-        "latencyMs": 200.6
+        "latencyMs": 260.0
       },
       {
         "id": "warranty-03",
@@ -2019,7 +2019,7 @@
             "score": 0.523
           }
         ],
-        "latencyMs": 211.4
+        "latencyMs": 268.0
       },
       {
         "id": "warranty-04",
@@ -2036,7 +2036,7 @@
             "score": 0.534
           }
         ],
-        "latencyMs": 308.2
+        "latencyMs": 216.3
       },
       {
         "id": "warranty-05",
@@ -2053,7 +2053,7 @@
             "score": 0.5407
           }
         ],
-        "latencyMs": 208.0
+        "latencyMs": 215.7
       },
       {
         "id": "ticket-01",
@@ -2075,7 +2075,7 @@
             "score": 0.5646
           }
         ],
-        "latencyMs": 209.2
+        "latencyMs": 239.9
       },
       {
         "id": "ticket-02",
@@ -2097,7 +2097,7 @@
             "score": 0.6359
           }
         ],
-        "latencyMs": 198.3
+        "latencyMs": 232.1
       },
       {
         "id": "quickref-01",
@@ -2119,7 +2119,7 @@
             "score": 0.6215
           }
         ],
-        "latencyMs": 252.2
+        "latencyMs": 252.1
       },
       {
         "id": "quickref-02",
@@ -2136,7 +2136,7 @@
             "score": 0.5174
           }
         ],
-        "latencyMs": 243.6
+        "latencyMs": 228.4
       },
       {
         "id": "colloquial-01",
@@ -2153,7 +2153,7 @@
             "score": 0.5282
           }
         ],
-        "latencyMs": 224.2
+        "latencyMs": 219.4
       },
       {
         "id": "colloquial-02",
@@ -2165,13 +2165,13 @@
             "score": 0.5041
           }
         ],
-        "latencyMs": 219.7
+        "latencyMs": 224.0
       },
       {
         "id": "colloquial-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 224.1
+        "latencyMs": 215.8
       },
       {
         "id": "colloquial-04",
@@ -2183,7 +2183,7 @@
             "score": 0.5335
           }
         ],
-        "latencyMs": 232.4
+        "latencyMs": 248.7
       },
       {
         "id": "colloquial-05",
@@ -2205,7 +2205,7 @@
             "score": 0.5006
           }
         ],
-        "latencyMs": 211.9
+        "latencyMs": 343.5
       }
     ],
     "oos": [
@@ -2242,33 +2242,33 @@
     "hitRateAt3": 0.1379,
     "hitRateAt5": 0.1379,
     "mrr": 0.1379,
-    "avgLatencyMs": 233.6,
-    "maxLatencyMs": 412.5,
+    "avgLatencyMs": 262.7,
+    "maxLatencyMs": 756.2,
     "oosAvgTopScore": 0.0,
     "cases": [
       {
         "id": "refund-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 268.0
+        "latencyMs": 215.8
       },
       {
         "id": "refund-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 162.6
+        "latencyMs": 207.9
       },
       {
         "id": "refund-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 221.8
+        "latencyMs": 184.3
       },
       {
         "id": "refund-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 179.5
+        "latencyMs": 212.0
       },
       {
         "id": "refund-05",
@@ -2280,13 +2280,13 @@
             "score": 0.7062
           }
         ],
-        "latencyMs": 165.4
+        "latencyMs": 200.0
       },
       {
         "id": "return-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 262.1
+        "latencyMs": 212.0
       },
       {
         "id": "return-02",
@@ -2298,85 +2298,85 @@
             "score": 0.711
           }
         ],
-        "latencyMs": 412.5
+        "latencyMs": 207.8
       },
       {
         "id": "return-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 375.6
+        "latencyMs": 199.9
       },
       {
         "id": "return-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 194.6
+        "latencyMs": 196.0
       },
       {
         "id": "return-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 152.0
+        "latencyMs": 212.0
       },
       {
         "id": "logistics-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 229.5
+        "latencyMs": 232.0
       },
       {
         "id": "logistics-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 191.9
+        "latencyMs": 215.7
       },
       {
         "id": "logistics-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 392.1
+        "latencyMs": 216.8
       },
       {
         "id": "logistics-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 227.5
+        "latencyMs": 219.4
       },
       {
         "id": "logistics-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 192.6
+        "latencyMs": 460.4
       },
       {
         "id": "warranty-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 236.2
+        "latencyMs": 547.6
       },
       {
         "id": "warranty-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 227.4
+        "latencyMs": 292.1
       },
       {
         "id": "warranty-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 228.4
+        "latencyMs": 201.0
       },
       {
         "id": "warranty-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 162.1
+        "latencyMs": 190.6
       },
       {
         "id": "warranty-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 225.8
+        "latencyMs": 240.4
       },
       {
         "id": "ticket-01",
@@ -2388,13 +2388,13 @@
             "score": 0.8139
           }
         ],
-        "latencyMs": 195.8
+        "latencyMs": 215.8
       },
       {
         "id": "ticket-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 232.0
+        "latencyMs": 191.7
       },
       {
         "id": "quickref-01",
@@ -2411,43 +2411,43 @@
             "score": 0.7088
           }
         ],
-        "latencyMs": 219.7
+        "latencyMs": 756.2
       },
       {
         "id": "quickref-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 272.0
+        "latencyMs": 432.0
       },
       {
         "id": "colloquial-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 255.8
+        "latencyMs": 232.0
       },
       {
         "id": "colloquial-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 204.1
+        "latencyMs": 197.3
       },
       {
         "id": "colloquial-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 169.8
+        "latencyMs": 177.4
       },
       {
         "id": "colloquial-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 206.7
+        "latencyMs": 249.0
       },
       {
         "id": "colloquial-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 311.5
+        "latencyMs": 303.8
       }
     ],
     "oos": [
@@ -2484,8 +2484,8 @@
     "hitRateAt3": 1.0,
     "hitRateAt5": 1.0,
     "mrr": 0.9483,
-    "avgLatencyMs": 223.5,
-    "maxLatencyMs": 443.9,
+    "avgLatencyMs": 272.4,
+    "maxLatencyMs": 924.3,
     "oosAvgTopScore": 0.4408,
     "cases": [
       {
@@ -2518,7 +2518,7 @@
             "score": 0.4717
           }
         ],
-        "latencyMs": 221.9
+        "latencyMs": 252.3
       },
       {
         "id": "refund-02",
@@ -2550,7 +2550,7 @@
             "score": 0.4944
           }
         ],
-        "latencyMs": 200.1
+        "latencyMs": 227.9
       },
       {
         "id": "refund-03",
@@ -2582,7 +2582,7 @@
             "score": 0.4584
           }
         ],
-        "latencyMs": 244.2
+        "latencyMs": 227.5
       },
       {
         "id": "refund-04",
@@ -2614,7 +2614,7 @@
             "score": 0.4316
           }
         ],
-        "latencyMs": 231.2
+        "latencyMs": 308.5
       },
       {
         "id": "refund-05",
@@ -2646,7 +2646,7 @@
             "score": 0.5423
           }
         ],
-        "latencyMs": 231.8
+        "latencyMs": 211.8
       },
       {
         "id": "return-01",
@@ -2678,7 +2678,7 @@
             "score": 0.4738
           }
         ],
-        "latencyMs": 195.2
+        "latencyMs": 243.9
       },
       {
         "id": "return-02",
@@ -2710,7 +2710,7 @@
             "score": 0.5772
           }
         ],
-        "latencyMs": 196.9
+        "latencyMs": 372.1
       },
       {
         "id": "return-03",
@@ -2742,7 +2742,7 @@
             "score": 0.4681
           }
         ],
-        "latencyMs": 208.1
+        "latencyMs": 236.1
       },
       {
         "id": "return-04",
@@ -2774,7 +2774,7 @@
             "score": 0.5119
           }
         ],
-        "latencyMs": 170.0
+        "latencyMs": 255.7
       },
       {
         "id": "return-05",
@@ -2806,7 +2806,7 @@
             "score": 0.4754
           }
         ],
-        "latencyMs": 184.6
+        "latencyMs": 216.0
       },
       {
         "id": "logistics-01",
@@ -2838,7 +2838,7 @@
             "score": 0.5005
           }
         ],
-        "latencyMs": 221.4
+        "latencyMs": 296.0
       },
       {
         "id": "logistics-02",
@@ -2870,7 +2870,7 @@
             "score": 0.4339
           }
         ],
-        "latencyMs": 223.9
+        "latencyMs": 231.9
       },
       {
         "id": "logistics-03",
@@ -2902,7 +2902,7 @@
             "score": 0.303
           }
         ],
-        "latencyMs": 192.3
+        "latencyMs": 203.9
       },
       {
         "id": "logistics-04",
@@ -2934,7 +2934,7 @@
             "score": 0.4346
           }
         ],
-        "latencyMs": 227.6
+        "latencyMs": 260.0
       },
       {
         "id": "logistics-05",
@@ -2966,7 +2966,7 @@
             "score": 0.3895
           }
         ],
-        "latencyMs": 243.7
+        "latencyMs": 219.9
       },
       {
         "id": "warranty-01",
@@ -2998,7 +2998,7 @@
             "score": 0.368
           }
         ],
-        "latencyMs": 192.5
+        "latencyMs": 223.8
       },
       {
         "id": "warranty-02",
@@ -3030,7 +3030,7 @@
             "score": 0.3851
           }
         ],
-        "latencyMs": 220.3
+        "latencyMs": 179.7
       },
       {
         "id": "warranty-03",
@@ -3062,7 +3062,7 @@
             "score": 0.4489
           }
         ],
-        "latencyMs": 263.5
+        "latencyMs": 212.3
       },
       {
         "id": "warranty-04",
@@ -3094,7 +3094,7 @@
             "score": 0.3802
           }
         ],
-        "latencyMs": 189.5
+        "latencyMs": 236.4
       },
       {
         "id": "warranty-05",
@@ -3126,7 +3126,7 @@
             "score": 0.3957
           }
         ],
-        "latencyMs": 218.7
+        "latencyMs": 219.5
       },
       {
         "id": "ticket-01",
@@ -3158,7 +3158,7 @@
             "score": 0.489
           }
         ],
-        "latencyMs": 224.0
+        "latencyMs": 204.1
       },
       {
         "id": "ticket-02",
@@ -3190,7 +3190,7 @@
             "score": 0.5454
           }
         ],
-        "latencyMs": 235.5
+        "latencyMs": 191.9
       },
       {
         "id": "quickref-01",
@@ -3222,7 +3222,7 @@
             "score": 0.4966
           }
         ],
-        "latencyMs": 191.7
+        "latencyMs": 247.9
       },
       {
         "id": "quickref-02",
@@ -3254,7 +3254,7 @@
             "score": 0.3983
           }
         ],
-        "latencyMs": 224.2
+        "latencyMs": 192.2
       },
       {
         "id": "colloquial-01",
@@ -3286,7 +3286,7 @@
             "score": 0.4355
           }
         ],
-        "latencyMs": 232.0
+        "latencyMs": 223.7
       },
       {
         "id": "colloquial-02",
@@ -3318,7 +3318,7 @@
             "score": 0.4263
           }
         ],
-        "latencyMs": 236.0
+        "latencyMs": 404.3
       },
       {
         "id": "colloquial-03",
@@ -3350,7 +3350,7 @@
             "score": 0.2578
           }
         ],
-        "latencyMs": 203.8
+        "latencyMs": 415.7
       },
       {
         "id": "colloquial-04",
@@ -3382,7 +3382,7 @@
             "score": 0.3347
           }
         ],
-        "latencyMs": 443.9
+        "latencyMs": 259.8
       },
       {
         "id": "colloquial-05",
@@ -3414,7 +3414,7 @@
             "score": 0.4411
           }
         ],
-        "latencyMs": 211.9
+        "latencyMs": 924.3
       }
     ],
     "oos": [
@@ -3451,8 +3451,8 @@
     "hitRateAt3": 0.931,
     "hitRateAt5": 0.931,
     "mrr": 0.8966,
-    "avgLatencyMs": 228.5,
-    "maxLatencyMs": 383.8,
+    "avgLatencyMs": 280.1,
+    "maxLatencyMs": 955.5,
     "oosAvgTopScore": 0.0,
     "cases": [
       {
@@ -3475,7 +3475,7 @@
             "score": 0.5063
           }
         ],
-        "latencyMs": 183.0
+        "latencyMs": 188.8
       },
       {
         "id": "refund-02",
@@ -3502,7 +3502,7 @@
             "score": 0.5341
           }
         ],
-        "latencyMs": 232.4
+        "latencyMs": 379.5
       },
       {
         "id": "refund-03",
@@ -3519,7 +3519,7 @@
             "score": 0.5425
           }
         ],
-        "latencyMs": 178.6
+        "latencyMs": 216.0
       },
       {
         "id": "refund-04",
@@ -3541,7 +3541,7 @@
             "score": 0.515
           }
         ],
-        "latencyMs": 209.1
+        "latencyMs": 231.7
       },
       {
         "id": "refund-05",
@@ -3573,7 +3573,7 @@
             "score": 0.5423
           }
         ],
-        "latencyMs": 303.8
+        "latencyMs": 283.9
       },
       {
         "id": "return-01",
@@ -3595,7 +3595,7 @@
             "score": 0.52
           }
         ],
-        "latencyMs": 383.8
+        "latencyMs": 215.9
       },
       {
         "id": "return-02",
@@ -3627,7 +3627,7 @@
             "score": 0.5772
           }
         ],
-        "latencyMs": 223.8
+        "latencyMs": 196.4
       },
       {
         "id": "return-03",
@@ -3644,7 +3644,7 @@
             "score": 0.5633
           }
         ],
-        "latencyMs": 212.1
+        "latencyMs": 203.7
       },
       {
         "id": "return-04",
@@ -3676,7 +3676,7 @@
             "score": 0.5119
           }
         ],
-        "latencyMs": 196.0
+        "latencyMs": 220.6
       },
       {
         "id": "return-05",
@@ -3698,7 +3698,7 @@
             "score": 0.5156
           }
         ],
-        "latencyMs": 220.2
+        "latencyMs": 187.4
       },
       {
         "id": "logistics-01",
@@ -3730,7 +3730,7 @@
             "score": 0.5005
           }
         ],
-        "latencyMs": 244.6
+        "latencyMs": 955.5
       },
       {
         "id": "logistics-02",
@@ -3742,13 +3742,13 @@
             "score": 0.5886
           }
         ],
-        "latencyMs": 243.1
+        "latencyMs": 237.6
       },
       {
         "id": "logistics-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 255.9
+        "latencyMs": 194.8
       },
       {
         "id": "logistics-04",
@@ -3770,7 +3770,7 @@
             "score": 0.5049
           }
         ],
-        "latencyMs": 203.8
+        "latencyMs": 203.6
       },
       {
         "id": "logistics-05",
@@ -3782,7 +3782,7 @@
             "score": 0.5022
           }
         ],
-        "latencyMs": 216.6
+        "latencyMs": 252.2
       },
       {
         "id": "warranty-01",
@@ -3794,7 +3794,7 @@
             "score": 0.6778
           }
         ],
-        "latencyMs": 223.9
+        "latencyMs": 231.8
       },
       {
         "id": "warranty-02",
@@ -3811,7 +3811,7 @@
             "score": 0.5169
           }
         ],
-        "latencyMs": 232.0
+        "latencyMs": 308.2
       },
       {
         "id": "warranty-03",
@@ -3833,7 +3833,7 @@
             "score": 0.523
           }
         ],
-        "latencyMs": 239.7
+        "latencyMs": 383.8
       },
       {
         "id": "warranty-04",
@@ -3850,7 +3850,7 @@
             "score": 0.534
           }
         ],
-        "latencyMs": 224.0
+        "latencyMs": 232.3
       },
       {
         "id": "warranty-05",
@@ -3867,7 +3867,7 @@
             "score": 0.5407
           }
         ],
-        "latencyMs": 239.8
+        "latencyMs": 371.5
       },
       {
         "id": "ticket-01",
@@ -3894,7 +3894,7 @@
             "score": 0.5272
           }
         ],
-        "latencyMs": 220.1
+        "latencyMs": 212.2
       },
       {
         "id": "ticket-02",
@@ -3926,7 +3926,7 @@
             "score": 0.5454
           }
         ],
-        "latencyMs": 227.9
+        "latencyMs": 212.0
       },
       {
         "id": "quickref-01",
@@ -3953,7 +3953,7 @@
             "score": 0.5272
           }
         ],
-        "latencyMs": 216.5
+        "latencyMs": 176.0
       },
       {
         "id": "quickref-02",
@@ -3970,7 +3970,7 @@
             "score": 0.5174
           }
         ],
-        "latencyMs": 187.5
+        "latencyMs": 231.8
       },
       {
         "id": "colloquial-01",
@@ -3987,7 +3987,7 @@
             "score": 0.5282
           }
         ],
-        "latencyMs": 175.7
+        "latencyMs": 391.9
       },
       {
         "id": "colloquial-02",
@@ -3999,13 +3999,13 @@
             "score": 0.5041
           }
         ],
-        "latencyMs": 188.6
+        "latencyMs": 212.1
       },
       {
         "id": "colloquial-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 279.6
+        "latencyMs": 231.8
       },
       {
         "id": "colloquial-04",
@@ -4017,7 +4017,7 @@
             "score": 0.5335
           }
         ],
-        "latencyMs": 231.5
+        "latencyMs": 204.4
       },
       {
         "id": "colloquial-05",
@@ -4039,7 +4039,7 @@
             "score": 0.5006
           }
         ],
-        "latencyMs": 232.3
+        "latencyMs": 555.6
       }
     ],
     "oos": [
@@ -4076,33 +4076,33 @@
     "hitRateAt3": 0.1379,
     "hitRateAt5": 0.1379,
     "mrr": 0.1379,
-    "avgLatencyMs": 264.8,
-    "maxLatencyMs": 876.5,
+    "avgLatencyMs": 244.7,
+    "maxLatencyMs": 512.4,
     "oosAvgTopScore": 0.0,
     "cases": [
       {
         "id": "refund-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 219.2
+        "latencyMs": 375.6
       },
       {
         "id": "refund-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 195.3
+        "latencyMs": 228.1
       },
       {
         "id": "refund-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 205.0
+        "latencyMs": 363.8
       },
       {
         "id": "refund-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 224.4
+        "latencyMs": 184.3
       },
       {
         "id": "refund-05",
@@ -4114,13 +4114,13 @@
             "score": 0.7062
           }
         ],
-        "latencyMs": 579.5
+        "latencyMs": 272.0
       },
       {
         "id": "return-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 227.4
+        "latencyMs": 212.0
       },
       {
         "id": "return-02",
@@ -4132,85 +4132,85 @@
             "score": 0.711
           }
         ],
-        "latencyMs": 876.5
+        "latencyMs": 203.8
       },
       {
         "id": "return-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 263.5
+        "latencyMs": 216.0
       },
       {
         "id": "return-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 304.4
+        "latencyMs": 231.8
       },
       {
         "id": "return-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 244.1
+        "latencyMs": 188.2
       },
       {
         "id": "logistics-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 176.9
+        "latencyMs": 271.5
       },
       {
         "id": "logistics-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 190.9
+        "latencyMs": 512.4
       },
       {
         "id": "logistics-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 367.6
+        "latencyMs": 212.2
       },
       {
         "id": "logistics-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 202.0
+        "latencyMs": 239.3
       },
       {
         "id": "logistics-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 298.4
+        "latencyMs": 202.9
       },
       {
         "id": "warranty-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 220.4
+        "latencyMs": 144.0
       },
       {
         "id": "warranty-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 227.3
+        "latencyMs": 201.6
       },
       {
         "id": "warranty-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 204.1
+        "latencyMs": 303.8
       },
       {
         "id": "warranty-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 204.0
+        "latencyMs": 191.8
       },
       {
         "id": "warranty-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 228.0
+        "latencyMs": 332.1
       },
       {
         "id": "ticket-01",
@@ -4222,13 +4222,13 @@
             "score": 0.8139
           }
         ],
-        "latencyMs": 199.9
+        "latencyMs": 247.8
       },
       {
         "id": "ticket-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 196.2
+        "latencyMs": 231.9
       },
       {
         "id": "quickref-01",
@@ -4245,43 +4245,43 @@
             "score": 0.7088
           }
         ],
-        "latencyMs": 244.3
+        "latencyMs": 208.4
       },
       {
         "id": "quickref-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 155.5
+        "latencyMs": 203.6
       },
       {
         "id": "colloquial-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 203.9
+        "latencyMs": 276.4
       },
       {
         "id": "colloquial-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 336.1
+        "latencyMs": 211.6
       },
       {
         "id": "colloquial-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 239.8
+        "latencyMs": 172.5
       },
       {
         "id": "colloquial-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 236.7
+        "latencyMs": 231.7
       },
       {
         "id": "colloquial-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 208.1
+        "latencyMs": 224.0
       }
     ],
     "oos": [
@@ -4318,8 +4318,8 @@
     "hitRateAt3": 1.0,
     "hitRateAt5": 1.0,
     "mrr": 0.9483,
-    "avgLatencyMs": 217.2,
-    "maxLatencyMs": 292.4,
+    "avgLatencyMs": 240.9,
+    "maxLatencyMs": 399.6,
     "oosAvgTopScore": 0.4408,
     "cases": [
       {
@@ -4357,7 +4357,7 @@
             "score": 0.3984
           }
         ],
-        "latencyMs": 243.9
+        "latencyMs": 256.3
       },
       {
         "id": "refund-02",
@@ -4394,7 +4394,7 @@
             "score": 0.3924
           }
         ],
-        "latencyMs": 193.0
+        "latencyMs": 220.1
       },
       {
         "id": "refund-03",
@@ -4431,7 +4431,7 @@
             "score": 0.4102
           }
         ],
-        "latencyMs": 199.3
+        "latencyMs": 231.6
       },
       {
         "id": "refund-04",
@@ -4468,7 +4468,7 @@
             "score": 0.4081
           }
         ],
-        "latencyMs": 228.4
+        "latencyMs": 228.7
       },
       {
         "id": "refund-05",
@@ -4505,7 +4505,7 @@
             "score": 0.395
           }
         ],
-        "latencyMs": 188.8
+        "latencyMs": 182.6
       },
       {
         "id": "return-01",
@@ -4542,7 +4542,7 @@
             "score": 0.4185
           }
         ],
-        "latencyMs": 191.1
+        "latencyMs": 217.6
       },
       {
         "id": "return-02",
@@ -4579,7 +4579,7 @@
             "score": 0.4593
           }
         ],
-        "latencyMs": 195.2
+        "latencyMs": 259.5
       },
       {
         "id": "return-03",
@@ -4616,7 +4616,7 @@
             "score": 0.461
           }
         ],
-        "latencyMs": 232.8
+        "latencyMs": 211.9
       },
       {
         "id": "return-04",
@@ -4653,7 +4653,7 @@
             "score": 0.4334
           }
         ],
-        "latencyMs": 227.7
+        "latencyMs": 235.7
       },
       {
         "id": "return-05",
@@ -4690,7 +4690,7 @@
             "score": 0.4742
           }
         ],
-        "latencyMs": 243.6
+        "latencyMs": 399.6
       },
       {
         "id": "logistics-01",
@@ -4727,7 +4727,7 @@
             "score": 0.4221
           }
         ],
-        "latencyMs": 200.3
+        "latencyMs": 148.8
       },
       {
         "id": "logistics-02",
@@ -4764,7 +4764,7 @@
             "score": 0.4278
           }
         ],
-        "latencyMs": 191.4
+        "latencyMs": 211.8
       },
       {
         "id": "logistics-03",
@@ -4801,7 +4801,7 @@
             "score": 0.2481
           }
         ],
-        "latencyMs": 192.6
+        "latencyMs": 303.4
       },
       {
         "id": "logistics-04",
@@ -4838,7 +4838,7 @@
             "score": 0.3716
           }
         ],
-        "latencyMs": 207.7
+        "latencyMs": 228.1
       },
       {
         "id": "logistics-05",
@@ -4875,7 +4875,7 @@
             "score": 0.385
           }
         ],
-        "latencyMs": 179.4
+        "latencyMs": 244.2
       },
       {
         "id": "warranty-01",
@@ -4912,7 +4912,7 @@
             "score": 0.3594
           }
         ],
-        "latencyMs": 220.4
+        "latencyMs": 216.1
       },
       {
         "id": "warranty-02",
@@ -4949,7 +4949,7 @@
             "score": 0.3388
           }
         ],
-        "latencyMs": 227.8
+        "latencyMs": 384.0
       },
       {
         "id": "warranty-03",
@@ -4986,7 +4986,7 @@
             "score": 0.4066
           }
         ],
-        "latencyMs": 215.4
+        "latencyMs": 271.6
       },
       {
         "id": "warranty-04",
@@ -5023,7 +5023,7 @@
             "score": 0.325
           }
         ],
-        "latencyMs": 240.1
+        "latencyMs": 243.9
       },
       {
         "id": "warranty-05",
@@ -5060,7 +5060,7 @@
             "score": 0.3374
           }
         ],
-        "latencyMs": 292.4
+        "latencyMs": 252.0
       },
       {
         "id": "ticket-01",
@@ -5097,7 +5097,7 @@
             "score": 0.4827
           }
         ],
-        "latencyMs": 279.9
+        "latencyMs": 232.7
       },
       {
         "id": "ticket-02",
@@ -5134,7 +5134,7 @@
             "score": 0.4921
           }
         ],
-        "latencyMs": 220.0
+        "latencyMs": 199.3
       },
       {
         "id": "quickref-01",
@@ -5171,7 +5171,7 @@
             "score": 0.434
           }
         ],
-        "latencyMs": 215.3
+        "latencyMs": 215.8
       },
       {
         "id": "quickref-02",
@@ -5208,7 +5208,7 @@
             "score": 0.313
           }
         ],
-        "latencyMs": 228.2
+        "latencyMs": 235.8
       },
       {
         "id": "colloquial-01",
@@ -5245,7 +5245,7 @@
             "score": 0.3904
           }
         ],
-        "latencyMs": 209.9
+        "latencyMs": 191.9
       },
       {
         "id": "colloquial-02",
@@ -5282,7 +5282,7 @@
             "score": 0.3817
           }
         ],
-        "latencyMs": 217.9
+        "latencyMs": 235.9
       },
       {
         "id": "colloquial-03",
@@ -5319,7 +5319,7 @@
             "score": 0.2457
           }
         ],
-        "latencyMs": 204.2
+        "latencyMs": 280.1
       },
       {
         "id": "colloquial-04",
@@ -5356,7 +5356,7 @@
             "score": 0.3171
           }
         ],
-        "latencyMs": 216.3
+        "latencyMs": 228.0
       },
       {
         "id": "colloquial-05",
@@ -5393,7 +5393,7 @@
             "score": 0.414
           }
         ],
-        "latencyMs": 195.5
+        "latencyMs": 219.6
       }
     ],
     "oos": [
@@ -5430,8 +5430,8 @@
     "hitRateAt3": 0.931,
     "hitRateAt5": 0.931,
     "mrr": 0.8966,
-    "avgLatencyMs": 242.4,
-    "maxLatencyMs": 579.8,
+    "avgLatencyMs": 235.2,
+    "maxLatencyMs": 398.2,
     "oosAvgTopScore": 0.0,
     "cases": [
       {
@@ -5454,7 +5454,7 @@
             "score": 0.5063
           }
         ],
-        "latencyMs": 204.5
+        "latencyMs": 206.9
       },
       {
         "id": "refund-02",
@@ -5481,7 +5481,7 @@
             "score": 0.5341
           }
         ],
-        "latencyMs": 307.4
+        "latencyMs": 232.7
       },
       {
         "id": "refund-03",
@@ -5498,7 +5498,7 @@
             "score": 0.5425
           }
         ],
-        "latencyMs": 203.9
+        "latencyMs": 376.1
       },
       {
         "id": "refund-04",
@@ -5520,7 +5520,7 @@
             "score": 0.515
           }
         ],
-        "latencyMs": 208.2
+        "latencyMs": 291.9
       },
       {
         "id": "refund-05",
@@ -5552,7 +5552,7 @@
             "score": 0.5423
           }
         ],
-        "latencyMs": 235.7
+        "latencyMs": 216.0
       },
       {
         "id": "return-01",
@@ -5574,7 +5574,7 @@
             "score": 0.52
           }
         ],
-        "latencyMs": 191.9
+        "latencyMs": 212.1
       },
       {
         "id": "return-02",
@@ -5606,7 +5606,7 @@
             "score": 0.5772
           }
         ],
-        "latencyMs": 240.3
+        "latencyMs": 231.6
       },
       {
         "id": "return-03",
@@ -5623,7 +5623,7 @@
             "score": 0.5633
           }
         ],
-        "latencyMs": 292.4
+        "latencyMs": 212.0
       },
       {
         "id": "return-04",
@@ -5655,7 +5655,7 @@
             "score": 0.5119
           }
         ],
-        "latencyMs": 195.4
+        "latencyMs": 211.8
       },
       {
         "id": "return-05",
@@ -5677,7 +5677,7 @@
             "score": 0.5156
           }
         ],
-        "latencyMs": 231.8
+        "latencyMs": 204.4
       },
       {
         "id": "logistics-01",
@@ -5709,7 +5709,7 @@
             "score": 0.5005
           }
         ],
-        "latencyMs": 579.8
+        "latencyMs": 199.9
       },
       {
         "id": "logistics-02",
@@ -5721,13 +5721,13 @@
             "score": 0.5886
           }
         ],
-        "latencyMs": 216.3
+        "latencyMs": 239.8
       },
       {
         "id": "logistics-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 206.2
+        "latencyMs": 192.6
       },
       {
         "id": "logistics-04",
@@ -5749,7 +5749,7 @@
             "score": 0.5049
           }
         ],
-        "latencyMs": 197.6
+        "latencyMs": 196.9
       },
       {
         "id": "logistics-05",
@@ -5761,7 +5761,7 @@
             "score": 0.5022
           }
         ],
-        "latencyMs": 476.0
+        "latencyMs": 398.2
       },
       {
         "id": "warranty-01",
@@ -5773,7 +5773,7 @@
             "score": 0.6778
           }
         ],
-        "latencyMs": 204.2
+        "latencyMs": 215.8
       },
       {
         "id": "warranty-02",
@@ -5790,7 +5790,7 @@
             "score": 0.5169
           }
         ],
-        "latencyMs": 224.2
+        "latencyMs": 208.3
       },
       {
         "id": "warranty-03",
@@ -5812,7 +5812,7 @@
             "score": 0.523
           }
         ],
-        "latencyMs": 199.6
+        "latencyMs": 235.9
       },
       {
         "id": "warranty-04",
@@ -5829,7 +5829,7 @@
             "score": 0.534
           }
         ],
-        "latencyMs": 212.1
+        "latencyMs": 204.0
       },
       {
         "id": "warranty-05",
@@ -5846,7 +5846,7 @@
             "score": 0.5407
           }
         ],
-        "latencyMs": 172.1
+        "latencyMs": 204.2
       },
       {
         "id": "ticket-01",
@@ -5873,7 +5873,7 @@
             "score": 0.5272
           }
         ],
-        "latencyMs": 207.5
+        "latencyMs": 295.8
       },
       {
         "id": "ticket-02",
@@ -5905,7 +5905,7 @@
             "score": 0.5454
           }
         ],
-        "latencyMs": 200.0
+        "latencyMs": 244.1
       },
       {
         "id": "quickref-01",
@@ -5932,7 +5932,7 @@
             "score": 0.5272
           }
         ],
-        "latencyMs": 211.8
+        "latencyMs": 212.0
       },
       {
         "id": "quickref-02",
@@ -5949,7 +5949,7 @@
             "score": 0.5174
           }
         ],
-        "latencyMs": 248.2
+        "latencyMs": 232.2
       },
       {
         "id": "colloquial-01",
@@ -5966,7 +5966,7 @@
             "score": 0.5282
           }
         ],
-        "latencyMs": 220.0
+        "latencyMs": 275.5
       },
       {
         "id": "colloquial-02",
@@ -5978,13 +5978,13 @@
             "score": 0.5041
           }
         ],
-        "latencyMs": 219.9
+        "latencyMs": 200.1
       },
       {
         "id": "colloquial-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 216.3
+        "latencyMs": 235.8
       },
       {
         "id": "colloquial-04",
@@ -5996,7 +5996,7 @@
             "score": 0.5335
           }
         ],
-        "latencyMs": 220.1
+        "latencyMs": 232.1
       },
       {
         "id": "colloquial-05",
@@ -6018,7 +6018,7 @@
             "score": 0.5006
           }
         ],
-        "latencyMs": 287.5
+        "latencyMs": 200.6
       }
     ],
     "oos": [
@@ -6055,33 +6055,33 @@
     "hitRateAt3": 0.1379,
     "hitRateAt5": 0.1379,
     "mrr": 0.1379,
-    "avgLatencyMs": 248.8,
-    "maxLatencyMs": 684.6,
+    "avgLatencyMs": 224.8,
+    "maxLatencyMs": 403.8,
     "oosAvgTopScore": 0.0,
     "cases": [
       {
         "id": "refund-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 244.1
+        "latencyMs": 403.8
       },
       {
         "id": "refund-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 232.3
+        "latencyMs": 204.7
       },
       {
         "id": "refund-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 235.5
+        "latencyMs": 207.2
       },
       {
         "id": "refund-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 224.5
+        "latencyMs": 232.2
       },
       {
         "id": "refund-05",
@@ -6093,13 +6093,13 @@
             "score": 0.7062
           }
         ],
-        "latencyMs": 219.3
+        "latencyMs": 188.2
       },
       {
         "id": "return-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 244.1
+        "latencyMs": 203.5
       },
       {
         "id": "return-02",
@@ -6111,85 +6111,85 @@
             "score": 0.711
           }
         ],
-        "latencyMs": 228.2
+        "latencyMs": 189.9
       },
       {
         "id": "return-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 211.6
+        "latencyMs": 242.1
       },
       {
         "id": "return-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 204.6
+        "latencyMs": 192.1
       },
       {
         "id": "return-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 328.1
+        "latencyMs": 204.2
       },
       {
         "id": "logistics-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 239.5
+        "latencyMs": 224.0
       },
       {
         "id": "logistics-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 223.7
+        "latencyMs": 243.7
       },
       {
         "id": "logistics-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 196.6
+        "latencyMs": 216.2
       },
       {
         "id": "logistics-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 267.6
+        "latencyMs": 207.9
       },
       {
         "id": "logistics-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 200.0
+        "latencyMs": 203.9
       },
       {
         "id": "warranty-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 188.6
+        "latencyMs": 228.0
       },
       {
         "id": "warranty-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 215.6
+        "latencyMs": 256.0
       },
       {
         "id": "warranty-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 324.0
+        "latencyMs": 200.0
       },
       {
         "id": "warranty-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 215.8
+        "latencyMs": 240.4
       },
       {
         "id": "warranty-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 236.1
+        "latencyMs": 231.6
       },
       {
         "id": "ticket-01",
@@ -6201,13 +6201,13 @@
             "score": 0.8139
           }
         ],
-        "latencyMs": 223.7
+        "latencyMs": 159.4
       },
       {
         "id": "ticket-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 239.7
+        "latencyMs": 216.4
       },
       {
         "id": "quickref-01",
@@ -6224,43 +6224,43 @@
             "score": 0.7088
           }
         ],
-        "latencyMs": 684.6
+        "latencyMs": 232.1
       },
       {
         "id": "quickref-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 235.8
+        "latencyMs": 251.7
       },
       {
         "id": "colloquial-01",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 212.0
+        "latencyMs": 200.2
       },
       {
         "id": "colloquial-02",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 216.3
+        "latencyMs": 292.0
       },
       {
         "id": "colloquial-03",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 215.6
+        "latencyMs": 223.8
       },
       {
         "id": "colloquial-04",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 272.2
+        "latencyMs": 208.5
       },
       {
         "id": "colloquial-05",
         "rank": 0,
         "retrieved": [],
-        "latencyMs": 235.5
+        "latencyMs": 215.3
       }
     ],
     "oos": [

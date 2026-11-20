@@ -1,0 +1,573 @@
+{
+  "summary": {
+    "mode": "react",
+    "total": 30,
+    "success": 30,
+    "faithfulRate": 0.9,
+    "toolRuleRate": 1.0,
+    "refuseRate": 1.0,
+    "avgLatencyMs": 2088.6
+  },
+  "cases": [
+    {
+      "id": "a-refund-01",
+      "question": "什么情况下可以申请退款",
+      "reply": "根据退款政策，以下情况可以申请退款：\n\n1. 商品质量问题：存在制造缺陷、损坏或与描述不符，可全额退款（含运费）。\n2. 未收到货：订单状态为“已下单”超过7个自然日仍未发货，可全额退款（含运费）。\n3. 七天无理由退货：订单“已完成”且签收未满7个自然日（特殊商品除外），全额退款，退回运费由您承担。\n4. 多拍/错拍：下单错误且订单仍为“已下单”（未发货前），可全额退款（含运费）。\n\n退款流程：申请后进入“审核中”（1-3个工作日），审核通过后“已退款”，再1-5个工作日“已到账”。\n\n如方便，请提供订单号，我帮您查询具体订单状态并确认是否符合条件。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 3024.5,
+      "success": true
+    },
+    {
+      "id": "a-refund-02",
+      "question": "退款多久能到账",
+      "reply": "退款到账一般分三个阶段，根据退款政策：\n\n1. 审核中：客服审核退款申请，约 1-3 个工作日；\n2. 已退款：审核通过后 1 个工作日内发起至支付渠道；\n3. 已到账：退款发起后 1-5 个工作日到账，具体视银行而定。\n\n也就是说，从申请到实际到账，通常需要约 3-9 个工作日。如您提供订单编号，我可以帮您查询当前退款状态和所处阶段。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 0
+      },
+      "refusedOk": true,
+      "latencyMs": 2678.4,
+      "success": true
+    },
+    {
+      "id": "a-refund-03",
+      "question": "七天无理由退货退运费谁承担",
+      "reply": "按退货政策规定：七天无理由退货的退回运费由客户承担，商品货款全额退还。若属于商品质量问题退货，则退回运费由我方承担，客服会在工单处理阶段告知退货地址和运费承担方式。\n\n另外，七天无理由退货需在签收后7个自然日内提出，商品需完好、不影响二次销售，且需先创建售后工单（问题类型选“退货”）经审核。如您有具体订单，可提供订单号，我帮您核实具体情况。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 2287.0,
+      "success": true
+    },
+    {
+      "id": "a-return-01",
+      "question": "怎么申请退货",
+      "reply": "申请退货的流程如下（依据退货政策）：\n\n1. 创建售后工单，问题类型选择“退货”，并填写问题描述；涉及质量问题的，还需提供照片证据。\n2. 提交后，工单状态依次为：待处理 → 处理中 → 已完成。客服接单后，会与您确认退货地址和物流方式。\n3. 收到退货地址后，请在 3 个自然日内寄出商品。\n\n退货时限要求：\n- 七天无理由退货：签收后 7 个自然日内，商品需完好、不影响二次销售。退回运费由您承担。\n- 商品质量问题：签收后 15 个自然日内，需提供问题描述和照片。退回运费由本方承担。\n- 商品与描述不符：签收后 7 个自然日内。\n\n退货完成后，退款会按退款流程发起。如需我帮您查询具体订单是否还在可退期限内，请提供订单编号。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 0,
+        "refused": 0,
+        "tool_correct": 0
+      },
+      "refusedOk": true,
+      "latencyMs": 2733.7,
+      "success": true
+    },
+    {
+      "id": "a-return-02",
+      "question": "退货的运费由谁承担",
+      "reply": "退货运费按退货原因区分：\n\n1. 商品质量问题退货：退回运费由我们承担，客服会在工单处理阶段告知退货地址和运费承担方式。\n\n2. 七天无理由退货：退回运费由您承担，客服在工单处理阶段提供退货地址。\n\n3. 商品与描述不符退货：政策中未单独列明运费承担方，建议转人工确认。\n\n另外提醒：收到退货地址后需在3个自然日内寄出。如需针对具体订单判断，请提供订单编号。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 0
+      },
+      "refusedOk": true,
+      "latencyMs": 2087.2,
+      "success": true
+    },
+    {
+      "id": "a-logistics-01",
+      "question": "下单之后多久可以发货",
+      "reply": "根据物流政策，订单状态为“已下单”时，仓库会在下单后1-2个工作日内发货；发货后1-3个工作日送达（同城次日达）。\n\n若订单超过3个工作日仍显示“已下单”未发货，可创建售后工单催促发货。如需查询具体订单进度，请提供订单号。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 0
+      },
+      "refusedOk": true,
+      "latencyMs": 2449.2,
+      "success": true
+    },
+    {
+      "id": "a-logistics-02",
+      "question": "物流长时间没有更新应该怎么办",
+      "reply": "物流长时间未更新，可按以下政策处理：\n\n1. 先确认订单当前状态。若为“已下单”，说明仓库尚未发货，正常应在下单后1-2个工作日内发出；若超过3个工作日仍未发货，可创建售后工单催促发货。\n2. 若状态为“运输中”，正常应在发货后2-5个工作日送达；若超过7个自然日仍无更新，可创建售后工单查询物流。\n3. 若怀疑快递丢失，可创建售后工单，问题类型选“物流问题”，我们会联系快递核实并处理。\n4. 状态为“已发货”及之后，可提供快递单号，供您在快递官网自行追踪。\n\n请提供您的订单编号，我帮您查询具体状态和物流进度。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 0,
+        "refused": 0,
+        "tool_correct": 0
+      },
+      "refusedOk": true,
+      "latencyMs": 3237.2,
+      "success": true
+    },
+    {
+      "id": "a-warranty-01",
+      "question": "家电类商品保修多长时间",
+      "reply": "家电类商品保修期为 24 个月，自订单状态变为“已完成”（签收）之日起算。\n\n保修范围：正常使用下出现制造缺陷、功能故障可免费保修，来回运费由本方承担；人为损坏、进水、摔落等属有偿维修；超过保修期、无有效订单记录或商品被私自拆修的不支持保修。\n\n申请方式：创建售后工单，问题类型选“保修”，填写故障现象并提供订单编号以便核实保修期，客服审核后给出处理方案。\n\n如需确认您具体订单的保修状态，请提供订单编号，我帮您查询。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 0,
+        "refused": 0,
+        "tool_correct": 0
+      },
+      "refusedOk": true,
+      "latencyMs": 2086.7,
+      "success": true
+    },
+    {
+      "id": "a-warranty-02",
+      "question": "人为损坏还能保修吗",
+      "reply": "根据保修规则第4.2条：免费保修仅适用于正常使用下出现的制造缺陷、功能故障；人为损坏、进水、摔落等非质量问题属于**有偿维修**，即仍可受理维修，但需自费。\n\n另外，若已超过保修期、无有效订单记录或商品被私自拆修，则不支持保修。\n\n如需申请，请提供订单编号，我帮您核实保修期并创建售后工单（问题类型选“保修”）。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 0
+      },
+      "refusedOk": true,
+      "latencyMs": 2901.1,
+      "success": true
+    },
+    {
+      "id": "a-ticket-01",
+      "question": "售后工单的问题类型有哪些",
+      "reply": "根据知识库，售后工单的问题类型（problemType）共 5 类：\n\n1. 商品质量问题：适用退款§1.1、退货§2.1、保修§4.2，流程为创建工单→审核→退货/维修/退款。\n2. 七天无理由退货：适用退货§2.1，流程为创建工单→审核退货→退款。\n3. 物流问题：适用物流查询§3.3，流程为创建工单→联系快递→反馈结果。\n4. 保修：适用保修规则§4.3，流程为创建工单→核实保修期→维修/更换。\n5. 其他：视具体情况，由客服处理。\n\n如需针对某个订单提交工单，请提供订单编号。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 0
+      },
+      "refusedOk": true,
+      "latencyMs": 2567.2,
+      "success": true
+    },
+    {
+      "id": "a-order-01",
+      "question": "订单10001到哪了",
+      "reply": "订单10001（智能扫地机器人 X20，2999元）目前状态是运输中，下单时间为2026-10-20 10:15。\n\n系统暂未返回具体物流节点信息，无法确认包裹当前所在位置和预计送达时间。如需查询详细物流轨迹，建议转人工客服为您核实。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryOrderByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 1,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 2539.5,
+      "success": true
+    },
+    {
+      "id": "a-order-02",
+      "question": "订单10002发货了吗",
+      "reply": "订单10002（无线蓝牙耳机 Pro，499元）目前状态为“已下单”，尚未发货，下单时间为2026-10-28 09:30。如需了解预计发货时间或催发货，建议转人工客服核实仓库情况。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryOrderByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1664.9,
+      "success": true
+    },
+    {
+      "id": "a-order-03",
+      "question": "订单10004是什么状态",
+      "reply": "订单10004的当前状态为：已完成。\n\n- 商品：空气净化器 A1\n- 金额：1899.00 元\n- 下单时间：2026-09-15 11:00:00\n\n如需查询物流进度、退款或保修情况，请告知具体需求。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryOrderByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1900.7,
+      "success": true
+    },
+    {
+      "id": "a-refund-t01",
+      "question": "订单10001的退款到账了吗",
+      "reply": "订单10001的退款已到账。退款原因是商品质量问题，申请时间2026-10-25 09:00，当前状态为已到账。如账户未收到，建议核对支付渠道明细，或转人工进一步核实。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryRefundByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1452.2,
+      "success": true
+    },
+    {
+      "id": "a-refund-t02",
+      "question": "订单10002的退款进度怎么样",
+      "reply": "订单10002的退款记录显示：退款原因“未收到货”，当前状态为“审核中”，申请时间是2026-10-31 10:20:00，尚未退款到账。\n\n如需了解审核时效或加急处理，我可以进一步查询相关退款政策；您也可以要求转人工客服跟进。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryRefundByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 2791.2,
+      "success": true
+    },
+    {
+      "id": "a-ticket-t01",
+      "question": "订单10001的售后处理得怎么样了",
+      "reply": "订单10001的售后工单目前是“处理中”状态。\n\n工单信息：问题类型为商品质量问题，您反馈扫地机器人吸力明显下降、吸口有异物无法清理；处理方案为免费维修，客服上门检测并更换滤芯。工单创建时间：2026-10-26 09:30。\n\n订单信息：智能扫地机器人 X20，金额2999元，订单状态运输中，下单时间2026-10-20。\n\n如需预约上门时间或加急处理，建议转人工客服协调。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryOrderByOrderNo",
+        "queryTicketByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1757.6,
+      "success": true
+    },
+    {
+      "id": "a-ticket-t02",
+      "question": "订单10002的售后工单现在什么状态",
+      "reply": "订单10002的售后工单当前状态为“待处理”。\n\n工单信息：问题类型为物流问题，您反馈下单一周仍未发货、订单状态一直显示已下单。处理方案为已催仓库发货，预计今日出库并提供快递单号。工单创建时间为2026-11-01 11:00:00。\n\n建议您稍后关注物流信息，如需进一步跟进可转人工客服。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryTicketByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1895.3,
+      "success": true
+    },
+    {
+      "id": "a-warranty-t01",
+      "question": "10007的笔记本保修还有多久",
+      "reply": "订单10007（笔记本电脑15英寸）保修期为12个月，购买时间2026-11-01，目前仍在保，约剩余340天。\n\n在保期间非人为故障可免费维修，来回运费由我们承担。如需报修，请提供故障描述，我帮您创建工单。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryWarrantyByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 2232.6,
+      "success": true
+    },
+    {
+      "id": "a-warranty-t02",
+      "question": "订单10001的扫地机器人还能免费修吗",
+      "reply": "订单10001的智能扫地机器人X20仍在保修期内：保修期24个月，2026-10-20购买，目前约剩余688天。\n\n按保修规则，只要是非人为故障，例如制造缺陷或正常使用下出现的功能故障，就可以免费维修，来回运费由我们承担。人为损坏、进水、摔落等非质量问题属于有偿维修。\n\n如需申请，请创建售后工单，问题类型选“保修”，填写故障现象和订单编号10001，客服审核后会给出处理方案。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryWarrantyByOrderNo",
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 3150.5,
+      "success": true
+    },
+    {
+      "id": "a-order-04",
+      "question": "订单99999能查到吗",
+      "reply": "抱歉，系统中未查询到订单号 99999 的订单记录。请您核对一下订单号是否正确（通常为更长位数的数字），或提供下单手机号、商品名称等信息，我再帮您核实。如确认无误仍查不到，建议转人工客服进一步处理。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryOrderByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 1,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1838.1,
+      "success": true
+    },
+    {
+      "id": "a-ticket-t03",
+      "question": "订单10007有售后工单吗",
+      "reply": "您好，查询结果：订单 10007 目前没有售后工单记录，该订单可能尚未提交售后申请。如您需要办理退换货或维修，可以告诉我具体问题，我帮您确认对应政策；若您确信已提交过申请，建议转人工客服进一步核实。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryTicketByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 2363.1,
+      "success": true
+    },
+    {
+      "id": "a-refund-t03",
+      "question": "订单10003申请退款了吗",
+      "reply": "系统未查到订单10003的退款记录，说明该订单目前可能尚未申请退款。如您已提交申请，可能是数据延迟或单号有误，建议核对订单号后我再帮您查询，或转人工客服进一步确认。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "queryRefundByOrderNo"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 1,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1598.8,
+      "success": true
+    },
+    {
+      "id": "a-oos-01",
+      "question": "你们的客服电话是多少",
+      "reply": "您好，很抱歉，我这边无法确认客服热线的准确号码，知识库中没有相关条文，为避免给您错误信息，建议您通过官方App或官网的“联系客服”入口获取最新热线，或直接转人工客服咨询。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 1,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 927.0,
+      "success": true
+    },
+    {
+      "id": "a-oos-02",
+      "question": "我要投诉刚才接待我的客服",
+      "reply": "抱歉，知识库中没有关于“投诉客服”的具体处理条文，我无法确认投诉的受理渠道和处理时限，建议转接人工客服或投诉专线为您登记处理。\n\n为便于跟进，您可先告知涉及的订单编号，以及当时客服的工号或大致接待时间。给您带来不便，敬请谅解。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 1,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 2689.4,
+      "success": true
+    },
+    {
+      "id": "a-oos-03",
+      "question": "你们公司的股票代码是多少",
+      "reply": "抱歉，这个问题我无法确认。我是售后客服，只能回答退款、退货、物流、保修等售后相关问题，没有公司股票代码方面的信息，建议您通过公司官网或投资者关系渠道查询，或转人工咨询。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 1,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 863.5,
+      "success": true
+    },
+    {
+      "id": "a-oos-04",
+      "question": "能不能给我发一张优惠券",
+      "reply": "抱歉，优惠券发放不在我可查询的售后政策范围内，我无法确认是否有可发放的优惠券，也无法直接为您发放。建议您转接人工客服，由人工核实您的账户情况后处理。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 1,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1243.7,
+      "success": true
+    },
+    {
+      "id": "a-coll-01",
+      "question": "拆封了还能退吗",
+      "reply": "按退货政策，拆封后能否退货要看情况：\n\n1. 七天无理由退货：需签收后 7 个自然日内，且商品完好、不影响二次销售。仅拆封、未使用、配件包装齐全的，通常算商品完好；若已使用或损坏影响二次销售，则不符合。\n\n2. 商品质量问题：签收后 15 个自然日内可退，需提供问题描述和照片证据，不受拆封限制。\n\n3. 商品与描述不符：签收后 7 个自然日内可退。\n\n办理方式：需创建售后工单，问题类型选“退货”，经客服审核后处理。无理由退货的退回运费由您承担，质量问题由本方承担。\n\n具体商品是否属特殊商品（如部分品类不支持无理由退货），知识库未列明，建议提供订单号或转人工确认。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [
+        "searchPolicyKnowledge"
+      ],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 1,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 2687.8,
+      "success": true
+    },
+    {
+      "id": "a-coll-02",
+      "question": "钱什么时候能退到我卡上",
+      "reply": "您好，方便提供一下订单编号吗？我需要先查询该订单的退款记录，才能确认退款状态和到账情况。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1058.7,
+      "success": true
+    },
+    {
+      "id": "a-coll-03",
+      "question": "东西坏了找谁修",
+      "reply": "您好，请问您有具体的订单号吗？我可以帮您查一下保修状态和维修渠道。另外，您方便说明一下是哪种商品、出现了什么故障吗？\n\n如果方便提供订单号，我会根据订单信息为您确认是否在保、能否免费维修。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 1423.5,
+      "success": true
+    },
+    {
+      "id": "a-coll-04",
+      "question": "快递怎么还没到",
+      "reply": "您好，麻烦提供一下订单编号，我帮您查物流进度。",
+      "sources": [],
+      "ragHit": true,
+      "actualTools": [],
+      "toolRuleOk": true,
+      "judge": {
+        "faithful": 1,
+        "refused": 0,
+        "tool_correct": 1
+      },
+      "refusedOk": true,
+      "latencyMs": 527.9,
+      "success": true
+    }
+  ]
+}

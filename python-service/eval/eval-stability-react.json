@@ -1,0 +1,98 @@
+{
+  "summary": {
+    "mode": "react",
+    "rounds": 3,
+    "metrics": {
+      "success": {
+        "values": [
+          30,
+          30,
+          30
+        ],
+        "min": 30,
+        "median": 30,
+        "max": 30,
+        "spread": 0
+      },
+      "faithfulRate": {
+        "values": [
+          0.8333,
+          0.9,
+          0.8333
+        ],
+        "min": 0.8333,
+        "median": 0.8333,
+        "max": 0.9,
+        "spread": 0.0667
+      },
+      "toolRuleRate": {
+        "values": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0,
+        "spread": 0.0
+      },
+      "refuseRate": {
+        "values": [
+          1.0,
+          0.75,
+          1.0
+        ],
+        "min": 0.75,
+        "median": 1.0,
+        "max": 1.0,
+        "spread": 0.25
+      },
+      "avgLatencyMs": {
+        "values": [
+          2148.4,
+          2193.5,
+          2110.2
+        ],
+        "min": 2110.2,
+        "median": 2148.4,
+        "max": 2193.5,
+        "spread": 83.3
+      }
+    }
+  },
+  "rounds": [
+    {
+      "mode": "react",
+      "total": 30,
+      "executed": 30,
+      "success": 30,
+      "aborted": false,
+      "faithfulRate": 0.8333,
+      "toolRuleRate": 1.0,
+      "refuseRate": 1.0,
+      "avgLatencyMs": 2148.4
+    },
+    {
+      "mode": "react",
+      "total": 30,
+      "executed": 30,
+      "success": 30,
+      "aborted": false,
+      "faithfulRate": 0.9,
+      "toolRuleRate": 1.0,
+      "refuseRate": 0.75,
+      "avgLatencyMs": 2193.5
+    },
+    {
+      "mode": "react",
+      "total": 30,
+      "executed": 30,
+      "success": 30,
+      "aborted": false,
+      "faithfulRate": 0.8333,
+      "toolRuleRate": 1.0,
+      "refuseRate": 1.0,
+      "avgLatencyMs": 2110.2
+    }
+  ]
+}

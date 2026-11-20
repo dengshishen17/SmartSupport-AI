@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
 from langgraph.prebuilt import create_react_agent
 
-from . import config, memory, tools, vectorstore
+from . import config, memory, retrieval, tools, vectorstore
 
 _llm = ChatOpenAI(api_key=config.DEEPSEEK_API_KEY or "dummy",
                   base_url=config.DEEPSEEK_BASE_URL,
@@ -17,7 +17,7 @@ _llm = ChatOpenAI(api_key=config.DEEPSEEK_API_KEY or "dummy",
       description="检索售后政策知识库（退款/退货/物流/保修规则）。政策类问题先调本工具查条文，再依据条文回答；不要编造条款。")
 def search_policy_tool(query: str) -> str:
     try:
-        docs = vectorstore.similarity_search(query, top_k=config.RAG_TOP_K, threshold=config.RAG_THRESHOLD)
+        docs = retrieval.retrieve(query, top_k=config.RAG_TOP_K, threshold=config.RAG_THRESHOLD)
     except Exception as e:
         return f"知识库暂时不可用（{e}）。"
     if not docs:

@@ -3,7 +3,7 @@
 """
 import json
 from openai import OpenAI
-from . import config, memory, prompts, tools, vectorstore
+from . import config, memory, prompts, retrieval, tools, vectorstore
 
 _client = OpenAI(api_key=config.DEEPSEEK_API_KEY or "dummy", base_url=config.DEEPSEEK_BASE_URL,
                   timeout=60.0, max_retries=1)
@@ -20,7 +20,7 @@ def _messages(system: str, session_id: str, question: str):
 def chat_once(question: str, session_id: str, top_k: int = 5, threshold: float = 0.0):
     """同步 RAG 问答：检索 → 组 prompt → tool loop → 存记忆。返回 (reply, sources, rag_hit, tool_events)。"""
     try:
-        retrieved = vectorstore.similarity_search(question, top_k=top_k, threshold=threshold)
+        retrieved = retrieval.retrieve(question, top_k=top_k, threshold=threshold)
     except Exception:
         retrieved = []  # 向量库不可用时降级为无知识回答，与 Java 版 stream 版一致
     system, rag_hit = prompts.build_system(retrieved)
@@ -66,7 +66,7 @@ def chat_stream(question: str, session_id: str, top_k: int = 5, threshold: float
     """流式：先做非流式 tool loop 拿到最终回复意图，再对最终回复做流式生成。
     简化但语义保真：tool 事件先推，content 再逐块推（与 Java 版事件顺序一致）。"""
     try:
-        retrieved = vectorstore.similarity_search(question, top_k=top_k, threshold=threshold)
+        retrieved = retrieval.retrieve(question, top_k=top_k, threshold=threshold)
     except Exception:
         retrieved = []
     system, rag_hit = prompts.build_system(retrieved)

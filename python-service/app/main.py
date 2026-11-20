@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse
 
-from . import agent, config, ingest, metrics, vectorstore, workflow
+from . import agent, config, ingest, metrics, retrieval, vectorstore, workflow
 
 app = FastAPI(title="SmartSupport Python RAG Service")
 
@@ -34,7 +34,7 @@ def health():
 @app.get("/py/knowledge/search")
 def search(query: str, topK: int = 3):
     try:
-        docs = vectorstore.similarity_search(query, top_k=topK, threshold=0.0)
+        docs = retrieval.retrieve(query, top_k=topK, threshold=0.0)
         return ok([{"content": d["content"], "score": d["score"], "metadata": d["metadata"]} for d in docs])
     except Exception as e:
         return JSONResponse(status_code=200, content=fail(f"搜索失败：{e}"))

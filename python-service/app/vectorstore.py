@@ -24,6 +24,29 @@ def _conn():
                            connect_timeout=3)
 
 
+def load_corpus() -> list[tuple[str, dict]]:
+    """只读加载 vector_store 全表语料，返回 [(content, metadata), ...]。
+
+    供 BM25 召回器建立倒排索引使用。与 dense 召回同源，
+    保证两路召回看到同一批文档，融合结果才有意义。
+    不做任何写入。
+    """
+    if not pg_available():
+        raise ConnectionError(f"pgvector 不可用（{config.PG_HOST}:{config.PG_PORT} 端口不通），请先启动 Docker Compose")
+    with _conn() as conn, conn.cursor() as cur:
+        cur.execute("SELECT content, metadata FROM public.vector_store")
+        rows = cur.fetchall()
+    out = []
+    for content, metadata in rows:
+        if isinstance(metadata, str):
+            try:
+                metadata = json.loads(metadata)
+            except Exception:
+                metadata = {}
+        out.append((content, metadata or {}))
+    return out
+
+
 def similarity_search(query: str, top_k: int = 5, threshold: float = 0.0):
     if not pg_available():
         raise ConnectionError(f"pgvector 不可用（{config.PG_HOST}:{config.PG_PORT} 端口不通），请先启动 Docker Compose")
