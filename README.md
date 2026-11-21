@@ -5,7 +5,7 @@
 > Java 侧承担业务 CRUD 与只读工具服务化保障。两栈共用同一批 MySQL / Redis / pgvector / DeepSeek / 百炼 Key。
 > 把售后政策文档导入向量库，让 AI 基于真实政策回答问题；再挂载订单 / 退款 / 工单查询工具，让 AI 说出**真实业务数据**而不是编造。
 >
-> 所有能力均由**可复现的评测**支撑：75 条检索标注用例 + 114 条 Agent 轨迹用例 + 154 个离线单测（详见[核心可量化指标](#核心可量化指标实测非估算)）。
+> 所有能力均由**可复现的评测**支撑：75 条检索标注用例 + 114 条 Agent 轨迹用例 + 154 个离线单测（详见[核心可量化指标](#核心可量化指标实测非估算)、[完整评测报告](docs/evaluation-report.md)）。
 
 > 🤝 **开发方式**：本项目由本人在 Cursor、Claude Code 等 AI 编程工具辅助下完成 —— 需求拆解、技术选型、架构设计、数据库与接口设计、代码审查与本地调试验收均由本人负责；AI 工具用于代码生成、问题排查与文档整理。
 
@@ -37,6 +37,7 @@
 - [API 一览](#api-一览)
 - [数据库说明](#数据库说明)
 - [评测体系](#评测体系)
+- [📊 完整评测报告](docs/evaluation-report.md)
 - [开发方式与 AI 工具使用](#开发方式与-ai-工具使用)
 - [注意事项](#注意事项)
 - [许可证](#许可证)
@@ -349,6 +350,8 @@ Agent 调工具时工具可能卡住、失败、宕机。`ToolExecutor` 提供�
 | 工具调用 | 无效调用率 / 浪费调用率 / 降级调用 | **0.0% / 0.0% / 0** |
 | Prompt 回归 | 拒答率提升（超噪声带） | **+1.78pt**（噪声带 0.84pt，判定 IMPROVED） |
 | 离线单测 | 全绿 | **154 个**，零 API 消耗 |
+
+> 📊 每一项数字的**逐条明细、失败归因与复现命令**见 [`docs/evaluation-report.md`](docs/evaluation-report.md)。
 
 ### 前端
 
@@ -970,6 +973,9 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 
 ## 评测体系
 
+> 📊 **完整评测报告**：[`docs/evaluation-report.md`](docs/evaluation-report.md)
+> 包含四种召回策略的逐项横向对比、114 条 Agent 用例的分类别表现与失败归因、Prompt 回归的中位数与噪声带判定过程、span Trace 的实测数据，以及全部数字的复现命令与成本说明。
+
 项目的评测分两层：**Python AI 应用栈**是主力（检索质量 + Agent 轨迹 + Prompt 回归 + 单测），**Java 业务栈**保留一套基础检索评测做交叉验证。
 
 ### ⭐ Python AI 应用栈评测（`python-service/eval/`）
@@ -1083,13 +1089,14 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 
 | 简历表述 | 对应代码 / 报告 | 复现命令 |
 |---|---|---|
-| Rerank Hit@1 89.3%、Hit@5 100%、MRR 0.9400、NDCG@5 0.9048 | `python-service/eval/eval_retrieval.py` | `python -m eval.eval_retrieval --cases=both` |
+| Rerank Hit@1 89.3%、Hit@5 100%、MRR 0.9400、NDCG@5 0.9048 | `python-service/eval/eval_retrieval.py` | `python -m eval.eval_retrieval --modes=dense,bm25,hybrid,rerank --topk=5 --cases=both` |
 | Agent pass@1 89.5%、引用忠实度 96.5% | `python-service/eval/eval_agent.py` | `python -m eval.eval_agent --mode=react --cases=both` |
 | 无效 / 浪费工具调用均为 0 | 同上，`invalidCallRate` / `wastedCallRate` | 同上 |
-| Prompt 版本化 + 多轮交错回归 | `python-service/eval/eval_prompt_regression.py` | `python -m eval.eval_prompt_regression --rounds=2 --cases=both` |
+| Prompt 版本化 + 多轮交错回归 | `python-service/eval/eval_prompt_regression.py` | `python -m eval.eval_prompt_regression --baseline=rag_system:v1 --candidate=rag_system:v2 --rounds=2 --cases=both` |
 | 上下文预算器（Token 分配 + 片段压缩） | `python-service/app/context.py` | `python -m eval.test_context` |
 | span 级全链路 Trace（SQLite） | `python-service/app/trace.py` | `python -m eval.test_trace` |
-| 151 个离线单测全绿 | `python-service/eval/test_*.py` | 逐个 `python -m eval.test_*` |
+| 154 个离线单测全绿 | `python-service/eval/test_*.py` | 逐个 `python -m eval.test_*` |
+| **上述全部指标的逐条明细** | **`docs/evaluation-report.md`** | **报告内含每项的复现命令与成本说明** |
 
 ---
 
