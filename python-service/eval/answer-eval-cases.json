@@ -1,1 +1,246 @@
-{"cases": [{"category": "policy", "expected_tool": "", "id": "a-refund-01", "question": "什么情况下可以申请退款", "reference": "商品质量问题/未收到货超7天未发货/七天无理由/多拍错拍未发货可退；完成超7天、特殊商品拆封、人力损坏不支持", "should_refuse": false}, {"category": "policy", "expected_tool": "", "id": "a-refund-02", "question": "退款多久能到账", "reference": "审核1-3工作日，通过后1工作日发起，发起后1-5工作日到账", "should_refuse": false}, {"category": "policy", "expected_tool": "", "id": "a-refund-03", "question": "七天无理由退货退运费谁承担", "reference": "质量问题运费商家承担，无理由退货运费买家承担", "should_refuse": false}, {"category": "policy", "expected_tool": "", "id": "a-return-01", "question": "怎么申请退货", "reference": "创建售后工单选退货，经审核后退货", "should_refuse": false}, {"category": "policy", "expected_tool": "", "id": "a-return-02", "question": "退货的运费由谁承担", "reference": "质量问题商家承担，无理由客户承担", "should_refuse": false}, {"category": "policy", "expected_tool": "", "id": "a-logistics-01", "question": "下单之后多久可以发货", "reference": "下单后1-2个工作日内发货", "should_refuse": false}, {"category": "policy", "expected_tool": "", "id": "a-logistics-02", "question": "物流长时间没有更新应该怎么办", "reference": "运输中超7天可建工单查物流，丢件选物流问题", "should_refuse": false}, {"category": "policy", "expected_tool": "", "id": "a-warranty-01", "question": "家电类商品保修多长时间", "reference": "家电类24个月，电子数码12个月，配饰3个月，食品不支持", "should_refuse": false}, {"category": "policy", "expected_tool": "", "id": "a-warranty-02", "question": "人为损坏还能保修吗", "reference": "人为损坏/进水/摔落属有偿维修，非免费保修", "should_refuse": false}, {"category": "policy", "expected_tool": "", "id": "a-ticket-01", "question": "售后工单的问题类型有哪些", "reference": "商品质量问题/七天无理由退货/物流问题/保修/其他", "should_refuse": false}, {"category": "tool", "expected_tool": "queryOrderByOrderNo", "id": "a-order-01", "question": "订单10001到哪了", "reference": "订单10001扫地机器人运输中；工具应返回真实状态金额时间", "should_refuse": false}, {"category": "tool", "expected_tool": "queryOrderByOrderNo", "id": "a-order-02", "question": "订单10002发货了吗", "reference": "订单10002蓝牙耳机已下单未发货；应说明1-2工作日发货", "should_refuse": false}, {"category": "tool", "expected_tool": "queryOrderByOrderNo", "id": "a-order-03", "question": "订单10004是什么状态", "reference": "订单10004空气净化器已完成", "should_refuse": false}, {"category": "tool", "expected_tool": "queryRefundByOrderNo", "id": "a-refund-t01", "question": "订单10001的退款到账了吗", "reference": "10001退款已到账；工具应返回原因状态时间", "should_refuse": false}, {"category": "tool", "expected_tool": "queryRefundByOrderNo", "id": "a-refund-t02", "question": "订单10002的退款进度怎么样", "reference": "10002退款审核中；预计1-3工作日审核", "should_refuse": false}, {"category": "tool", "expected_tool": "queryTicketByOrderNo", "id": "a-ticket-t01", "question": "订单10001的售后处理得怎么样了", "reference": "10001工单处理中，免费维修换滤芯", "should_refuse": false}, {"category": "tool", "expected_tool": "queryTicketByOrderNo", "id": "a-ticket-t02", "question": "订单10002的售后工单现在什么状态", "reference": "10002工单待处理，催仓库发货", "should_refuse": false}, {"category": "tool", "expected_tool": "queryWarrantyByOrderNo", "id": "a-warranty-t01", "question": "10007的笔记本保修还有多久", "reference": "10007笔记本电子数码12个月，应测算在保/过保", "should_refuse": false}, {"category": "tool", "expected_tool": "queryWarrantyByOrderNo", "id": "a-warranty-t02", "question": "订单10001的扫地机器人还能免费修吗", "reference": "10001扫地机家电类24个月，应测算在保并说明免费维修条件", "should_refuse": false}, {"category": "tool", "expected_tool": "queryOrderByOrderNo", "id": "a-order-04", "question": "订单99999能查到吗", "reference": "不存在的订单应如实说未找到，请确认订单号，不要编造", "should_refuse": false}, {"category": "tool", "expected_tool": "queryTicketByOrderNo", "id": "a-ticket-t03", "question": "订单10007有售后工单吗", "reference": "10007无工单，应如实说未提交售后申请", "should_refuse": false}, {"category": "tool", "expected_tool": "queryRefundByOrderNo", "id": "a-refund-t03", "question": "订单10003申请退款了吗", "reference": "10003无退款记录，应如实说尚未申请", "should_refuse": false}, {"category": "out_of_scope", "expected_tool": "", "id": "a-oos-01", "question": "你们的客服电话是多少", "reference": "知识库无客服电话，应说无法确认建议转人工，不编号码", "should_refuse": true}, {"category": "out_of_scope", "expected_tool": "", "id": "a-oos-02", "question": "我要投诉刚才接待我的客服", "reference": "应共情并建议转人工/建工单，不编造投诉流程", "should_refuse": true}, {"category": "out_of_scope", "expected_tool": "", "id": "a-oos-03", "question": "你们公司的股票代码是多少", "reference": "知识库无此信息，应拒答不编造", "should_refuse": true}, {"category": "out_of_scope", "expected_tool": "", "id": "a-oos-04", "question": "能不能给我发一张优惠券", "reference": "无发券政策，应说无法确认建议转人工", "should_refuse": true}, {"category": "colloquial", "expected_tool": "", "id": "a-coll-01", "question": "拆封了还能退吗", "reference": "特殊商品拆封不支持无理由退，质量问题15天内可退", "should_refuse": false}, {"category": "colloquial", "expected_tool": "", "id": "a-coll-02", "question": "钱什么时候能退到我卡上", "reference": "发起后1-5工作日到账，视银行而定", "should_refuse": false}, {"category": "colloquial", "expected_tool": "", "id": "a-coll-03", "question": "东西坏了找谁修", "reference": "建售后工单选保修，提供订单号核实保修期", "should_refuse": false}, {"category": "colloquial", "expected_tool": "", "id": "a-coll-04", "question": "快递怎么还没到", "reference": "按订单状态解释时效，超期建议建工单", "should_refuse": false}], "description": "SmartSupport 端到端生成质量评估集：政策10+工具12+越界4+口语4=30", "version": "1.0"}
+{
+  "cases": [
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-refund-01",
+      "question": "什么情况下可以申请退款",
+      "reference": "一、退款政策 1.1 退款适用场景 客户在以下情况下可申请退款，退款记录将关联对应订单编号（orderNo）： 商品质量问题：商品存在制造缺陷、损坏或与描述不符 未收到货：订单状态为\"已下单\"超过 7 个自然日仍未发货 七天无理由退货：订单状态为\"已完成\"且签收未满 7 个自然日（特殊商品除外） 多拍/错拍：客户下单错误，且订单状态仍为\"已下单\"（未发货前） 1.2 退款流程与状态流转 退款记录（refund_record）的状态流转如下： ``` 客户申请退款 → 审核中 → 已退款 → 已到账 ``` | 状态 | 说明 | 预计时长 | |------|------|----------| | 审核中 | 客服审核退款申请，核实退款原因与订单信息 | 1-3 个工作日 | | 已退款 | 审核通过，退款已发起至支付渠道 | 审核通过后 1 个工作日内 | | 已到账 | 退款已到达客",
+      "should_refuse": false
+    },
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-refund-02",
+      "question": "退款多久能到账",
+      "reference": "一、退款政策 1.1 退款适用场景 客户在以下情况下可申请退款，退款记录将关联对应订单编号（orderNo）： 商品质量问题：商品存在制造缺陷、损坏或与描述不符 未收到货：订单状态为\"已下单\"超过 7 个自然日仍未发货 七天无理由退货：订单状态为\"已完成\"且签收未满 7 个自然日（特殊商品除外） 多拍/错拍：客户下单错误，且订单状态仍为\"已下单\"（未发货前） 1.2 退款流程与状态流转 退款记录（refund_record）的状态流转如下： ``` 客户申请退款 → 审核中 → 已退款 → 已到账 ``` | 状态 | 说明 | 预计时长 | |------|------|----------| | 审核中 | 客服审核退款申请，核实退款原因与订单信息 | 1-3 个工作日 | | 已退款 | 审核通过，退款已发起至支付渠道 | 审核通过后 1 个工作日内 | | 已到账 | 退款已到达客户支付账户 | 退款发起后 1-5 个工作日（视银行而定） | 1.3 退款金额规则 商品质量问题：全额退款（含运费） 七天无理由退货：全额退款，退回运费由客户承担 未收到货：全额退款（含运费） 多拍/错拍（已下单未发货）：全额退款（含运费） 多拍/错拍（已发货）：全额退款，退回运费由客户承担 1.4 不支持退款的情况 订单状态为\"已完成\"且签收超过 7 个自然日（商品质量问题除外） 特殊商品：贴身衣物、食品、定制商品一经拆封不支持无理由退款 客户人为损坏商品后申请质量问题退款 --",
+      "should_refuse": false
+    },
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-refund-03",
+      "question": "七天无理由退货退运费谁承担",
+      "reference": "二、退货政策 2.1 退货条件 客户需创建售后工单（after_sale_ticket），填写问题描述（description）并选择问题类型（problemType）为\"退货\"，经客服审核后方可退货。；七天无理由退货：签收后 7 个自然日内，商品完好不影响二次销售 商品质量问题退货：签收后 15 个自然日内，需提供问题描述和照片证据 商品与描述不符退货：签收后 7 个自然日内 2.2 退货流程与工单状态 退货通过售后工单跟踪，工单状态（status）流转如下： ``` 客户提交工单 → 待处理 → 处理中 → 已完成 ``` | 工单状态 | 说明 | |----------|------| | 待处理 | 客服尚未开始处理该工单 | | 处理中 | 客服已接单，正在与客户沟通退货地址、物流方式等 | | 已完成 | 退货已完成，退款已发起或已处理完毕 | 2.3 退货物流 质量问题退货：退回运费由本方承担，客服在工单处理阶段提供退货地址和运费承担方式 无理由退货：退回运费由客户承担，客服在工单处理阶段提供退货地址 退货地址：客服通过工单处理阶段告知客户，客户需在收到退货地址后 3 个自然日内寄出 2.4 退款与退货的关系 退货工单状态变为\"已完成\"后，系统自动创建退款记录（refund_record） 退款记录关联同一订单编号（orderNo） 退款审核与到账时长遵循上述退款政策 --",
+      "should_refuse": false
+    },
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-return-01",
+      "question": "怎么申请退货",
+      "reference": "二、退货政策 2.1 退货条件 客户需创建售后工单（after_sale_ticket），填写问题描述（description）并选择问题类型（problemType）为\"退货\"，经客服审核后方可退货。",
+      "should_refuse": false
+    },
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-return-02",
+      "question": "退货的运费由谁承担",
+      "reference": "二、退货政策 2.1 退货条件 客户需创建售后工单（after_sale_ticket），填写问题描述（description）并选择问题类型（problemType）为\"退货\"，经客服审核后方可退货。；十四、渠道与自营配送政策 14.1 配送范围 | 配送方式 | 覆盖范围 | 时效 | |----------|----------|------| | 顺丰标快 | 全国大陆（不含港澳台及偏远地区） | 1-3 个工作日 | | 顺丰次日达 | 部分城市 | 次日达 | | 同城配送 | 部分城市 | 当日达 | | 偏远地区专线 | 偏远地区 | 3-7 个工作日 | 14.2 运费规则 订单实付金额满 99 元免运费 未满 99 元收取运费 10 元 部分城市参与同城免邮活动，以结算页展示为准 偏远地区可能加收偏远附加费 14.3 上门取件 退货与换货均支持上门取件，需在售后工单中填写取件地址与时间 上门取件时限为工单进入\"处理中\"后 48 小时内 客户也可自行寄出，需在工单中提供退货地址 14.4 配送异常 包裹破损：签收前发现破损可直接拒收，拒收后系统自动触发退款 包裹丢失：运输",
+      "should_refuse": false
+    },
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-logistics-01",
+      "question": "下单之后多久可以发货",
+      "reference": "三、物流查询 3.1 订单状态与物流节点 订单状态（status）反映物流进度： | 订单状态 | 物流含义 | 预计时长 | |----------|----------|----------| | 已下单 | 客户已提交订单，仓库尚未发货 | 下单后 1-2 个工作日内发货 | | 已发货 | 仓库已打包出库，快递已揽收 | 发货后 1-3 个工作日送达（同城次日达） | | 运输中 | 快递在途，正在配送到客户所在城市 | 发货后 2-5 个工作日送达 | | 已完成 | 客户已签收 | — | 3.2 物流查询方式 客户可通过订单编号（orderNo）查询订单状态 \"已发货\"及之后的状态，客服可提供快递单号供客户在快递官网追踪 \"已下单\"状态表示尚未发货，暂无快递单号 3.3 物流异常处理 超时未发货：订单状态为\"已下单\"超过 3 个工作日，客户可创建售后工单催促发货 运输超时：订",
+      "should_refuse": false
+    },
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-logistics-02",
+      "question": "物流长时间没有更新应该怎么办",
+      "reference": "三、物流查询 3.1 订单状态与物流节点 订单状态（status）反映物流进度： | 订单状态 | 物流含义 | 预计时长 | |----------|----------|----------| | 已下单 | 客户已提交订单，仓库尚未发货 | 下单后 1-2 个工作日内发货 | | 已发货 | 仓库已打包出库，快递已揽收 | 发货后 1-3 个工作日送达（同城次日达） | | 运输中 | 快递在途，正在配送到客户所在城市 | 发货后 2-5 个工作日送达 | | 已完成 | 客户已签收 | — | 3.2 物流查询方式 客户可通过订单编号（orderNo）查询订单状态 \"已发货\"及之后的状态，客服可提供快递单号供客户在快递官网追踪 \"已下单\"状态表示尚未发货，暂无快递单号 3.3 物流异常处理 超时未发货：订单状态为\"已下单\"超过 3 个工作日，客户可创建售后工单催促发货 运输超时：订",
+      "should_refuse": false
+    },
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-warranty-01",
+      "question": "家电类商品保修多长时间",
+      "reference": "四、保修规则 4.1 保修期 | 商品类别 | 保修期 | 起算时间 | |----------|--------|----------| | 电子数码类 | 12 个月 | 订单\"已完成\"（签收）之日 | | 家电类 | 24 个月 | 订单\"已完成\"之日 | | 配饰/日用品类 | 3 个月 | 订单\"已完成\"之日 | | 食品/消耗品类 | 不支持保修 | — | 4.2 保修范围 免费保修：商品在正常使用下出现制造缺陷、功能故障 有偿维修：人为损坏、进水、摔落等非质量问题 不支持保修：超过保修期、无有效订单记录、商品已被私自拆修 4.3 保修申请流程 1. 客户创建售后工单（after_sale_ticket） 2. 问题类型（problemType）选择\"保修\" 3. 问题描述（description）中填写故障现象 4. 提供订单编号（orderNo）以核实保修期 5. 客服审",
+      "should_refuse": false
+    },
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-warranty-02",
+      "question": "人为损坏还能保修吗",
+      "reference": "四、保修规则 4.1 保修期 | 商品类别 | 保修期 | 起算时间 | |----------|--------|----------| | 电子数码类 | 12 个月 | 订单\"已完成\"（签收）之日 | | 家电类 | 24 个月 | 订单\"已完成\"之日 | | 配饰/日用品类 | 3 个月 | 订单\"已完成\"之日 | | 食品/消耗品类 | 不支持保修 | — | 4.2 保修范围 免费保修：商品在正常使用下出现制造缺陷、功能故障 有偿维修：人为损坏、进水、摔落等非质量问题 不支持保修：超过保修期、无有效订单记录、商品已被私自拆修 4.3 保修申请流程 1. 客户创建售后工单（after_sale_ticket） 2. 问题类型（problemType）选择\"保修\" 3. 问题描述（description）中填写故障现象 4. 提供订单编号（orderNo）以核实保修期 5. 客服审",
+      "should_refuse": false
+    },
+    {
+      "category": "policy",
+      "expected_tool": "",
+      "id": "a-ticket-01",
+      "question": "售后工单的问题类型有哪些",
+      "reference": "五、售后工单问题类型汇总 售后工单的 problemType 字段支持以下取值： | problemType | 对应政策 | 处理流程 | |-------------|----------|----------| | 商品质量问题 | 退款政策 §1.1 / 退货政策 §2.1 / 保修规则 §4.2 | 创建工单 → 审核 → 退货/维修/退款 | | 七天无理由退货 | 退货政策 §2.1 | 创建工单 → 审核退货 → 退款 | | 物流问题 | 物流查询 §3.3 | 创建工单 → 联系快递 → 反馈结果 | | 保修 | 保修规则 §4.3 | 创建工单 → 核实保修期 → 维修/更换 | | 其他 | 视具体情况 | 创建工单 → 客服处理 | --",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryOrderByOrderNo",
+      "id": "a-order-01",
+      "question": "订单10001到哪了",
+      "reference": "订单10001扫地机器人运输中；工具应返回真实状态金额时间",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryOrderByOrderNo",
+      "id": "a-order-02",
+      "question": "订单10002发货了吗",
+      "reference": "订单10002蓝牙耳机已下单未发货；应说明1-2工作日发货",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryOrderByOrderNo",
+      "id": "a-order-03",
+      "question": "订单10004是什么状态",
+      "reference": "订单10004空气净化器已完成",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryRefundByOrderNo",
+      "id": "a-refund-t01",
+      "question": "订单10001的退款到账了吗",
+      "reference": "10001退款已到账；工具应返回原因状态时间",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryRefundByOrderNo",
+      "id": "a-refund-t02",
+      "question": "订单10002的退款进度怎么样",
+      "reference": "10002退款审核中；预计1-3工作日审核",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryTicketByOrderNo",
+      "id": "a-ticket-t01",
+      "question": "订单10001的售后处理得怎么样了",
+      "reference": "10001工单处理中，免费维修换滤芯",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryTicketByOrderNo",
+      "id": "a-ticket-t02",
+      "question": "订单10002的售后工单现在什么状态",
+      "reference": "10002工单待处理，催仓库发货",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryWarrantyByOrderNo",
+      "id": "a-warranty-t01",
+      "question": "10007的笔记本保修还有多久",
+      "reference": "10007笔记本电子数码12个月，应测算在保/过保",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryWarrantyByOrderNo",
+      "id": "a-warranty-t02",
+      "question": "订单10001的扫地机器人还能免费修吗",
+      "reference": "10001扫地机家电类24个月，应测算在保并说明免费维修条件",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryOrderByOrderNo",
+      "id": "a-order-04",
+      "question": "订单99999能查到吗",
+      "reference": "不存在的订单应如实说未找到，请确认订单号，不要编造",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryTicketByOrderNo",
+      "id": "a-ticket-t03",
+      "question": "订单10007有售后工单吗",
+      "reference": "10007无工单，应如实说未提交售后申请",
+      "should_refuse": false
+    },
+    {
+      "category": "tool",
+      "expected_tool": "queryRefundByOrderNo",
+      "id": "a-refund-t03",
+      "question": "订单10003申请退款了吗",
+      "reference": "10003无退款记录，应如实说尚未申请",
+      "should_refuse": false
+    },
+    {
+      "category": "out_of_scope",
+      "expected_tool": "",
+      "id": "a-oos-01",
+      "question": "你们的客服电话是多少",
+      "reference": "",
+      "should_refuse": true
+    },
+    {
+      "category": "out_of_scope",
+      "expected_tool": "",
+      "id": "a-oos-02",
+      "question": "我要投诉刚才接待我的客服",
+      "reference": "",
+      "should_refuse": true
+    },
+    {
+      "category": "out_of_scope",
+      "expected_tool": "",
+      "id": "a-oos-03",
+      "question": "你们公司的股票代码是多少",
+      "reference": "",
+      "should_refuse": true
+    },
+    {
+      "category": "out_of_scope",
+      "expected_tool": "",
+      "id": "a-oos-04",
+      "question": "能不能给我发一张优惠券",
+      "reference": "",
+      "should_refuse": true
+    },
+    {
+      "category": "colloquial",
+      "expected_tool": "",
+      "id": "a-coll-01",
+      "question": "拆封了还能退吗",
+      "reference": "二、退货政策 2.1 退货条件 客户需创建售后工单（after_sale_ticket），填写问题描述（description）并选择问题类型（problemType）为\"退货\"，经客服审核后方可退货。；一、退款政策 1.1 退款适用场景 客户在以下情况下可申请退款，退款记录将关联对应订单编号（orderNo）： 商品质量问题：商品存在制造缺陷、损坏或与描述不符 未收到货：订单状态为\"已下单\"超过 7 个自然日仍未发货 七天无理由退货：订单状态为\"已完成\"且签收未满 7 个自然日（特殊商品除外） 多拍/错拍：客户下单错误，且订单状态仍为\"已下单\"（未发货前） 1.2 退款流程与状态流转 退款记录（refund_record）的状态流转如下： ``` 客户申请退款 → 审核中 → 已退款 → 已到账 ``` | 状态 | 说明 | 预计时长 | |------|------|----------| | 审核中 | 客服审核退款申请，核实退款原因与订单信息 | 1-3 个工作日 | | 已退款 | 审核通过，退款已发起至支付渠道 | 审核通过后 1 个工作日内 | | 已到账 | 退款已到达客；十一、常见问题 FAQ 11.1 退款相关 Q：钱什么时候能退到我卡上？；A：退款审核通过后 1 个工作日内发起退款，到账时间取决于发卡行，通常退款发起后 1-5 个工作日到账。；Q：为什么我的退款一直显示审核中？；A：退款审核需核实订单信息与退款原因，通常 1-3 个工作日完成。；Q：我下错单了还能退吗？；多拍/错拍且订单仍为\"已下单\"（未发货）可全额退款（含运费）；已发货的需承担退回运费。；Q：拆封了还能退吗？；A：仅拆封检查、商品本身完好且配件齐全的通常可退（七天无理由）。；若拆封导致无法二次销售则不符合条件。",
+      "should_refuse": false
+    },
+    {
+      "category": "colloquial",
+      "expected_tool": "",
+      "id": "a-coll-02",
+      "question": "钱什么时候能退到我卡上",
+      "reference": "一、退款政策 1.1 退款适用场景 客户在以下情况下可申请退款，退款记录将关联对应订单编号（orderNo）： 商品质量问题：商品存在制造缺陷、损坏或与描述不符 未收到货：订单状态为\"已下单\"超过 7 个自然日仍未发货 七天无理由退货：订单状态为\"已完成\"且签收未满 7 个自然日（特殊商品除外） 多拍/错拍：客户下单错误，且订单状态仍为\"已下单\"（未发货前） 1.2 退款流程与状态流转 退款记录（refund_record）的状态流转如下： ``` 客户申请退款 → 审核中 → 已退款 → 已到账 ``` | 状态 | 说明 | 预计时长 | |------|------|----------| | 审核中 | 客服审核退款申请，核实退款原因与订单信息 | 1-3 个工作日 | | 已退款 | 审核通过，退款已发起至支付渠道 | 审核通过后 1 个工作日内 | | 已到账 | 退款已到达客；十一、常见问题 FAQ 11.1 退款相关 Q：钱什么时候能退到我卡上？；A：退款审核通过后 1 个工作日内发起退款，到账时间取决于发卡行，通常退款发起后 1-5 个工作日到账。；Q：为什么我的退款一直显示审核中？；A：退款审核需核实订单信息与退款原因，通常 1-3 个工作日完成。；Q：我下错单了还能退吗？；多拍/错拍且订单仍为\"已下单\"（未发货）可全额退款（含运费）；已发货的需承担退回运费。；Q：拆封了还能退吗？；A：仅拆封检查、商品本身完好且配件齐全的通常可退（七天无理由）。；11.2 物流相关 Q：快递怎么还没到？",
+      "should_refuse": false
+    },
+    {
+      "category": "colloquial",
+      "expected_tool": "",
+      "id": "a-coll-03",
+      "question": "东西坏了找谁修",
+      "reference": "四、保修规则 4.1 保修期 | 商品类别 | 保修期 | 起算时间 | |----------|--------|----------| | 电子数码类 | 12 个月 | 订单\"已完成\"（签收）之日 | | 家电类 | 24 个月 | 订单\"已完成\"之日 | | 配饰/日用品类 | 3 个月 | 订单\"已完成\"之日 | | 食品/消耗品类 | 不支持保修 | — | 4.2 保修范围 免费保修：商品在正常使用下出现制造缺陷、功能故障 有偿维修：人为损坏、进水、摔落等非质量问题 不支持保修：超过保修期、无有效订单记录、商品已被私自拆修 4.3 保修申请流程 1. 客户创建售后工单（after_sale_ticket） 2. 问题类型（problemType）选择\"保修\" 3. 问题描述（description）中填写故障现象 4. 提供订单编号（orderNo）以核实保修期 5. 客服审；Q：我下错单了还能退吗？；Q：拆封了还能退吗？；Q：快递丢件了怎么办？；11.3 保修相关 Q：东西坏了找谁修？；A：创建售后工单，问题类型选择\"保修\"，描述故障现象并提供订单编号，客服审核后安排维修或更换。；Q：保修期内维修几次还不好可以换新机？；A：同一故障维修 2 次仍未解决的，可免费更换同型号商品。；Q：人为损坏还能保修吗？；人为损坏、进水、摔落等属有偿维修，运费由客户承担。；Q：买完降价了能退差价吗？",
+      "should_refuse": false
+    },
+    {
+      "category": "colloquial",
+      "expected_tool": "",
+      "id": "a-coll-04",
+      "question": "快递怎么还没到",
+      "reference": "三、物流查询 3.1 订单状态与物流节点 订单状态（status）反映物流进度： | 订单状态 | 物流含义 | 预计时长 | |----------|----------|----------| | 已下单 | 客户已提交订单，仓库尚未发货 | 下单后 1-2 个工作日内发货 | | 已发货 | 仓库已打包出库，快递已揽收 | 发货后 1-3 个工作日送达（同城次日达） | | 运输中 | 快递在途，正在配送到客户所在城市 | 发货后 2-5 个工作日送达 | | 已完成 | 客户已签收 | — | 3.2 物流查询方式 客户可通过订单编号（orderNo）查询订单状态 \"已发货\"及之后的状态，客服可提供快递单号供客户在快递官网追踪 \"已下单\"状态表示尚未发货，暂无快递单号 3.3 物流异常处理 超时未发货：订单状态为\"已下单\"超过 3 个工作日，客户可创建售后工单催促发货 运输超时：订；十一、常见问题 FAQ 11.1 退款相关 Q：钱什么时候能退到我卡上？；A：退款审核通过后 1 个工作日内发起退款，到账时间取决于发卡行，通常退款发起后 1-5 个工作日到账。；Q：为什么我的退款一直显示审核中？；Q：我下错单了还能退吗？；Q：拆封了还能退吗？；11.2 物流相关 Q：快递怎么还没到？；Q：什么时候能发货？；Q：快递丢件了怎么办？；A：创建售后工单，问题类型选择\"物流问题\"，客服联系快递核实并处理。；Q：保修期内维修几次还不好可以换新机？",
+      "should_refuse": false
+    }
+  ],
+  "description": "SmartSupport 端到端生成质量评估集：政策10+工具12+越界4+口语4=30",
+  "version": "1.0"
+}

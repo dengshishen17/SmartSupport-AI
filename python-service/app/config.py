@@ -123,3 +123,18 @@ TOOL_MAX_CONCURRENCY = int(getenv("TOOL_MAX_CONCURRENCY", default="8"))
 TOOL_BREAKER_THRESHOLD = int(getenv("TOOL_BREAKER_THRESHOLD", default="3"))
 # 熔断冷却时间（秒），到期后半开探测
 TOOL_BREAKER_COOLDOWN = float(getenv("TOOL_BREAKER_COOLDOWN", default="30.0"))
+
+# ---- 上下文工程（Token 预算控制）----
+# 单次请求的总 prompt 预算（token）。超预算时按「历史 → 检索片段」顺序裁剪，
+# 系统提示词不裁（角色设定被裁会直接破坏回答质量）。
+CONTEXT_TOKEN_BUDGET = int(getenv("CONTEXT_TOKEN_BUDGET", default="4096"))
+# 为模型输出预留的 token（不计入输入预算）
+CONTEXT_RESERVE_OUTPUT = int(getenv("CONTEXT_RESERVE_OUTPUT", default="512"))
+# 历史消息最多占可用预算的比例
+CONTEXT_HISTORY_RATIO = float(getenv("CONTEXT_HISTORY_RATIO", default="0.25"))
+# 系统提示词最多占可用预算的比例（仅作参考统计，系统提示词本身不裁）
+CONTEXT_SYSTEM_RATIO = float(getenv("CONTEXT_SYSTEM_RATIO", default="0.30"))
+# 单个检索片段的最大字符数
+CONTEXT_MAX_CHUNK_CHARS = int(getenv("CONTEXT_MAX_CHUNK_CHARS", default="600"))
+# 历史消息窗口条数上限（与 MEMORY_MAX_MESSAGES 独立：前者是存储，后者是上下文裁剪）
+CONTEXT_MAX_HISTORY_MESSAGES = int(getenv("CONTEXT_MAX_HISTORY_MESSAGES", default="20"))

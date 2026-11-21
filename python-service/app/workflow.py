@@ -11,11 +11,14 @@
 - 并发限流（asyncio.Semaphore）：限制同时执行的工具数
 工具失败时返回可读的中文降级话术而非抛异常，让模型能看到失败信息并自行决定转人工。
 """
+from contextlib import contextmanager
+from contextvars import ContextVar
+
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
 from langgraph.prebuilt import create_react_agent
 
-from . import config, memory, retrieval, tool_runtime, tools, vectorstore
+from . import config, context, memory, retrieval, tool_runtime, tools, trace, vectorstore
 
 _llm = ChatOpenAI(api_key=config.DEEPSEEK_API_KEY or "dummy",
                   base_url=config.DEEPSEEK_BASE_URL,
@@ -25,16 +28,45 @@ _llm = ChatOpenAI(api_key=config.DEEPSEEK_API_KEY or "dummy",
 @tool("searchPolicyKnowledge",
       description="检索售后政策知识库（退款/退货/物流/保修规则）。政策类问题先调本工具查条文，再依据条文回答；不要编造条款。")
 def search_policy_tool(query: str) -> str:
-    try:
-        docs = retrieval.retrieve(query, top_k=config.RAG_TOP_K, threshold=config.RAG_THRESHOLD)
-    except Exception as e:
-        return f"知识库暂时不可用（{e}）。"
+    tr = _current_trace.get()
+    with (tr.span("retrieval", "retrieval") if tr is not None else _null_span()) as sp:
+        try:
+            docs = retrieval.retrieve(query, top_k=config.RAG_TOP_K, threshold=config.RAG_THRESHOLD)
+        except Exception as e:
+            if sp is not None:
+                sp.fail(e)
+            return f"知识库暂时不可用（{e}）。"
+        if sp is not None:
+            sp.set("query", query[:120])
+            sp.set("count", len(docs))
+            sp.set("sections", [d.get("section") for d in docs[:5]])
+
     if not docs:
         return "知识库中没有检索到相关条文，请如实说明无法确认、建议转人工，不要编造。"
+    # ---- 上下文预算：检索片段按 Token 预算整段裁剪，避免超预算 ----
+    plan = context.plan_budget(
+        total_budget=config.CONTEXT_TOKEN_BUDGET,
+        reserve_output=config.CONTEXT_RESERVE_OUTPUT,
+        history_ratio=config.CONTEXT_HISTORY_RATIO,
+        system_ratio=config.CONTEXT_SYSTEM_RATIO,
+    )
+    kept, stats = context.compress_context(
+        docs,
+        budget_tokens=plan.max_context,
+        max_chunk_chars=config.CONTEXT_MAX_CHUNK_CHARS,
+    )
+    if tr is not None:
+        tr.record("context_compress", "context",
+                  originalTokens=stats.original_tokens,
+                  finalTokens=stats.final_tokens,
+                  droppedChunks=stats.dropped_chunks,
+                  keptChunks=stats.kept_chunks)
+    if not kept:
+        return "知识库中没有检索到相关条文，请如实说明无法确认、建议转人工，不要编造。"
     parts = []
-    for i, d in enumerate(docs):
+    for i, d in enumerate(kept):
         sec = vectorstore.section_of(d["content"]) or f"片段{i+1}"
-        parts.append(f"【{sec}】(score={d['score']:.3f})\n{d['content'][:600]}")
+        parts.append(f"【{sec}】(score={d['score']:.3f})\n{d['content']}")
     return "\n\n---\n\n".join(parts)
 
 
@@ -52,6 +84,11 @@ _TOOL_FNS = {
 
 # 工具名 -> 最近一次执行记录（耗时、是否降级），供轨迹采集使用
 _LAST_CALL: dict[str, dict] = {}
+
+# 当前请求的 Trace（线程/协程内共享）。
+# FastAPI 的同步端点跑在 threadpool、异步端点跑在 event loop，
+# 用 ContextVar 隔离不同请求的 trace 上下文，避免并发串写。
+_current_trace: ContextVar[trace.Trace | None] = ContextVar("current_trace", default=None)
 
 _system = ("你是企业售后客服。政策类问题先调用 searchPolicyKnowledge 查条文，只依据条文回答；"
            "涉及具体订单号时调用订单/退款/工单/保修工具查真实数据；知识中没有就明说无法确认、建议转人工，"
@@ -99,7 +136,21 @@ async def _guarded_wrapper(request, execute):
         # 未知工具：交给 LangGraph 原生处理（它会给出未注册工具的错误）
         return await execute(request)
 
-    result = await _executor.execute(tool_name, args, lambda a: fn(a))
+    tr = _current_trace.get()
+    span_cm = tr.span("tool", "tool") if tr is not None else _null_span()
+    with span_cm as sp:
+        if sp is not None:
+            sp.set("toolName", tool_name)
+            sp.set("args", args)
+        result = await _executor.execute(tool_name, args, lambda a: fn(a))
+        if sp is not None:
+            sp.set("durationMs", result.duration_ms)
+            sp.set("ok", result.ok)
+            sp.set("degraded", result.degraded)
+            sp.set("attempts", result.attempts)
+            if result.error:
+                sp.set("error", result.error)
+
     _LAST_CALL[call_id or str(seq)] = {
         "durationMs": result.duration_ms,
         "ok": result.ok,
@@ -116,6 +167,12 @@ async def _guarded_wrapper(request, execute):
         name=tool_name,
         status="error" if not result.ok else "success",
     )
+
+
+@contextmanager
+def _null_span():
+    """无 Trace 上下文时的空实现（避免各处 if 判断）。"""
+    yield None
 
 
 # 进程级共享的执行器（熔断状态需要跨请求保持）
@@ -140,17 +197,55 @@ _tool_node = ToolNode(_REACT_TOOLS, awrap_tool_call=_guarded_wrapper)
 _react = create_react_agent(_llm, _tool_node, prompt=_system)
 
 
-async def run_react(question: str, session_id: str) -> tuple[str, list[dict], dict]:
+async def run_react(question: str, session_id: str,
+                    tr: "trace.Trace | None" = None) -> tuple[str, list[dict], dict]:
     """跑一轮 ReAct。
 
     返回 (reply, tool_events, usage)
     - tool_events: 逐步工具事件，含 durationMs / ok / degraded / attempts
     - usage: {prompt_tokens, completion_tokens, total_tokens, steps}
     """
+    if tr is None:
+        tr = trace.Trace("react_chat", session_id=session_id, mode="react")
+    token = _current_trace.set(tr)
+    try:
+        return await _run_react_inner(question, session_id, tr)
+    finally:
+        _current_trace.reset(token)
+
+
+async def _run_react_inner(question: str, session_id: str,
+                           tr: "trace.Trace") -> tuple[str, list[dict], dict]:
     hist = memory.load(session_id)
-    messages = [{"role": m["role"], "content": m["content"]} for m in hist]
-    messages.append({"role": "user", "content": question})
-    result = await _react.ainvoke({"messages": messages})
+
+    # ---- 上下文预算控制：按 Token 预算裁剪历史消息 ----
+    # 检索片段由 searchPolicyKnowledge 工具在 Agent 自主决策时注入，
+    # 那里同样走 compress_context（见 search_policy_tool）。
+    plan = context.plan_budget(
+        total_budget=config.CONTEXT_TOKEN_BUDGET,
+        reserve_output=config.CONTEXT_RESERVE_OUTPUT,
+        history_ratio=config.CONTEXT_HISTORY_RATIO,
+        system_ratio=config.CONTEXT_SYSTEM_RATIO,
+    )
+    kept_hist, dropped_hist = context.build_history(
+        hist,
+        max_messages=config.CONTEXT_MAX_HISTORY_MESSAGES,
+        budget_tokens=plan.max_history,
+    )
+
+    with tr.span("context", "context") as sp:
+        messages = [{"role": m["role"], "content": m["content"]} for m in kept_hist]
+        messages.append({"role": "user", "content": question})
+        sp.set("budget", plan.total_budget)
+        sp.set("historyKept", len(kept_hist))
+        sp.set("historyDropped", dropped_hist)
+        sp.set("historyTokens", context.count_message_tokens(kept_hist))
+        sp.set("questionTokens", context.count_tokens(question))
+        sp.set("systemTokens", context.count_tokens(_system))
+
+    with tr.span("agent", "agent") as sp:
+        result = await _react.ainvoke({"messages": messages})
+        sp.set("messageCount", len(result.get("messages", [])))
     out_msgs = result["messages"]
 
     # ---- Token 用量统计：累加各轮 LLM 调用的 usage_metadata ----
@@ -216,6 +311,19 @@ async def run_react(question: str, session_id: str) -> tuple[str, list[dict], di
     reply = reply or "暂时无法确认，建议转人工客服。"
     memory.save_turn(session_id, question, reply)
     usage["toolCalls"] = sum(1 for e in tool_events if e.get("stage") == "start")
+
+    # ---- 上下文预算统计（供评测与 trace 消费）----
+    hist_tokens = context.count_message_tokens(kept_hist)
+    usage["context"] = {
+        "budget": plan.total_budget,
+        "available": plan.available,
+        "historyKept": len(kept_hist),
+        "historyDropped": dropped_hist,
+        "historyTokens": hist_tokens,
+        "questionTokens": context.count_tokens(question),
+        "promptTokensEstimated": hist_tokens + context.count_tokens(question) + context.count_tokens(_system),
+        "maxHistory": plan.max_history,
+    }
     return reply, tool_events, usage
 
 

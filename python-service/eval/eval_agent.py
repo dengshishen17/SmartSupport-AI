@@ -56,6 +56,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app import config  # noqa: E402
 
 CASES_FILE = Path(__file__).with_name("answer-eval-cases.json")
+# 扩展评测集（75 条可答 + 15 条越界探针），与检索评测共用同一套语料语义
+CASES_EXT_FILE = Path(__file__).resolve().parents[2].joinpath(
+    "backend", "src", "main", "resources", "eval", "answer-eval-cases-extended.json")
 
 # --------------------------------------------------------------------------
 # 工具元信息：合法参数名、是否业务数据工具、是否检索工具
@@ -491,10 +494,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", default="react", choices=["react", "rag"])
     ap.add_argument("--max-steps", type=int, default=8)
+    ap.add_argument("--cases", default="base", choices=["base", "ext", "both"],
+                    help="base=30 条标注用例；ext=扩展集；both=合并")
     args = ap.parse_args()
 
     cases = json.loads(CASES_FILE.read_text(encoding="utf-8"))["cases"]
-    print(f"agent-eval: mode={args.mode} maxSteps={args.max_steps} cases={len(cases)}")
+    label = "base"
+    if args.cases in ("ext", "both") and CASES_EXT_FILE.exists():
+        ext = json.loads(CASES_EXT_FILE.read_text(encoding="utf-8"))["cases"]
+        cases = ext if args.cases == "ext" else cases + ext
+        label = args.cases
+    print(f"agent-eval: mode={args.mode} maxSteps={args.max_steps} cases={len(cases)} set={label}")
 
     rows = []
     aborted = False

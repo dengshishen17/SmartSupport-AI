@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse
 
-from . import agent, config, ingest, metrics, retrieval, vectorstore, workflow
+from . import agent, config, ingest, metrics, retrieval, trace, vectorstore, workflow
 
 app = FastAPI(title="SmartSupport Python RAG Service")
 
@@ -47,14 +47,16 @@ def chat(req: ChatReq):
     session_id = req.sessionId or str(uuid.uuid4())
     import time
     t0 = time.time()
+    tr = trace.Trace("rag_chat", session_id=session_id, mode="rag")
     try:
         reply, sources, rag_hit, tool_events, usage = agent.chat_once(
-            req.question, session_id, top_k=config.RAG_TOP_K, threshold=config.RAG_THRESHOLD)
+            req.question, session_id, top_k=config.RAG_TOP_K, threshold=config.RAG_THRESHOLD, tr=tr)
         metrics.log_call("rag", session_id, req.question, (time.time() - t0) * 1000,
                          rag_hit, len(tool_events) // 2, True, "",
                          usage.get("prompt_tokens", 0), usage.get("completion_tokens", 0),
                          len(reply or ""))
-        return ok({"reply": reply, "sources": sources, "rag": rag_hit, "sessionId": session_id})
+        return ok({"reply": reply, "sources": sources, "rag": rag_hit, "sessionId": session_id,
+                   "traceId": tr.trace_id})
     except Exception as e:
         metrics.log_call("rag", session_id, req.question, (time.time() - t0) * 1000,
                          False, 0, False, str(e)[:300])
@@ -107,8 +109,9 @@ async def agent_chat(req: ChatReq):
     session_id = req.sessionId or str(uuid.uuid4())
     import time
     t0 = time.time()
+    tr = trace.Trace("react_chat", session_id=session_id, mode="react")
     try:
-        reply, tool_events, usage = await workflow.run_react(req.question, session_id)
+        reply, tool_events, usage = await workflow.run_react(req.question, session_id, tr=tr)
         # 工具调用次数统一从 stage=="start" 计数，不再用 len(events)//2 的脆弱假设
         tool_count = sum(1 for e in tool_events if e.get("stage") == "start")
         metrics.log_call("react", session_id, req.question, (time.time() - t0) * 1000,
@@ -116,7 +119,7 @@ async def agent_chat(req: ChatReq):
                          usage.get("prompt_tokens", 0), usage.get("completion_tokens", 0),
                          len(reply or ""))
         return ok({"reply": reply, "toolEvents": tool_events, "sessionId": session_id, "mode": "react",
-                   "usage": usage})
+                   "usage": usage, "traceId": tr.trace_id})
     except Exception as e:
         metrics.log_call("react", session_id, req.question, (time.time() - t0) * 1000,
                          False, 0, False, str(e)[:300])
@@ -212,3 +215,43 @@ def ops_recent(limit: int = 20):
         return ok({"logs": metrics.recent(max(1, min(limit, 100)))})
     except Exception as e:
         return JSONResponse(status_code=200, content=fail(f"查询失败：{e}"))
+
+
+# --------------------------------------------------------------------------
+# 全链路追踪查询
+# --------------------------------------------------------------------------
+
+@app.get("/py/ops/trace/{trace_id}")
+def ops_trace(trace_id: str):
+    """按 trace_id 取完整 span 树（定位单次请求各阶段耗时）。"""
+    try:
+        return ok(trace.get_trace(trace_id))
+    except Exception as e:
+        return JSONResponse(status_code=200, content=fail(f"查询 trace 失败：{e}"))
+
+
+@app.get("/py/ops/traces")
+def ops_traces(limit: int = 20):
+    """最近的 trace 列表。"""
+    try:
+        return ok({"traces": trace.recent_traces(max(1, min(limit, 100)))})
+    except Exception as e:
+        return JSONResponse(status_code=200, content=fail(f"查询 traces 失败：{e}"))
+
+
+@app.get("/py/ops/slow-spans")
+def ops_slow_spans(thresholdMs: float = 500.0, limit: int = 20):
+    """耗时最长的 span 列表（性能瓶颈定位）。"""
+    try:
+        return ok({"spans": trace.slow_spans(thresholdMs, max(1, min(limit, 100)))})
+    except Exception as e:
+        return JSONResponse(status_code=200, content=fail(f"查询慢 span 失败：{e}"))
+
+
+@app.get("/py/ops/trace-stats")
+def ops_trace_stats():
+    """按 span 类型聚合的耗时画像。"""
+    try:
+        return ok(trace.stats())
+    except Exception as e:
+        return JSONResponse(status_code=200, content=fail(f"查询 trace 统计失败：{e}"))

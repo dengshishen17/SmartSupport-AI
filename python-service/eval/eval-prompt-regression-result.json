@@ -1,0 +1,106 @@
+{
+  "mode": "rag",
+  "baseline": {
+    "name": "rag_system",
+    "version": "v1",
+    "hash": "8bbf0ba3af18",
+    "note": "基线：抽取 9 条处理要求 + 250 字上限（改造前线上版本）"
+  },
+  "candidate": {
+    "name": "rag_system",
+    "version": "v2",
+    "hash": "53222f898df3",
+    "note": "候选：强制先查再答、显式禁止编造条款、口语化提问不算越界、去掉末尾转人工兜底话术"
+  },
+  "rounds": 2,
+  "metrics": {
+    "faithfulRate": {
+      "baselineRounds": [
+        0.9643,
+        0.9762
+      ],
+      "candidateRounds": [
+        0.9762,
+        0.9762
+      ],
+      "baselineMedian": 0.9703,
+      "candidateMedian": 0.9762,
+      "delta": 0.0059,
+      "noise": 0.0084,
+      "verdict": "NO_SIGNIFICANT_CHANGE"
+    },
+    "toolRuleRate": {
+      "baselineRounds": [
+        1.0,
+        1.0
+      ],
+      "candidateRounds": [
+        1.0,
+        1.0
+      ],
+      "baselineMedian": 1.0,
+      "candidateMedian": 1.0,
+      "delta": 0.0,
+      "noise": 0.0,
+      "verdict": "NO_SIGNIFICANT_CHANGE"
+    },
+    "refusedRate": {
+      "baselineRounds": [
+        0.9643,
+        0.9643
+      ],
+      "candidateRounds": [
+        0.9762,
+        0.9881
+      ],
+      "baselineMedian": 0.9643,
+      "candidateMedian": 0.9821,
+      "delta": 0.0178,
+      "noise": 0.0084,
+      "verdict": "IMPROVED"
+    },
+    "successRate": {
+      "baselineRounds": [
+        1.0,
+        1.0
+      ],
+      "candidateRounds": [
+        1.0,
+        1.0
+      ],
+      "baselineMedian": 1.0,
+      "candidateMedian": 1.0,
+      "delta": 0.0,
+      "noise": 0.0,
+      "verdict": "NO_SIGNIFICANT_CHANGE"
+    },
+    "avgLatencyMs": {
+      "baselineRounds": [
+        1622.3,
+        1583.0
+      ],
+      "candidateRounds": [
+        1748.6,
+        1467.9
+      ],
+      "baselineMedian": 1602.65,
+      "candidateMedian": 1608.25,
+      "delta": 5.6,
+      "noise": 198.4849,
+      "verdict": "NO_SIGNIFICANT_CHANGE"
+    }
+  },
+  "verdict": {
+    "faithfulRate": "NO_SIGNIFICANT_CHANGE",
+    "toolRuleRate": "NO_SIGNIFICANT_CHANGE",
+    "refusedRate": "IMPROVED",
+    "successRate": "NO_SIGNIFICANT_CHANGE",
+    "avgLatencyMs": "NO_SIGNIFICANT_CHANGE"
+  },
+  "summary": {
+    "primaryMetric": "faithfulRate",
+    "primaryVerdict": "NO_SIGNIFICANT_CHANGE",
+    "regressedMetrics": [],
+    "conclusion": "两版无显著差异（改动落在噪声范围内）"
+  }
+}

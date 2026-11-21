@@ -1,8 +1,11 @@
 # SmartSupport AI —— 企业智能售后助手
 
 > 基于 **Java + Python 双栈（Spring AI + FastAPI + LangChain/LangGraph + RAG + Tool Calling + MCP）** 的企业售后智能客服系统。
-> Java 版（`backend`，8080）保障主链路稳定；Python 版（`python-service`，8001）承载 ReAct Agent、知识运营（512/50 切分入库）、MCP 对外接入与 LLM 生成评估。两栈共用同一批 MySQL / Redis / pgvector / DeepSeek / 百炼 Key。
+> **Python 侧承担 AI 应用主线**：LangGraph Agent 编排、RAG 检索与知识运营、上下文预算、Prompt 版本化回归、span 级可观测、MCP 对外接入；
+> Java 侧承担业务 CRUD 与工具服务化保障。两栈共用同一批 MySQL / Redis / pgvector / DeepSeek / 百炼 Key。
 > 把售后政策文档导入向量库，让 AI 基于真实政策回答问题；再挂载订单 / 退款 / 工单查询工具，让 AI 说出**真实业务数据**而不是编造。
+>
+> 所有能力均由**可复现的评测**支撑：75 条检索标注用例 + 114 条 Agent 轨迹用例 + 151 个离线单测（详见[核心可量化指标](#核心可量化指标实测非估算)）。
 
 > 🤝 **开发方式**：本项目由本人在 Cursor、Claude Code 等 AI 编程工具辅助下完成 —— 需求拆解、技术选型、架构设计、数据库与接口设计、代码审查与本地调试验收均由本人负责；AI 工具用于代码生成、问题排查与文档整理。
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.1-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
@@ -191,6 +194,51 @@
 
 订单 / 退款 / 工单的查询与写入接口，统一返回 `{ code, message, data }` 结构。
 
+### 8. Python AI 应用主线（FastAPI 8001）
+
+#### 8.1 上下文工程与 Token 预算（`app/context.py`）
+
+模型上下文是有限预算。RAG 场景下"检索片段 + 多轮历史 + 系统提示"三者会互相挤占，超限会直接报错。
+
+`app/context.py` 把这件事做成了**可分配、可观测**的预算器：
+
+- `count_tokens(text)`：CJK / 拉丁混排启发式计数，不依赖 `tiktoken`（避免额外依赖与网络调用）
+- `compress_context(retrieved, budget_tokens)`：**按句**截断过长片段；预算不足时**整段丢弃**低相关度尾部片段，而不是从中间切断语义
+- `build_history(...)`：保留最近若干轮，超预算时从最旧的历史往回收，且强制保留最后一轮
+- `assemble(...)`：统一入口，三段预算分配，返回组装结果 + `ContextStats`（含压缩节省比例、丢弃片段数）
+
+已接入 `workflow.py` 的 ReAct 链路与 `agent.py` 的固定 RAG 管线。
+
+#### 8.2 Prompt 版本化与回归比对（`app/prompts.py`）
+
+Prompt 是代码，却极易被"顺手改一句"破坏。这里把 Prompt 当**带版本的代码资产**管：
+
+- `PromptRegistry`：不可变注册表，按 `(name, version)` 命名空间存放，自动计算 SHA256 哈希
+- `registry.diff(...)`：输出统一 diff + 增删行数，用于 code review 式评审 Prompt 改动
+- `eval_prompt_regression.py`：**多轮交错执行**（候选/基线轮换，避免后端状态漂移与 API 延迟偏差），
+  对忠实度 / 工具选型 / 拒答率 / 成功率 / 延迟取中位数，用**跨轮标准差**估计噪声带，超噪声带才判定 `IMPROVED` / `REGRESSED`
+
+#### 8.3 工具执行可靠性（`app/tool_runtime.py`）
+
+Agent 调工具时工具可能卡住、失败、宕机。`ToolExecutor` 提供四层保护：
+**超时控制**（8s）、**指数退避重试**（2 次）、**熔断降级**（3 次失败开闸，30s 冷却半开）、**并发限流**（8）。
+
+两个关键实现细节：
+
+- **同步阻塞工具必须放自管线程池**。业务工具是阻塞式 MySQL 查询，`asyncio.wait_for` 无法中断它（实测 0.5s 超时实际跑了 3s）；
+  但**不能用 `asyncio.to_thread`**（它用 asyncio 默认线程池，事件循环关闭时会等池内线程结束，导致"超时后总耗时仍被拖长"）。
+- **失败必须返回字符串而不是抛异常**。模型需要看到"工具失败了，请转人工"才能正确处理；抛异常会崩掉整条 ReAct 链路。
+
+### 9. 全链路 Trace 追踪（`app/trace.py`）
+
+`ops.db` 原先只有"每次请求一行"的粗粒度日志，无法回答"到底是检索慢还是模型慢"。
+
+`app/trace.py` 提供 **span 级别**追踪：单次请求按 `agent → retrieval / context / tool → llm` 展开为**嵌套 span**，
+通过活跃执行栈自动串联父子关系，落库 `ops.db` 的 `trace_spans` 表（按 `trace_id` / `name` / `ts` 建索引）。
+
+对外提供 4 个运维接口：`/py/ops/trace/{trace_id}`（完整调用链）、`/py/ops/traces`（最近列表）、
+`/py/ops/slow-spans`（慢 span 排行）、`/py/ops/trace-stats`（按类型聚合的耗时画像）。
+
 ---
 
 ## 技术栈
@@ -216,12 +264,24 @@
 |---|---|---|
 | 框架 | FastAPI + uvicorn | 端口 8001，与 Java 版共用同一批中间件与 Key |
 | 编排 | LangChain 0.3+ / LangGraph 0.2+ | 固定 RAG 管线 + `create_react_agent` 自主规划 |
+| 上下文工程 | 自研 Token 预算器（`app/context.py`） | 系统提示 / 会话历史 / 检索片段三段预算分配，句级压缩 + 整段丢弃 |
+| Prompt 工程 | 版本化注册表（`app/prompts.py`） | SHA256 版本哈希 + diff 评审 + A/B 回归比对，v2 已验证提升为默认 |
 | 切分 | LangChain Text Splitters | 按 `##` 粗切、超长按 512/50 细切入库，支持切分预览 |
 | 协议 | MCP（FastMCP / MCPServer 2.x，stdio） | 4 个查询工具对外暴露，可供 Dify / Claude Desktop 接入 |
-| 评估 | 自研检索评测 + LLM-as-Judge 生成评估 | 33 条检索 + 30 条端到端，Hit@K / MRR / 忠实度 / 工具选型 / 越界拒答 |
-| 可观测 | SQLite（`ops.db`）+ `/py/ops/*` | 延迟 p50/p95、Token、工具数、成功率、分链路统计 |
+| 评估 | 自研检索评测 + LLM-as-Judge 生成评估 | 75 条检索标注 + 114 条 Agent 轨迹；Hit@K / MRR / **NDCG / MAP** / 忠实度 / 工具选型 / 无效调用率 |
+| 可观测 | SQLite（`ops.db`）+ span 级 Trace | 延迟 p50/p95、Token、工具数、成功率 + **完整 span 调用链**（检索/上下文/工具/模型） |
 
 > 📁 Python 服务详情见 [`python-service/README.md`](python-service/README.md)。
+
+### 核心可量化指标（实测，非估算）
+
+| 能力 | 指标 | 实测值 |
+|---|---|---|
+| 检索 | Hit@1 / Hit@5 / MRR / NDCG@5 | **89.3% / 100% / 0.9400 / 0.9048**（75 条标注用例） |
+| Agent 轨迹 | pass@1 / pass@3 / 引用忠实度 | **89.5% / 96.5% / 96.5%**（114 条用例，成功率 100%） |
+| 工具调用 | 无效调用率 / 浪费调用率 / 降级调用 | **0.0% / 0.0% / 0** |
+| Prompt 回归 | 拒答率提升（超噪声带） | **+1.78pt**（噪声带 0.84pt，判定 IMPROVED） |
+| 离线单测 | 全绿 | **151 个**，零 API 消耗 |
 
 ### 前端
 
@@ -359,13 +419,29 @@ JDK HttpClient 复用被对端关闭的连接会收到 RST（表现为 `Connecti
 │   │   ├── main.py                 # /py/* 接口（RAG/Agent/知识运营/ops）
 │   │   ├── agent.py                # 固定 RAG 管线（与 Java 同语义）
 │   │   ├── workflow.py             # LangGraph ReAct Agent
+│   │   ├── context.py              # ★ 上下文工程：Token 预算分配 + 片段压缩
+│   │   ├── prompts.py              # ★ Prompt 版本注册表（哈希 + diff + 生效版本）
+│   │   ├── trace.py                # ★ span 级全链路追踪（SQLite trace_spans）
 │   │   ├── ingest.py               # ## 粗切 + 512/50 细切入库
 │   │   ├── tools.py                # 订单/退款/工单/保修 4 工具
+│   │   ├── tool_runtime.py         # 工具可靠性层（超时/重试/熔断/限流）
 │   │   ├── vectorstore.py          # pgvector 检索（topK/threshold）
 │   │   ├── memory.py               # Redis 会话记忆（与 Java 共用 key）
 │   │   ├── metrics.py              # SQLite 可观测落库
 │   │   └── mcp_server.py           # MCP stdio 服务（4 工具对外）
-│   └── eval/                       # eval_rag.py（检索）+ eval_answer.py（LLM-as-Judge 生成评估）
+│   └── eval/                       # 评测与离线单测
+│       ├── eval_retrieval.py       # 检索策略横向对比（75 条，零 LLM 消耗）
+│       ├── eval_agent.py           # Agent 轨迹级评测（114 条）
+│       ├── eval_prompt_regression.py # ★ Prompt A/B 回归（多轮交错 + 噪声带）
+│       ├── metrics_ndcg.py         # ★ NDCG / MAP（分级相关性）
+│       ├── eval_answer.py          # 端到端生成评估（LLM-as-Judge）
+│       ├── test_context.py         # 上下文预算器单测（31）
+│       ├── test_prompt_version.py  # Prompt 版本注册表单测（22）
+│       ├── test_ndcg.py            # NDCG/MAP 单测（41）
+│       ├── test_trace.py           # Trace span 单测（23）
+│       ├── test_tool_runtime.py    # 工具可靠性单测（13）
+│       ├── test_eval_agent.py      # 轨迹解析单测（15）
+│       └── test_rerank_authority.py # 重排权威度单测（6）
 │
 └── docs/
     └── screenshots/                # ★ README 截图（需自行放置）
@@ -707,6 +783,10 @@ python -m uvicorn app.main:app --port 8001
 | POST | `/py/knowledge/upload` | 上传 md/txt 并入库（multipart，字段名 `file`） |
 | GET | `/py/ops/stats` | 调用量/成功率/延迟 p50/p95/Token/工具均值/分链路统计 |
 | GET | `/py/ops/recent?limit=` | 最近调用明细 |
+| GET | `/py/ops/trace/{trace_id}` | 单次请求的完整 span 调用链（父子关系 + 各段耗时） |
+| GET | `/py/ops/traces?limit=` | 最近 trace 列表 |
+| GET | `/py/ops/slow-spans?thresholdMs=` | 慢 span 排行（性能瓶颈定位） |
+| GET | `/py/ops/trace-stats` | 按 span 类型聚合的耗时画像 |
 
 ---
 
@@ -804,16 +884,25 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 
 ### Python 双栈评测（`python-service/eval/`，与 Java 同口径）
 
-- **检索评测**（`eval_rag.py`，33 条 = 29 可答 + 4 越界探针，ground truth=章节标题，只读 `vector_store`）：
-  生产参数 topK=5 下 **Hit@1 89.7%、Hit@3 100%、MRR 0.9483**（见 `python-service/eval/eval-py-result.json`），与 Java 版一致。
-- **端到端生成评估**（`eval_answer.py`，LLM-as-Judge，30 条 = 政策10 + 工具12 + 越界4 + 口语4）：
-  **引用忠实度 83.3%、工具选型准确率 100%、越界拒答 4/4**（见 `python-service/eval/eval-answer-result.json`），
-  覆盖固定 RAG 管线（`--mode=rag`）与 LangGraph ReAct（`--mode=react`）两条链路。
-- **知识运营**：文档按 `##` 粗切、超长按 512/50 细切入库，支持切分预览（`/py/knowledge/preview-split`）、文本/文件上传入库。
-- **可观测**：每次 `/py/knowledge/chat` 与 `/py/agent/chat` 落库 SQLite（`ops.db`），`/py/ops/stats` 看调用量/成功率/延迟 p50/p95/Token/工具均值/RAG 命中率/分链路统计。
+- **检索评测**（`eval_retrieval.py`，75 条标注 + 15 条越界，ground truth=章节标题，只读 `vector_store`）：
+  **75 条**（含 8 条近义干扰）下 Rerank 策略 **Hit@1 89.3%、Hit@5 100%、MRR 0.9400、NDCG@5 0.9048**；
+  四策略横向对比 dense / bm25 / hybrid / rerank。NDCG 采用**分级相关性**（Primary=3 / Secondary=2 / Tertiary=1 / Distractor=-1），
+  专门区分"命中正确章节"与"命中近似干扰章节"。
+- **Agent 轨迹评测**（`eval_agent.py`，114 条 = 政策63 + 工具24 + 口语8 + 越界19）：
+  **pass@1 89.5%、pass@3 96.5%、引用忠实度 96.5%**、执行成功率 100%、
+  **无效调用率 0.0%、浪费调用率 0.0%、降级调用 0**、平均步数 0.87。
+- **Prompt 回归比对**（`eval_prompt_regression.py`，84 条 × 2 轮 × 2 版本交错执行）：
+  `rag_system:v1` vs `v2`，忠实度 97.0% → 97.6%（无退化）、**拒答率 +1.78pt > 0.84pt 噪声带 → IMPROVED**，
+  故 `v2` 提升为默认版本。
+- **上下文工程**（`app/context.py`）：Token 预算三段分配 + 句级压缩 + 整段丢弃，接入 ReAct 与固定 RAG 两条链路。
+- **可观测**：每次 `/py/knowledge/chat` 与 `/py/agent/chat` 落库 SQLite（`ops.db`），`/py/ops/stats` 看调用量/成功率/延迟 p50/p95/Token/工具均值/RAG 命中率/分链路统计；
+  另提供 **span 级 Trace**（`/py/ops/trace/{trace_id}`、`/py/ops/slow-spans`、`/py/ops/trace-stats`），
+  可下钻到"单次请求里检索、上下文组装、工具调用、模型生成各耗时多少"。
 - **MCP**：`python -m app.mcp_server`（stdio）暴露订单/退款/工单/保修 4 工具，可供 Dify / Claude Desktop 接入。
 
-> 📌 报告已明确列出局限：未评测答案生成质量、未评测生成层拒答、未把 `@Tool` 业务查询纳入评测、未做并发压测。样本量小，指标置信区间较宽。
+> 📌 **一个重要的方法论教训**：初版评测参考答案只写了 1 句摘要，模型引用完整条款反被判 `HALLUCINATION`，
+> pass@1 一度只有 64.9%。修复参考答案质量 + 裁判 Prompt 后，pass@1 提升到 89.5%、幻觉从 35 条降到 4 条。
+> **评测集本身的质量决定了评测结论的可信度** —— 这比调 Prompt 更值得记录。
 
 ---
 
@@ -824,11 +913,14 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 | 环节 | 由谁负责 |
 | --- | --- |
 | 需求拆解与场景定义（退换货政策问答 / 订单数据查询 / 越界拒答） | 本人 |
-| 技术选型（Spring Boot + Spring AI 主链路、FastAPI + LangGraph 双栈、pgvector 向量库） | 本人 |
+| 技术选型（FastAPI + LangGraph 为 AI 主线，Spring Boot 为业务 CRUD 保障，pgvector 向量库） | 本人 |
 | 架构设计（Java / Python 双栈职责划分、共享 MySQL / Redis / pgvector） | 本人 |
 | 数据库表结构与接口契约设计 | 本人 |
 | Prompt 策略、检索切分参数（512/50）、topK / 阈值、越界兜底策略 | 本人 |
-| RAG 评测集构建（33 条）与评测方法设计 | 本人 |
+| **上下文预算策略（系统提示 / 会话历史 / 检索片段三段配额分配）** | 本人 |
+| **评测集构建（75 条检索标注 + 114 条 Agent 轨迹）与评测方法设计** | 本人 |
+| **Prompt 版本化策略与回归判定规则（噪声带阈值）** | 本人 |
+| **span 追踪埋点设计与运维接口设计** | 本人 |
 | 代码生成与重构 | 本人主导，AI 工具辅助 |
 | 问题排查、性能调优、本地联调与验收 | 本人主导，AI 工具辅助 |
 | README 与评测报告撰写 | 本人主导，AI 工具辅助 |
@@ -836,6 +928,10 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 **实际使用的 AI 工具**：Cursor（Agent / Composer）、Claude Code —— 主要用于模板生成、重复代码编写、单测补全、报错定位与文档整理。
 
 **为什么把这个写出来**：现在绝大多数开发者都在用 AI 编程工具，能主动讲清楚"哪些是我决定的、哪些是 AI 做的"，比声称"全部手写"更真实，也更能体现工程判断力。
+
+> **关于评测的特别说明**：本项目的评测脚本、参考答案、指标定义与判定阈值均由本人设计与实现，
+> 并通过**参考集质量修复**（初版 1 句摘要导致 35 条误判幻觉）与**裁判稳定性复跑**（12 条 0 翻转）
+> 排除了评测本身的系统性偏差。报告里的每个数字都可以用 `python -m eval.xxx` 复现。
 
 ---
 
@@ -860,11 +956,31 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 
 ### 已知局限
 
-12. **检索层挡不住越界问题**。`threshold=0.0` 时 4 条越界探针全部返回了内容（最高相似度 0.4903），兜底靠 system prompt 而非检索层。
+12. **检索层挡不住越界问题**。`threshold=0.0` 时越界探针全部返回了内容，兜底靠 system prompt 而非检索层。
 13. **存在「一单一退」假设**（`selectOne` + 唯一索引），多笔退款场景需改造。
 14. **无用户体系**，`user_id` 是孤立标识，没有对应的用户表。
 15. **`findConversationIds()` 用 `KEYS` 全量扫描**，演示项目数据量小可接受，生产应改为 `SCAN` 增量遍历。
 16. **政策文档为模拟数据**，不代表真实企业政策。
+17. **评测样本量有限**：75 条检索 + 114 条 Agent 轨迹，置信区间仍较宽；策略对比已用 dev/test 分割规避过拟合，
+    但更大的标注集才能支撑更细的结论。
+18. **未做并发压测**：工具可靠性层的超时/熔断/限流逻辑有离线单测覆盖，但未在真实高并发下验证。
+19. **Context 预算器用启发式 Token 计数**，与真实模型 tokenizer 有偏差（刻意不引入 `tiktoken` 依赖）；
+    偏差在长上下文场景需要留意。
+20. **Prompt 回归的噪声带基于 2 轮估计**，样本偏少时判定可能过于保守。
+
+---
+
+## 简历对应关系（可验证）
+
+| 简历表述 | 对应代码 / 报告 | 复现命令 |
+|---|---|---|
+| Rerank Hit@1 89.3%、Hit@5 100%、MRR 0.9400、NDCG@5 0.9048 | `python-service/eval/eval_retrieval.py` | `python -m eval.eval_retrieval --cases=both` |
+| Agent pass@1 89.5%、引用忠实度 96.5% | `python-service/eval/eval_agent.py` | `python -m eval.eval_agent --mode=react --cases=both` |
+| 无效 / 浪费工具调用均为 0 | 同上，`invalidCallRate` / `wastedCallRate` | 同上 |
+| Prompt 版本化 + 多轮交错回归 | `python-service/eval/eval_prompt_regression.py` | `python -m eval.eval_prompt_regression --rounds=2 --cases=both` |
+| 上下文预算器（Token 分配 + 片段压缩） | `python-service/app/context.py` | `python -m eval.test_context` |
+| span 级全链路 Trace（SQLite） | `python-service/app/trace.py` | `python -m eval.test_trace` |
+| 151 个离线单测全绿 | `python-service/eval/test_*.py` | 逐个 `python -m eval.test_*` |
 
 ---
 

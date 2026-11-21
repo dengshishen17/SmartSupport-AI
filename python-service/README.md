@@ -33,6 +33,55 @@
 > > **注意**：`embeddings.embed_batch` 已按百炼 API 单批 ≤10 条自动分批
 > > （`text-embedding-v4` 限制，语料少时不触发，扩充后必然触发）。
 
+## 上下文工程与 Token 预算（app/context.py）
+
+模型上下文是有限预算，RAG 场景下"检索回来的片段 + 多轮历史 + 系统提示"三者会互相挤占。
+`app/context.py` 把这件事做成了**可分配、可观测**的预算器：
+
+| 能力 | 说明 |
+|---|---|
+| `count_tokens(text)` | CJK / 拉丁混排启发式计数，不依赖 `tiktoken`（避免额外依赖与网络） |
+| `compress_context(retrieved, budget_tokens)` | **按句**截断过长片段；预算不足时**整段丢弃**低相关度尾部片段，而不是从中间切断语义 |
+| `build_history(messages, max_messages, budget_tokens)` | 保留最近若干轮，超预算时从最旧的历史往回收，且强制保留最后一轮 |
+| `assemble(...)` | 统一入口：系统提示 / 历史 / 检索片段三段预算分配，返回组装结果 + `ContextStats` |
+
+`ContextStats` 记录每段实际占用、压缩节省比例、丢弃片段数，可直接进 Trace 观测。
+
+**接入点**：`workflow.py` 的 `run_react`（LangGraph ReAct）与 `agent.py` 的 `chat_once`（固定 RAG 管线）。
+这解决了一个真实问题：超长历史 + 大量召回片段会让请求直接撞上模型上下文上限而报错。
+
+## Prompt 版本管理与回归比对（app/prompts.py）
+
+Prompt 是代码，却极易被"顺手改一句"破坏。`app/prompts.py` 把 Prompt 当**带版本的代码资产**管：
+
+| 能力 | 说明 |
+|---|---|
+| `PromptRegistry` | 不可变注册表，按 `(name, version)` 命名空间存放，自动计算 SHA256 哈希 |
+| `registry.diff(name, v1, v2)` | 输出统一 diff 文本 + 增删行数，用于 code review 式评审 Prompt 改动 |
+| `ACTIVE_RAG_VERSION` | 当前生效版本；`v2` 已被回归比对验证并提升为默认 |
+
+`eval/eval_prompt_regression.py` 做 A/B 回归：**多轮交错执行**（候选/基线轮换，避免后端状态漂移与 API 延迟偏差），
+对 `faithfulRate` / `toolRuleRate` / `refusedRate` / `successRate` / `avgLatencyMs` 取中位数，
+用**跨轮标准差**估计噪声带，超过噪声带才判定为 `IMPROVED` / `REGRESSED`。
+
+> 实测：`rag_system:v1` vs `v2`，84 条用例 × 2 轮 —— 忠实度 97.0% → 97.6%（无退化），
+> 拒答率 +1.78pt（> 0.84pt 噪声带）判定 `IMPROVED`，故 `v2` 提升为默认。
+
+## 全链路 Trace 追踪（app/trace.py）
+
+`ops.db` 原先只有"每次请求一行"的粗粒度日志，无法回答"到底是检索慢还是模型慢"。
+`app/trace.py` 提供 **span 级别**追踪：
+
+| 能力 | 说明 |
+|---|---|
+| `Trace` 上下文管理器 | 支持嵌套 `with tr.span("retrieval"):`，通过活跃执行栈自动串联父子关系 |
+| 落库 | SQLite `ops.db` → `trace_spans` 表，按 `trace_id` / `name` / `ts` 建索引 |
+| span 类型 | `retrieval` / `context` / `tool` / `agent` / `llm`，各带耗时、状态与 JSON 属性 |
+| 查询 | `get_trace(trace_id)` / `recent_traces(limit)` / `slow_spans(threshold_ms)` / `stats()` |
+
+**接入点**：`agent.py`（`retrieval`→`context`→`tool`→`llm`）、`workflow.py`（`context`→`tool`→`agent`）、
+`main.py`（生成 `traceId` 并回传）。单条请求的完整调用链可以一次性拉出来看。
+
 ## 工具清单（LangChain + MCP 共用）
 
 `queryOrderByOrderNo` / `queryRefundByOrderNo` / `queryTicketByOrderNo` / `queryWarrantyByOrderNo`（保修测算：按§4.1 保修期表推算在保/过保）。
@@ -194,6 +243,8 @@ cd D:\SmartSupport AI 企业智能售后助手\python-service
 python -m eval.eval_rag          # 检索评测：Hit@1/3/5+MRR+延迟，只读 vector_store
 python -m eval.eval_retrieval     # 检索策略横向对比：dense/bm25/hybrid/rerank（无 LLM，零消耗）
                                   #   --cases=ext  仅扩展集(46条)  --cases=both 合并集(75条)
+python -m eval.eval_prompt_regression  # Prompt A/B 回归：多轮交错 + 中位数 + 噪声带判定
+                                  #   --rounds=2  --cases=both
 python -m eval.tune_rerank_weight  # 重排权重调参（dev/test 分割，37 组网格，约 6 分钟）
 python -m eval.eval_answer --mode=rag    # 端到端生成评估：LLM-as-Judge（忠实度/拒答率/工具选型）
 python -m eval.eval_answer --mode=react  # 同上，测 ReAct 链路
@@ -202,22 +253,38 @@ python -m eval.eval_agent --mode react   # Agent 轨迹级评测：pass@1/步数
 python -m eval.test_eval_agent            # 轨迹解析与失败分类的离线单测（15/15，零 API 消耗）
 python -m eval.test_tool_runtime          # 工具可靠性层离线单测（13/13，零 API 消耗）
 python -m eval.test_rerank_authority      # 重排权威度信号离线单测（6/6，零 API 消耗）
+python -m eval.test_context              # 上下文预算器离线单测（31/31，零 API 消耗）
+python -m eval.test_prompt_version       # Prompt 版本注册表离线单测（22/22，零 API 消耗）
+python -m eval.test_ndcg                 # NDCG/MAP 指标离线单测（41/41，零 API 消耗）
+python -m eval.test_trace                # Trace span 离线单测（23/23，零 API 消耗）
 ```
+
+> 离线单测合计 **151 个，全绿，零 API 消耗** —— 评测代码本身的质量也必须被测，
+> 否则"评测结果不可信"这件事会一直藏着。
 
 > **完整基线见 [`eval/baseline-report.md`](eval/baseline-report.md)** —— 后续所有改造的对照基准。
 > **轨迹评测报告见 [`eval/eval-agent-report.md`](eval/eval-agent-report.md)**。
 > **检索评测报告见 [`eval/retrieval-eval-report.md`](eval/retrieval-eval-report.md)**。
 
-### 检索策略横向对比（75 条标注用例，topK=5）
+### 检索策略横向对比（75 条标注用例 + 15 条越界，topK=5）
 
 知识库从 6 chunk 扩充到 24 chunk、评测集从 29 条扩到 75 条（含 8 条近义干扰用例）后：
 
-| 策略 | Hit@1 | Hit@3 | Hit@5 | MRR | 平均延迟 |
-|---|---|---|---|---|---|
-| dense | 81.3% | 97.3% | 98.7% | 0.8878 | 264ms |
-| bm25 | 76.0% | 92.0% | 93.3% | 0.8338 | **26ms** |
-| hybrid | 81.3% | 94.7% | 100% | 0.8847 | 310ms |
-| **rerank** | **89.3%** | 97.3% | **100%** | **0.9400** | 263ms |
+| 策略 | Hit@1 | Hit@3 | Hit@5 | MRR | NDCG@5 | MAP | 平均延迟 |
+|---|---|---|---|---|---|---|---|
+| dense | 81.3% | 97.3% | 98.7% | 0.8878 | 0.8871 | **0.9092** | 286ms |
+| bm25 | 76.0% | 92.0% | 93.3% | 0.8338 | 0.8919 | 0.8864 | **30ms** |
+| hybrid | 81.3% | 94.7% | 100% | 0.8847 | 0.9002 | **0.9384** | 305ms |
+| **rerank** | **89.3%** | 97.3% | **100%** | **0.9400** | **0.9048** | 0.8970 | 269ms |
+
+> NDCG / MAP 由 `eval/metrics_ndcg.py` 计算，**采用分级相关性**（Primary=3 / Secondary=2 / Tertiary=1 /
+> Distractor=-1 / None=0），而非二值命中。理由：二值指标无法区分"命中了正确章节"与
+> "命中了近似干扰章节"，而后者恰恰是本场景最容易踩的坑。
+>
+> 一个有意思的现象：**MAP 与 NDCG 的排序不完全一致** —— `hybrid` 的 MAP 最高（0.9384），
+> 但 `rerank` 的 Hit@1 / NDCG 最高（89.3% / 0.9048）。因为 MAP 衡量的是"整个有序列表上相关文档的平均位置"，
+> 更看重**整体把相关文档排在前面**；NDCG 更看重**头部位置的精度**，并且给干扰文档负分。
+> 面向用户的问答场景，**首条结果决定答案质量**，所以默认仍选 rerank。
 
 **默认策略已从 dense 改为 rerank**（Hit@1 +8.0pt、MRR +0.052），
 可用 `RETRIEVAL_MODE=dense` 回退。
@@ -258,21 +325,44 @@ final = (0.55·vec + 0.20·kw + 0.15·sec + 0.10·auth) × (0.85 + 0.15·auth)
 **结论：75 条规模上做权重微调收益落在噪声范围内，当前权重已接近最优。**
 这比「又调出 0.5% 提升」更有价值 —— 说明该扩语料和用例，而不是继续调参。
 
-### Agent 轨迹级评测（P0-3）
+### Agent 轨迹级评测（114 条用例全量）
 
 `eval_answer.py` 只看结果，`eval_agent.py` 看**过程**：走了几步、调了哪些工具、
 有没有无效调用、在哪一步失败、失败属于哪一类。
 
-| 指标 | react 实测（30 条） |
+| 指标 | react 实测（114 条全量） |
 |---|---|
-| pass@1 / pass@3 | 83.3% / 86.7% |
-| 平均步数 | 0.83 |
-| 工具调用总数 | 25 |
+| 执行成功率 | 114/114（100%） |
+| pass@1 / pass@3 | **89.5%** / **96.5%** |
+| 引用忠实度 | **96.5%** |
+| 平均步数 / 最大步数 | 0.87 / 8 |
+| 工具调用总数 | 99 |
 | **无效调用率** | **0.0%** |
 | **浪费调用率** | **0.0%** |
 | **降级调用数** | **0** |
-| 失败归类 | HALLUCINATION 4、RETRIEVAL_EMPTY 3，其余 7 类均为 0 |
-| 平均单请求 Token | prompt 1825 / completion 127 / total 1952 |
+| 失败归类 | HALLUCINATION 4、RETRIEVAL_EMPTY 6，其余 7 类均为 0 |
+| 平均单请求 Token | prompt 2096 / completion 144 / total 2240 |
+| 平均延迟 | 2041ms |
+
+分类别表现：
+
+| 类别 | 条数 | pass@1 | 忠实度 |
+|---|---|---|---|
+| out_of_scope（越界） | 19 | **100%** | **100%** |
+| colloquial（口语化） | 8 | **100%** | **100%** |
+| policy（政策） | 63 | 90.5% | 93.7% |
+| tool（业务工具） | 24 | 75.0% | **100%** |
+
+> **重要：评测参考集质量决定评测结论的有效性。**
+> 初版参考答案是"创建售后工单选退货，经审核后退货"这样的 1 句摘要，
+> 而模型实际引用了完整的 7 天窗口与运费规则，裁判反而判为 `HALLUCINATION`，
+> 导致 pass@1 一度只有 64.9%、35 条"幻觉"。这**不是模型的问题，是标准答案的问题**。
+> 修复动作：① 参考答案升级为多条款原文（≤900 字，按查询关键词相关性挑选）；
+> ② 裁判 Prompt 明确"参考为摘要，与政策语义一致的细节表述不算幻觉，除非明确矛盾"；
+> ③ `load_sections()` 修复 —— 原本会丢弃没有 `##` 标题的续接 chunk（如 §1.3 退款计算规则）。
+> 修复后 pass@1 89.5%、忠实度 96.5%，HALLUCINATION 从 35 降到 4。
+>
+> 另用 `_judge_stability.py` 复跑 12 条验证裁判稳定性，0/12 出现误判翻转。
 
 
 失败归因 taxonomy 共 9 类：`RETRIEVAL_EMPTY` / `TOOL_ERROR` / `INVALID_ARGS` /
@@ -323,9 +413,17 @@ final = (0.55·vec + 0.20·kw + 0.15·sec + 0.10·auth) × (0.85 + 0.15·auth)
 |---|---|---|
 | GET | `/py/ops/stats` | 调用量/成功率/延迟p50/p95/Token均值与总量/工具均值/RAG命中率/分链路统计/Top错误 |
 | GET | `/py/ops/recent?limit=20` | 最近调用明细（含问题、延迟、Token、工具数） |
+| GET | `/py/ops/trace/{trace_id}` | 单次请求的**完整 span 调用链**（父子关系 + 各段耗时 + 属性） |
+| GET | `/py/ops/traces?limit=20` | 最近的 trace 列表 |
+| GET | `/py/ops/slow-spans?thresholdMs=500` | 慢 span 排行，用于定位"到底是哪一环慢" |
+| GET | `/py/ops/trace-stats` | 按 span 类型聚合的耗时画像（哪类 span 占用总耗时最多） |
 
 每次 `/py/knowledge/chat` 与 `/py/agent/chat` 自动记录：延迟、RAG命中、工具数、成功失败、
 prompt/completion Token（ReAct 链路暂记 0）、回复长度。失败只记不抛，不影响主流程。
+
+**span 级追踪**（`app/trace.py`）在此之上补充了细粒度视图：单次请求按
+`agent → retrieval / context / tool → llm` 展开为嵌套 span，落库 `ops.db` 的 `trace_spans` 表。
+回答"这次慢，是 Embedding 慢、pgvector 慢、还是模型慢"不再需要猜。
 
 ## MCP
 
