@@ -1,0 +1,370 @@
+{
+  "version": "2.0-ext",
+  "description": "SmartSupport AI RAG 检索评测集（扩展版）。在原 29 条可答用例 + 4 条越界探针的基础上，新增扩展语料《售后政策扩展数据.md》对应的用例，以及一组「近义干扰」用例与扩充后的越界探针集。",
+  "groundTruthBasis": "public.vector_store 中 source='售后政策演示数据.md'（6 chunk）与 source='售后政策扩展数据.md'（18 chunk）共 24 个 chunk",
+  "scoringNote": "expectedSections 为空的用例归入 out_of_scope 探针集，不计入 Hit Rate@K 与 MRR 的分母，单独成表报告。expectedSections 命中判定：返回 chunk 的 content 包含任一 expectedSections 标题（## 标题）。",
+  "newSections": [
+    "七、换货政策",
+    "八、开票与发票政策",
+    "九、优惠券与活动规则",
+    "十、价格保护与价保规则",
+    "十一、常见问题 FAQ",
+    "十二、服务等级与响应时效",
+    "十三、客服话术与信息脱敏规范",
+    "十四、渠道与自营配送政策",
+    "十五、常见误区澄清"
+  ],
+  "distractorNote": "distractor 分类的用例刻意设计成与正确章节词面高度相似但语义不同（如 退货 vs 换货、保修 vs 价保、退款 vs 优惠券），用于检验不同检索策略在近义干扰下的表现差异。这类用例的 expectedSections 只指向正确语义章节。",
+  "cases": [
+    {
+      "id": "ext-exchange-01",
+      "query": "怎么申请换货",
+      "category": "换货政策",
+      "expectedSections": ["七、换货政策"]
+    },
+    {
+      "id": "ext-exchange-02",
+      "query": "换货工单的状态流转是怎样的",
+      "category": "换货政策",
+      "expectedSections": ["七、换货政策"]
+    },
+    {
+      "id": "ext-exchange-03",
+      "query": "换货的运费由谁承担",
+      "category": "换货政策",
+      "expectedSections": ["七、换货政策"]
+    },
+    {
+      "id": "ext-exchange-04",
+      "query": "非质量问题换货的时限是多久",
+      "category": "换货政策",
+      "expectedSections": ["七、换货政策"]
+    },
+    {
+      "id": "ext-exchange-05",
+      "query": "换货完成后会自动创建退款记录吗",
+      "category": "换货政策",
+      "expectedSections": ["七、换货政策"]
+    },
+    {
+      "id": "ext-invoice-01",
+      "query": "电子发票怎么开具",
+      "category": "开票政策",
+      "expectedSections": ["八、开票与发票政策"]
+    },
+    {
+      "id": "ext-invoice-02",
+      "query": "订单完成后多久可以申请开票",
+      "category": "开票政策",
+      "expectedSections": ["八、开票与发票政策"]
+    },
+    {
+      "id": "ext-invoice-03",
+      "query": "发票抬头写错了能改吗",
+      "category": "开票政策",
+      "expectedSections": ["八、开票与发票政策"]
+    },
+    {
+      "id": "ext-invoice-04",
+      "query": "增值税专用发票需要什么条件",
+      "category": "开票政策",
+      "expectedSections": ["八、开票与发票政策"]
+    },
+    {
+      "id": "ext-coupon-01",
+      "query": "优惠券有哪几种类型",
+      "category": "优惠券规则",
+      "expectedSections": ["九、优惠券与活动规则"]
+    },
+    {
+      "id": "ext-coupon-02",
+      "query": "一张订单能用几张优惠券",
+      "category": "优惠券规则",
+      "expectedSections": ["九、优惠券与活动规则"]
+    },
+    {
+      "id": "ext-coupon-03",
+      "query": "用优惠券的订单退款时券会退回来吗",
+      "category": "优惠券规则",
+      "expectedSections": ["九、优惠券与活动规则"]
+    },
+    {
+      "id": "ext-coupon-04",
+      "query": "满减活动和买赠活动可以一起参加吗",
+      "category": "优惠券规则",
+      "expectedSections": ["九、优惠券与活动规则"]
+    },
+    {
+      "id": "ext-price-01",
+      "query": "买完降价了可以申请价保吗",
+      "category": "价保规则",
+      "expectedSections": ["十、价格保护与价保规则"]
+    },
+    {
+      "id": "ext-price-02",
+      "query": "价保的期限是多久",
+      "category": "价保规则",
+      "expectedSections": ["十、价格保护与价保规则"]
+    },
+    {
+      "id": "ext-price-03",
+      "query": "哪些商品不支持价保",
+      "category": "价保规则",
+      "expectedSections": ["十、价格保护与价保规则"]
+    },
+    {
+      "id": "ext-price-04",
+      "query": "申请价保需要提供什么材料",
+      "category": "价保规则",
+      "expectedSections": ["十、价格保护与价保规则"]
+    },
+    {
+      "id": "ext-faq-01",
+      "query": "钱什么时候能退到我卡上",
+      "category": "常见问题FAQ",
+      "expectedSections": ["十一、常见问题 FAQ", "一、退款政策"]
+    },
+    {
+      "id": "ext-faq-02",
+      "query": "快递怎么还没到",
+      "category": "常见问题FAQ",
+      "expectedSections": ["十一、常见问题 FAQ", "三、物流查询"]
+    },
+    {
+      "id": "ext-faq-03",
+      "query": "东西坏了找谁修",
+      "category": "常见问题FAQ",
+      "expectedSections": ["十一、常见问题 FAQ", "四、保修规则"]
+    },
+    {
+      "id": "ext-faq-04",
+      "query": "发票怎么开",
+      "category": "常见问题FAQ",
+      "expectedSections": ["十一、常见问题 FAQ", "八、开票与发票政策"]
+    },
+    {
+      "id": "ext-faq-05",
+      "query": "优惠券能叠加用吗",
+      "category": "常见问题FAQ",
+      "expectedSections": ["十一、常见问题 FAQ", "九、优惠券与活动规则"]
+    },
+    {
+      "id": "ext-sla-01",
+      "query": "退款咨询多久回复",
+      "category": "服务时效",
+      "expectedSections": ["十二、服务等级与响应时效"]
+    },
+    {
+      "id": "ext-sla-02",
+      "query": "在线客服的服务时间是几点到几点",
+      "category": "服务时效",
+      "expectedSections": ["十二、服务等级与响应时效"]
+    },
+    {
+      "id": "ext-sla-03",
+      "query": "什么情况工单会被优先处理",
+      "category": "服务时效",
+      "expectedSections": ["十二、服务等级与响应时效"]
+    },
+    {
+      "id": "ext-sla-04",
+      "query": "对处理结果不满意可以升级吗",
+      "category": "服务时效",
+      "expectedSections": ["十二、服务等级与响应时效"]
+    },
+    {
+      "id": "ext-privacy-01",
+      "query": "客服回复订单号时需要脱敏吗",
+      "category": "客服规范",
+      "expectedSections": ["十三、客服话术与信息脱敏规范"]
+    },
+    {
+      "id": "ext-privacy-02",
+      "query": "哪些字段客服不能主动查询",
+      "category": "客服规范",
+      "expectedSections": ["十三、客服话术与信息脱敏规范"]
+    },
+    {
+      "id": "ext-privacy-03",
+      "query": "什么情况下必须转人工",
+      "category": "客服规范",
+      "expectedSections": ["十三、客服话术与信息脱敏规范"]
+    },
+    {
+      "id": "ext-privacy-04",
+      "query": "客服能不能承诺具体到账时间",
+      "category": "客服规范",
+      "expectedSections": ["十三、客服话术与信息脱敏规范"]
+    },
+    {
+      "id": "ext-delivery-01",
+      "query": "有哪几种配送方式",
+      "category": "配送政策",
+      "expectedSections": ["十四、渠道与自营配送政策"]
+    },
+    {
+      "id": "ext-delivery-02",
+      "query": "满多少钱免运费",
+      "category": "配送政策",
+      "expectedSections": ["十四、渠道与自营配送政策"]
+    },
+    {
+      "id": "ext-delivery-03",
+      "query": "退货换货支持上门取件吗",
+      "category": "配送政策",
+      "expectedSections": ["十四、渠道与自营配送政策"]
+    },
+    {
+      "id": "ext-delivery-04",
+      "query": "包裹破损可以拒收吗",
+      "category": "配送政策",
+      "expectedSections": ["十四、渠道与自营配送政策"]
+    },
+    {
+      "id": "ext-clarify-01",
+      "query": "退货和换货有什么区别",
+      "category": "误区澄清",
+      "expectedSections": ["十五、常见误区澄清", "七、换货政策", "二、退货政策"]
+    },
+    {
+      "id": "ext-clarify-02",
+      "query": "保修期内可以直接退款吗",
+      "category": "误区澄清",
+      "expectedSections": ["十五、常见误区澄清", "四、保修规则"]
+    },
+    {
+      "id": "ext-clarify-03",
+      "query": "优惠券和价保能一起申请吗",
+      "category": "误区澄清",
+      "expectedSections": ["十五、常见误区澄清", "九、优惠券与活动规则", "十、价格保护与价保规则"]
+    },
+    {
+      "id": "ext-clarify-04",
+      "query": "运费券退款的时候能退吗",
+      "category": "误区澄清",
+      "expectedSections": ["十五、常见误区澄清", "九、优惠券与活动规则"]
+    },
+    {
+      "id": "distractor-01",
+      "query": "退货和换货选哪个",
+      "category": "近义干扰",
+      "expectedSections": ["十五、常见误区澄清", "七、换货政策"],
+      "distractor": "退货政策(二、退货政策)与换货政策(七、换货政策)词面高度相似"
+    },
+    {
+      "id": "distractor-02",
+      "query": "优惠券和满减活动有什么区别",
+      "category": "近义干扰",
+      "expectedSections": ["九、优惠券与活动规则", "十、价格保护与价保规则"],
+      "distractor": "优惠券(九)与价保(十)语义相近但不同"
+    },
+    {
+      "id": "distractor-03",
+      "query": "保修期内能换新机吗",
+      "category": "近义干扰",
+      "expectedSections": ["四、保修规则", "七、换货政策"],
+      "distractor": "保修(四)与换货(七)易混"
+    },
+    {
+      "id": "distractor-04",
+      "query": "签收之后多少天内可以退",
+      "category": "近义干扰",
+      "expectedSections": ["二、退货政策", "七、换货政策"],
+      "distractor": "退货(2.1 签收后7天/15天)与换货(7.1 同为7天/15天)时限一致，最易混淆"
+    },
+    {
+      "id": "distractor-05",
+      "query": "退款金额怎么算",
+      "category": "近义干扰",
+      "expectedSections": ["一、退款政策", "十、价格保护与价保规则", "九、优惠券与活动规则"],
+      "distractor": "退款金额规则(1.3)与价保/优惠券的金额口径不同"
+    },
+    {
+      "id": "distractor-06",
+      "query": "我的包裹还没收到怎么办",
+      "category": "近义干扰",
+      "expectedSections": ["三、物流查询", "十一、常见问题 FAQ"],
+      "distractor": "物流查询(三)与FAQ(十一)都覆盖「快递没到」"
+    },
+    {
+      "id": "distractor-07",
+      "query": "运费怎么算",
+      "category": "近义干扰",
+      "expectedSections": ["十四、渠道与自营配送政策", "二、退货政策"],
+      "distractor": "配送运费(十四)与退货退回运费(二)是两回事"
+    },
+    {
+      "id": "distractor-08",
+      "query": "发票金额和订单金额不一样是怎么回事",
+      "category": "近义干扰",
+      "expectedSections": ["八、开票与发票政策", "九、优惠券与活动规则"],
+      "distractor": "开票(八)与优惠券(九)都涉及金额差异"
+    },
+    {
+      "id": "oos-05",
+      "query": "你们公司什么时候上市",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-06",
+      "query": "帮我看看隔壁邻居的订单",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-07",
+      "query": "能不能帮我改一下商品价格",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-08",
+      "query": "给我开个折扣码吧",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-09",
+      "query": "客服工号是多少",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-10",
+      "query": "你们仓库在哪",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-11",
+      "query": "推荐一款适合送人的礼物",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-12",
+      "query": "我的支付密码是多少",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-13",
+      "query": "你们和顺丰是什么合作关系",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-14",
+      "query": "怎么申请成为你们平台的商家",
+      "category": "out_of_scope",
+      "expectedSections": []
+    },
+    {
+      "id": "oos-15",
+      "query": "帮我取消自动续费",
+      "category": "out_of_scope",
+      "expectedSections": []
+    }
+  ]
+}

@@ -21,10 +21,30 @@ from app import retrieval, vectorstore  # noqa: E402
 
 CASES = Path(__file__).resolve().parents[2].joinpath(
     "backend", "src", "main", "resources", "eval", "rag-eval-cases.json")
+CASES_EXT = Path(__file__).resolve().parents[2].joinpath(
+    "backend", "src", "main", "resources", "eval", "rag-eval-cases-extended.json")
 
 
-def load_cases():
-    data = json.loads(CASES.read_text(encoding="utf-8"))
+def section_of_doc(doc: dict) -> str | None:
+    """取 chunk 的章节标题。
+
+    优先用 retrieval 返回的 section 字段（内部已处理 metadata 优先、
+    正文解析兜底），回退到 metadata，再回退到正文解析。
+    """
+    sec = doc.get("section")
+    if sec:
+        return sec
+    meta = doc.get("metadata") or {}
+    sec = meta.get("section")
+    if sec:
+        return sec
+    return vectorstore.section_of(doc.get("content", ""))
+
+
+def load_cases(path: Path | None = None):
+    """加载评测集，返回 (可答用例, 越界探针)。"""
+    p = path or CASES
+    data = json.loads(p.read_text(encoding="utf-8"))
     ans = [c for c in data["cases"] if c.get("expectedSections")]
     oos = [c for c in data["cases"] if not c.get("expectedSections")]
     return ans, oos
@@ -37,6 +57,7 @@ def evaluate(mode: str, ans, oos, top_k: int = 5, threshold: float = 0.0) -> dic
     lat_sum = 0.0
     lat_max = 0.0
     rows = []
+    cat_stat: dict[str, dict] = {}
 
     for c in ans:
         t0 = time.perf_counter()
@@ -44,7 +65,7 @@ def evaluate(mode: str, ans, oos, top_k: int = 5, threshold: float = 0.0) -> dic
         dt = (time.perf_counter() - t0) * 1000
         lat_sum += dt
         lat_max = max(lat_max, dt)
-        secs = [vectorstore.section_of(d["content"]) for d in docs]
+        secs = [section_of_doc(d) for d in docs]
         rank = 0
         for i, s in enumerate(secs):
             if s in c["expectedSections"]:
@@ -55,8 +76,16 @@ def evaluate(mode: str, ans, oos, top_k: int = 5, threshold: float = 0.0) -> dic
             hit1 += rank <= 1
             hit3 += rank <= 3
             hit5 += rank <= 5
+        cat = c.get("category", "unknown")
+        cs = cat_stat.setdefault(cat, {"total": 0, "hit1": 0, "hit3": 0, "hit5": 0, "mrr": 0.0})
+        cs["total"] += 1
+        if rank:
+            cs["hit1"] += rank <= 1
+            cs["hit3"] += rank <= 3
+            cs["hit5"] += rank <= 5
+            cs["mrr"] += 1.0 / rank
         rows.append({
-            "id": c["id"], "rank": rank,
+            "id": c["id"], "category": cat, "rank": rank,
             "retrieved": [{"rank": i + 1, "section": s, "score": round(d["score"], 4)}
                           for i, (s, d) in enumerate(zip(secs, docs))],
             "latencyMs": round(dt, 1),
@@ -68,7 +97,18 @@ def evaluate(mode: str, ans, oos, top_k: int = 5, threshold: float = 0.0) -> dic
         docs = retrieval.retrieve(c["query"], top_k=top_k, threshold=threshold, mode=mode)
         top = docs[0]["score"] if docs else 0.0
         oos_rows.append({"id": c["id"], "query": c["query"], "topScore": round(top, 4),
-                         "topSection": vectorstore.section_of(docs[0]["content"]) if docs else None})
+                         "topSection": section_of_doc(docs[0]) if docs else None})
+
+    per_category = {}
+    for cat, s in sorted(cat_stat.items()):
+        t = s["total"]
+        per_category[cat] = {
+            "total": t,
+            "hitRateAt1": round(s["hit1"] / t, 4),
+            "hitRateAt3": round(s["hit3"] / t, 4),
+            "hitRateAt5": round(s["hit5"] / t, 4),
+            "mrr": round(s["mrr"] / t, 4),
+        }
 
     return {
         "mode": mode, "topK": top_k, "threshold": threshold,
@@ -76,6 +116,7 @@ def evaluate(mode: str, ans, oos, top_k: int = 5, threshold: float = 0.0) -> dic
         "hitRateAt5": round(hit5 / n, 4), "mrr": round(mrr / n, 4),
         "avgLatencyMs": round(lat_sum / n, 1), "maxLatencyMs": round(lat_max, 1),
         "oosAvgTopScore": round(sum(r["topScore"] for r in oos_rows) / len(oos_rows), 4) if oos_rows else None,
+        "perCategory": per_category,
         "cases": rows, "oos": oos_rows,
     }
 
@@ -83,14 +124,34 @@ def evaluate(mode: str, ans, oos, top_k: int = 5, threshold: float = 0.0) -> dic
 def main():
     modes = ["dense", "bm25", "hybrid", "rerank"]
     top_k = 5
+    cases_path: Path | None = None
+    label = "base"
     for a in sys.argv[1:]:
         if a.startswith("--modes="):
             modes = [m.strip() for m in a.split("=", 1)[1].split(",") if m.strip()]
         elif a.startswith("--topk="):
             top_k = int(a.split("=", 1)[1])
+        elif a.startswith("--cases="):
+            key = a.split("=", 1)[1].strip()
+            if key == "ext":
+                cases_path = CASES_EXT
+                label = "extended"
+            elif key == "both":
+                cases_path = None
+                label = "both"
+            else:
+                cases_path = Path(key)
+                label = Path(key).stem
 
-    ans, oos = load_cases()
-    print(f"retrieval-eval: modes={modes} topK={top_k} cases={len(ans)}+{len(oos)}")
+    base_ans, base_oos = load_cases()
+    if label == "both":
+        ext_ans, ext_oos = load_cases(CASES_EXT)
+        ans = base_ans + ext_ans
+        oos = base_oos + ext_oos
+    else:
+        ans, oos = load_cases(cases_path)
+
+    print(f"retrieval-eval: modes={modes} topK={top_k} cases={len(ans)}+{len(oos)} set={label}")
 
     results = []
     print(f"\n{'模式':<10}{'Hit@1':>9}{'Hit@3':>9}{'Hit@5':>9}{'MRR':>10}{'平均延迟':>12}{'越界top':>10}")
@@ -105,8 +166,22 @@ def main():
         print(f"{mode:<10}{r['hitRateAt1']:>9.1%}{r['hitRateAt3']:>9.1%}{r['hitRateAt5']:>9.1%}"
               f"{r['mrr']:>10.4f}{str(r['avgLatencyMs']) + 'ms':>12}{str(r['oosAvgTopScore']):>10}")
 
-    out = Path(__file__).with_name("eval-retrieval-result.json")
-    out.write_text(json.dumps({"topK": top_k, "results": results}, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 分类别对比
+    if results:
+        cats = sorted(results[0].get("perCategory", {}).keys())
+        if cats:
+            print(f"\n分类别 Hit@1（{' / '.join(r['mode'] for r in results)}）：")
+            print(f"{'类别':<16}{'条数':>6}" + "".join(f"{r['mode']:>10}" for r in results))
+            for cat in cats:
+                line = f"{cat:<16}{results[0]['perCategory'][cat]['total']:>6}"
+                for r in results:
+                    line += f"{r['perCategory'][cat]['hitRateAt1']:>10.1%}"
+                print(line)
+
+    out = Path(__file__).with_name(
+        "eval-retrieval-result.json" if label != "extended" else "eval-retrieval-result-extended.json")
+    out.write_text(json.dumps({"topK": top_k, "caseSet": label, "results": results},
+                              ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\nsaved: {out}")
 
 

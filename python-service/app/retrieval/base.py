@@ -24,7 +24,15 @@ class Document:
 
     @property
     def section(self) -> str | None:
-        """从正文首行 `## xxx` 取章节标题（与原 vectorstore.section_of 同口径）。"""
+        """取章节标题。
+
+        优先用 ingest 写入的 metadata.section —— 长章节被切成多段时，
+        后续段落正文里没有 "## " 标题，只有 metadata 里有；
+        回退到从正文首行解析（兼容 metadata 为空的历史数据）。
+        """
+        sec = (self.metadata or {}).get("section")
+        if sec:
+            return sec
         for line in (self.content or "").split("\n"):
             t = line.strip()
             if t.startswith("## "):
@@ -32,12 +40,17 @@ class Document:
         return None
 
     def to_dict(self) -> dict[str, Any]:
-        """转成原调用方期望的字典结构，保证向后兼容。"""
+        """转成原调用方期望的字典结构，保证向后兼容。
+
+        额外带出 section 字段，方便评测与调用方直接拿到章节标题，
+        不必再从正文解析（长章节的后续段落正文里没有 "## " 标题）。
+        """
         return {
             "content": self.content,
             "metadata": self.metadata or {},
             "distance": self.distance,
             "score": self.score,
+            "section": self.section,
         }
 
 

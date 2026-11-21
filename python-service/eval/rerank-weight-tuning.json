@@ -1,0 +1,473 @@
+{
+  "split": "dev/test",
+  "best": {
+    "weights": {
+      "w_vector": 0.45,
+      "w_keyword": 0.25,
+      "w_section": 0.2,
+      "w_authority": 0.1
+    },
+    "hitRateAt1": 0.9167,
+    "hitRateAt3": 1.0,
+    "mrr": 0.9583,
+    "n": 36
+  },
+  "grid": [
+    {
+      "weights": {
+        "w_vector": 0.45,
+        "w_keyword": 0.25,
+        "w_section": 0.2,
+        "w_authority": 0.1
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9583,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.5,
+        "w_keyword": 0.25,
+        "w_section": 0.15,
+        "w_authority": 0.1
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9583,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.5,
+        "w_keyword": 0.25,
+        "w_section": 0.2,
+        "w_authority": 0.05
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9583,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.15,
+        "w_section": 0.1,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9583,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.2,
+        "w_section": 0.15,
+        "w_authority": 0.1
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9583,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.25,
+        "w_section": 0.15,
+        "w_authority": 0.05
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9583,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.6,
+        "w_keyword": 0.15,
+        "w_section": 0.1,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9583,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.6,
+        "w_keyword": 0.2,
+        "w_section": 0.15,
+        "w_authority": 0.05
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9583,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.25,
+        "w_section": 0.1,
+        "w_authority": 0.1
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9537,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.6,
+        "w_keyword": 0.25,
+        "w_section": 0.1,
+        "w_authority": 0.05
+      },
+      "hitRateAt1": 0.9167,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9537,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.4,
+        "w_keyword": 0.25,
+        "w_section": 0.15,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.4,
+        "w_keyword": 0.25,
+        "w_section": 0.2,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.45,
+        "w_keyword": 0.2,
+        "w_section": 0.2,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.45,
+        "w_keyword": 0.25,
+        "w_section": 0.15,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.5,
+        "w_keyword": 0.15,
+        "w_section": 0.2,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.5,
+        "w_keyword": 0.2,
+        "w_section": 0.1,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.5,
+        "w_keyword": 0.2,
+        "w_section": 0.15,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.5,
+        "w_keyword": 0.2,
+        "w_section": 0.2,
+        "w_authority": 0.1
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.15,
+        "w_section": 0.15,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.15,
+        "w_section": 0.2,
+        "w_authority": 0.1
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.2,
+        "w_section": 0.1,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.2,
+        "w_section": 0.2,
+        "w_authority": 0.05
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.6,
+        "w_keyword": 0.1,
+        "w_section": 0.2,
+        "w_authority": 0.1
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.6,
+        "w_keyword": 0.15,
+        "w_section": 0.15,
+        "w_authority": 0.1
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.6,
+        "w_keyword": 0.15,
+        "w_section": 0.2,
+        "w_authority": 0.05
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.6,
+        "w_keyword": 0.2,
+        "w_section": 0.1,
+        "w_authority": 0.1
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9444,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.4,
+        "w_keyword": 0.2,
+        "w_section": 0.2,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9398,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.45,
+        "w_keyword": 0.2,
+        "w_section": 0.15,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9398,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.45,
+        "w_keyword": 0.25,
+        "w_section": 0.1,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9398,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.5,
+        "w_keyword": 0.25,
+        "w_section": 0.1,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8889,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9398,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.45,
+        "w_keyword": 0.15,
+        "w_section": 0.2,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.8611,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9306,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.5,
+        "w_keyword": 0.15,
+        "w_section": 0.15,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.8611,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9306,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.1,
+        "w_section": 0.2,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8611,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9306,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.55,
+        "w_keyword": 0.1,
+        "w_section": 0.15,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.8333,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9167,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.6,
+        "w_keyword": 0.1,
+        "w_section": 0.1,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.8333,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9167,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.6,
+        "w_keyword": 0.1,
+        "w_section": 0.15,
+        "w_authority": 0.15
+      },
+      "hitRateAt1": 0.8333,
+      "hitRateAt3": 1.0,
+      "mrr": 0.9167,
+      "n": 36
+    },
+    {
+      "weights": {
+        "w_vector": 0.5,
+        "w_keyword": 0.1,
+        "w_section": 0.2,
+        "w_authority": 0.2
+      },
+      "hitRateAt1": 0.7778,
+      "hitRateAt3": 1.0,
+      "mrr": 0.875,
+      "n": 36
+    }
+  ],
+  "test": {
+    "hitRateAt1": 0.8718,
+    "hitRateAt3": 0.9487,
+    "mrr": 0.9175,
+    "n": 39
+  },
+  "currentDefaultOnTest": {
+    "hitRateAt1": 0.8718,
+    "hitRateAt3": 0.9487,
+    "mrr": 0.9231,
+    "n": 39
+  }
+}

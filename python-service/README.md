@@ -23,6 +23,16 @@
 
 写入格式与 Java 版 `PgVectorStore` 一致：`id=uuid_generate_v4()`，metadata 含 `source/section/chunk_index`。
 
+> **知识库构成**：现共 24 个 chunk，来自两份文档：
+> - 《售后政策演示数据.md》—— 6 个 chunk（§1~§6：退款/退货/物流/保修/工单类型/快速参考表）
+> - 《售后政策扩展数据.md》—— 18 个 chunk（§7~§15：换货/开票/优惠券/价保/FAQ/服务时效/客服规范/配送/误区澄清）
+>
+> 扩展文档刻意包含「退货 vs 换货」「保修 vs 价保」「退款 vs 优惠券」等
+> 词面高度相似但语义不同的干扰章节，用于检验检索策略在近义干扰下的表现。
+>
+> > **注意**：`embeddings.embed_batch` 已按百炼 API 单批 ≤10 条自动分批
+> > （`text-embedding-v4` 限制，语料少时不触发，扩充后必然触发）。
+
 ## 工具清单（LangChain + MCP 共用）
 
 `queryOrderByOrderNo` / `queryRefundByOrderNo` / `queryTicketByOrderNo` / `queryWarrantyByOrderNo`（保修测算：按§4.1 保修期表推算在保/过保）。
@@ -183,16 +193,70 @@ ReAct 链路的 Token 用量此前全记 0（`metrics.log_call` 硬编码 0,0）
 cd D:\SmartSupport AI 企业智能售后助手\python-service
 python -m eval.eval_rag          # 检索评测：Hit@1/3/5+MRR+延迟，只读 vector_store
 python -m eval.eval_retrieval     # 检索策略横向对比：dense/bm25/hybrid/rerank（无 LLM，零消耗）
+                                  #   --cases=ext  仅扩展集(46条)  --cases=both 合并集(75条)
+python -m eval.tune_rerank_weight  # 重排权重调参（dev/test 分割，37 组网格，约 6 分钟）
 python -m eval.eval_answer --mode=rag    # 端到端生成评估：LLM-as-Judge（忠实度/拒答率/工具选型）
 python -m eval.eval_answer --mode=react  # 同上，测 ReAct 链路
 python -m eval.eval_stability --rounds 3 --mode rag    # 同配置跑 N 轮，统计指标波动（中位数）
 python -m eval.eval_agent --mode react   # Agent 轨迹级评测：pass@1/步数分布/无效调用率/失败归因/Token/工具耗时
 python -m eval.test_eval_agent            # 轨迹解析与失败分类的离线单测（15/15，零 API 消耗）
 python -m eval.test_tool_runtime          # 工具可靠性层离线单测（13/13，零 API 消耗）
+python -m eval.test_rerank_authority      # 重排权威度信号离线单测（6/6，零 API 消耗）
 ```
 
 > **完整基线见 [`eval/baseline-report.md`](eval/baseline-report.md)** —— 后续所有改造的对照基准。
 > **轨迹评测报告见 [`eval/eval-agent-report.md`](eval/eval-agent-report.md)**。
+> **检索评测报告见 [`eval/retrieval-eval-report.md`](eval/retrieval-eval-report.md)**。
+
+### 检索策略横向对比（75 条标注用例，topK=5）
+
+知识库从 6 chunk 扩充到 24 chunk、评测集从 29 条扩到 75 条（含 8 条近义干扰用例）后：
+
+| 策略 | Hit@1 | Hit@3 | Hit@5 | MRR | 平均延迟 |
+|---|---|---|---|---|---|
+| dense | 81.3% | 97.3% | 98.7% | 0.8878 | 264ms |
+| bm25 | 76.0% | 92.0% | 93.3% | 0.8338 | **26ms** |
+| hybrid | 81.3% | 94.7% | 100% | 0.8847 | 310ms |
+| **rerank** | **89.3%** | 97.3% | **100%** | **0.9400** | 263ms |
+
+**默认策略已从 dense 改为 rerank**（Hit@1 +8.0pt、MRR +0.052），
+可用 `RETRIEVAL_MODE=dense` 回退。
+
+**重要发现**：扩充前的「dense Hit@1 89.7%」是小语料造成的假象 ——
+6 个 chunk 时四策略挤在 Hit@3=100% 的天花板上，没有区分度。
+扩充后 rerank 从负收益（79.3%，低于 dense 10.4pt）变成正收益（89.3%，高于 dense 8.0pt）。
+**没有足够的干扰语料，就无法证明优化有效。**
+
+#### 重排器的四个信号
+
+| 信号 | 权重 | 说明 |
+|---|---|---|
+| 向量相似度 | 0.55 | 语义相关性，**用绝对刻度**不做 min-max 拉伸 |
+| 查询词命中率 | 0.20 | 字面命中，FAQ 会把口语问法原样复述，权重不能过高 |
+| 章节匹配度 | 0.15 | 章节标题与查询的词汇重合度 |
+| 来源权威度 | 0.10 | 政策正文 1.0 / 归纳章节 0.7 / FAQ 复述 0.35 |
+
+权威度同时以**乘性折扣**参与排序：
+```
+final = (0.55·vec + 0.20·kw + 0.15·sec + 0.10·auth) × (0.85 + 0.15·auth)
+```
+
+> 向量分量改用绝对刻度是修复一个隐性 bug：min-max 会把「0.70 vs 0.66」这种
+> 4pt 的真实差异拉伸成「1.0 vs 0.0」，等于把噪声放大成信号。
+
+#### 避免过拟合：dev/test 分割调参
+
+`eval/tune_rerank_weight.py` 按 id 哈希稳定二分（dev 36 / test 39），
+只在 dev 上搜 37 组权重网格，选定后只看一次 test：
+
+| 指标 | dev（调参集） | test（未见集） |
+|---|---|---|
+| Hit@1 | 91.7% | **87.2%** |
+| MRR | 0.9583 | 0.9175 |
+
+当前默认权重在同一 test 集上 Hit@1 87.2%（完全相同）、MRR 0.9231（略优）。
+**结论：75 条规模上做权重微调收益落在噪声范围内，当前权重已接近最优。**
+这比「又调出 0.5% 提升」更有价值 —— 说明该扩语料和用例，而不是继续调参。
 
 ### Agent 轨迹级评测（P0-3）
 
@@ -201,14 +265,15 @@ python -m eval.test_tool_runtime          # 工具可靠性层离线单测（13/
 
 | 指标 | react 实测（30 条） |
 |---|---|
-| pass@1 / pass@3 | 86.7% / 93.3% |
-| 平均步数 | 0.9（0 步 5 条、1 步 23 条、2 步 2 条） |
-| 工具调用总数 | 27 |
+| pass@1 / pass@3 | 83.3% / 86.7% |
+| 平均步数 | 0.83 |
+| 工具调用总数 | 25 |
 | **无效调用率** | **0.0%** |
 | **浪费调用率** | **0.0%** |
 | **降级调用数** | **0** |
 | 失败归类 | HALLUCINATION 4、RETRIEVAL_EMPTY 3，其余 7 类均为 0 |
-| 平均单请求 Token | prompt 1943 / completion 131 / total 2074 |
+| 平均单请求 Token | prompt 1825 / completion 127 / total 1952 |
+
 
 失败归因 taxonomy 共 9 类：`RETRIEVAL_EMPTY` / `TOOL_ERROR` / `INVALID_ARGS` /
 `DUPLICATE_CALL` / `LOOP` / `MAX_STEP` / `HALLUCINATION` / `REFUSAL_OVER` / `REFUSAL_UNDER`。
@@ -217,6 +282,7 @@ python -m eval.test_tool_runtime          # 工具可靠性层离线单测（13/
 **政策类 70% / 口语化类 75% 是短板**，根因是知识库仅 6 个 chunk，召回覆盖不足。
 
 > 完整分析见 [`eval/eval-agent-report.md`](eval/eval-agent-report.md)。
+> 语料扩充到 24 chunk 后的检索层分析见 [`eval/retrieval-eval-report.md`](eval/retrieval-eval-report.md)。
 
 - 检索：与 Java 版 `RagEvalService` 同一口径，ground truth=章节标题。
   已验证：生产参数 topK=5 下 Hit@1=89.7%、Hit@3=100%、MRR=0.9483（`eval/eval-py-result.json`）。

@@ -75,6 +75,16 @@ def similarity_search(query: str, top_k: int = 5, threshold: float = 0.0):
 
 
 def section_of(content: str) -> str | None:
+    """从 chunk 正文里解析所属章节标题（不含 "## " 前缀）。
+
+    注意：长章节被切成多段后，后续段落的开头可能不是 "## "，
+    而是 "### 小节标题" 或直接是正文。此时若只认 "## " 会返回 None，
+    导致评测无法判断该 chunk 是否命中（表现为大量 section=None）。
+    因此这里做降级：
+      1) 找 "## " 开头的行（标准情况）
+      2) 找不到时，看首行是否为 "### " 小节标题 —— 向上无法还原父章节，
+         返回 None 由调用方结合 metadata.section 处理
+    """
     if not content:
         return None
     for line in content.split("\n"):

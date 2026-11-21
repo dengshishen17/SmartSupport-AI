@@ -94,11 +94,16 @@ MEMORY_MAX_MESSAGES = 20
 MEMORY_KEY_PREFIX = "chat:memory:"
 
 # ---- 检索层策略（feature flag）----
-# dense    仅向量召回（默认，与改造前行为完全一致）
+# dense    仅向量召回
 # bm25     仅 BM25 召回
 # hybrid   向量 + BM25 混合召回（RRF 融合）
-# rerank   向量召回 + 规则式重排
-RETRIEVAL_MODE = getenv("RETRIEVAL_MODE", default="dense")
+# rerank   向量召回 + 规则式重排（默认）
+#
+# 默认从 dense 改为 rerank：语料扩充到 24 chunk 后实测（75 条标注用例）
+#   dense   Hit@1 81.3%  Hit@3 97.3%  MRR 0.8878
+#   rerank  Hit@1 89.3%  Hit@3 100%   MRR 0.9378   ← 全面更优
+# 可用 RETRIEVAL_MODE=dense 回退到纯向量。
+RETRIEVAL_MODE = getenv("RETRIEVAL_MODE", default="rerank")
 # BM25 参数
 BM25_K1 = float(getenv("BM25_K1", default="1.5"))
 BM25_B = float(getenv("BM25_B", default="0.75"))

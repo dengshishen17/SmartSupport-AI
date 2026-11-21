@@ -1,0 +1,6649 @@
+{
+  "topK": 5,
+  "caseSet": "extended",
+  "results": [
+    {
+      "mode": "dense",
+      "topK": 5,
+      "threshold": 0.0,
+      "hitRateAt1": 0.8043,
+      "hitRateAt3": 1.0,
+      "hitRateAt5": 1.0,
+      "mrr": 0.8877,
+      "avgLatencyMs": 300.0,
+      "maxLatencyMs": 933.8,
+      "oosAvgTopScore": 0.478,
+      "perCategory": {
+        "价保规则": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "优惠券规则": {
+          "total": 4,
+          "hitRateAt1": 0.75,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.875
+        },
+        "客服规范": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "常见问题FAQ": {
+          "total": 5,
+          "hitRateAt1": 0.6,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.7333
+        },
+        "开票政策": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "换货政策": {
+          "total": 5,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "服务时效": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "误区澄清": {
+          "total": 4,
+          "hitRateAt1": 0.25,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.5833
+        },
+        "近义干扰": {
+          "total": 8,
+          "hitRateAt1": 0.625,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.7917
+        },
+        "配送政策": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "cases": [
+        {
+          "id": "ext-exchange-01",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.6094
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.6078
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.5748
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5686
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5399
+            }
+          ],
+          "latencyMs": 644.6
+        },
+        {
+          "id": "ext-exchange-02",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.7371
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.6694
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.6624
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.6212
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.6004
+            }
+          ],
+          "latencyMs": 203.1
+        },
+        {
+          "id": "ext-exchange-03",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.7334
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.5636
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.5566
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 0.5517
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.5392
+            }
+          ],
+          "latencyMs": 240.3
+        },
+        {
+          "id": "ext-exchange-04",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.7006
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.646
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.6368
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.595
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.5888
+            }
+          ],
+          "latencyMs": 264.1
+        },
+        {
+          "id": "ext-exchange-05",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.7706
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.7081
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.6801
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6452
+            },
+            {
+              "rank": 5,
+              "section": "七、换货政策",
+              "score": 0.6443
+            }
+          ],
+          "latencyMs": 188.8
+        },
+        {
+          "id": "ext-invoice-01",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.6587
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.6109
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4798
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.3452
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.3083
+            }
+          ],
+          "latencyMs": 210.9
+        },
+        {
+          "id": "ext-invoice-02",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.78
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6742
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 0.6271
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5304
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.5234
+            }
+          ],
+          "latencyMs": 232.2
+        },
+        {
+          "id": "ext-invoice-03",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.6849
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.4545
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.398
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 0.3497
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.3469
+            }
+          ],
+          "latencyMs": 264.2
+        },
+        {
+          "id": "ext-invoice-04",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.5371
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.5313
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4189
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.334
+            },
+            {
+              "rank": 5,
+              "section": "十、价格保护与价保规则",
+              "score": 0.3208
+            }
+          ],
+          "latencyMs": 367.6
+        },
+        {
+          "id": "ext-coupon-01",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6648
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6277
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5906
+            },
+            {
+              "rank": 4,
+              "section": "十、价格保护与价保规则",
+              "score": 0.581
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.5354
+            }
+          ],
+          "latencyMs": 188.2
+        },
+        {
+          "id": "ext-coupon-02",
+          "category": "优惠券规则",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6943
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6894
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6417
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.5846
+            },
+            {
+              "rank": 5,
+              "section": "十、价格保护与价保规则",
+              "score": 0.559
+            }
+          ],
+          "latencyMs": 291.5
+        },
+        {
+          "id": "ext-coupon-03",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.8536
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.7021
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6888
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.676
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.6662
+            }
+          ],
+          "latencyMs": 236.0
+        },
+        {
+          "id": "ext-coupon-04",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.704
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 0.635
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.616
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6111
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.582
+            }
+          ],
+          "latencyMs": 247.8
+        },
+        {
+          "id": "ext-price-01",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.7763
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6999
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.683
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 0.585
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.5731
+            }
+          ],
+          "latencyMs": 216.4
+        },
+        {
+          "id": "ext-price-02",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.6544
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.6068
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.598
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5886
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.5878
+            }
+          ],
+          "latencyMs": 877.3
+        },
+        {
+          "id": "ext-price-03",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.7292
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.6509
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6109
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.6062
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.5548
+            }
+          ],
+          "latencyMs": 226.2
+        },
+        {
+          "id": "ext-price-04",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.5896
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.5514
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5228
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.5079
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.5025
+            }
+          ],
+          "latencyMs": 320.4
+        },
+        {
+          "id": "ext-faq-01",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6935
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5595
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5094
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 0.5079
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.5041
+            }
+          ],
+          "latencyMs": 244.1
+        },
+        {
+          "id": "ext-faq-02",
+          "category": "常见问题FAQ",
+          "rank": 3,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.5335
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.517
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5105
+            },
+            {
+              "rank": 4,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.4937
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.4579
+            }
+          ],
+          "latencyMs": 243.8
+        },
+        {
+          "id": "ext-faq-03",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5905
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4161
+            },
+            {
+              "rank": 3,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.4034
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.3867
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.3785
+            }
+          ],
+          "latencyMs": 720.0
+        },
+        {
+          "id": "ext-faq-04",
+          "category": "常见问题FAQ",
+          "rank": 3,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.6341
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.5793
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4597
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.349
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.3487
+            }
+          ],
+          "latencyMs": 181.2
+        },
+        {
+          "id": "ext-faq-05",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6646
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6581
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6327
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.6247
+            },
+            {
+              "rank": 5,
+              "section": "十、价格保护与价保规则",
+              "score": 0.5768
+            }
+          ],
+          "latencyMs": 278.5
+        },
+        {
+          "id": "ext-sla-01",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.6487
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6324
+            },
+            {
+              "rank": 3,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5704
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.5546
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.548
+            }
+          ],
+          "latencyMs": 251.9
+        },
+        {
+          "id": "ext-sla-02",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.6399
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5362
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4908
+            },
+            {
+              "rank": 4,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.4865
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.483
+            }
+          ],
+          "latencyMs": 232.2
+        },
+        {
+          "id": "ext-sla-03",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.6192
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.6045
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5785
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.5495
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.5312
+            }
+          ],
+          "latencyMs": 263.4
+        },
+        {
+          "id": "ext-sla-04",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.7412
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4967
+            },
+            {
+              "rank": 3,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.4852
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.4759
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4691
+            }
+          ],
+          "latencyMs": 225.7
+        },
+        {
+          "id": "ext-privacy-01",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.7677
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5864
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.5459
+            },
+            {
+              "rank": 4,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.542
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5408
+            }
+          ],
+          "latencyMs": 254.6
+        },
+        {
+          "id": "ext-privacy-02",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.6268
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 0.6136
+            },
+            {
+              "rank": 3,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5749
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5157
+            },
+            {
+              "rank": 5,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.51
+            }
+          ],
+          "latencyMs": 236.0
+        },
+        {
+          "id": "ext-privacy-03",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5426
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.4893
+            },
+            {
+              "rank": 3,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.4773
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4595
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.4327
+            }
+          ],
+          "latencyMs": 232.0
+        },
+        {
+          "id": "ext-privacy-04",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.7203
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.6046
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5668
+            },
+            {
+              "rank": 4,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.5396
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.5221
+            }
+          ],
+          "latencyMs": 215.4
+        },
+        {
+          "id": "ext-delivery-01",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.5822
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.5431
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.4974
+            },
+            {
+              "rank": 4,
+              "section": "八、开票与发票政策",
+              "score": 0.4827
+            },
+            {
+              "rank": 5,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.4424
+            }
+          ],
+          "latencyMs": 228.4
+        },
+        {
+          "id": "ext-delivery-02",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.594
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.545
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.5389
+            },
+            {
+              "rank": 4,
+              "section": "十、价格保护与价保规则",
+              "score": 0.5341
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.529
+            }
+          ],
+          "latencyMs": 220.2
+        },
+        {
+          "id": "ext-delivery-03",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.6845
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.604
+            },
+            {
+              "rank": 3,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.5911
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.5903
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5799
+            }
+          ],
+          "latencyMs": 227.9
+        },
+        {
+          "id": "ext-delivery-04",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.6941
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5275
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.5213
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5085
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.4978
+            }
+          ],
+          "latencyMs": 451.7
+        },
+        {
+          "id": "ext-clarify-01",
+          "category": "误区澄清",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.7056
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.673
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.6455
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.6363
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.5605
+            }
+          ],
+          "latencyMs": 203.9
+        },
+        {
+          "id": "ext-clarify-02",
+          "category": "误区澄清",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 0.6725
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6538
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 0.6501
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6474
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.6078
+            }
+          ],
+          "latencyMs": 232.1
+        },
+        {
+          "id": "ext-clarify-03",
+          "category": "误区澄清",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.7804
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.7644
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.7359
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6649
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6641
+            }
+          ],
+          "latencyMs": 567.7
+        },
+        {
+          "id": "ext-clarify-04",
+          "category": "误区澄清",
+          "rank": 3,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.7596
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6558
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.6425
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.6405
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6371
+            }
+          ],
+          "latencyMs": 216.3
+        },
+        {
+          "id": "distractor-01",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 0.701
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.6788
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.6235
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.5984
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.573
+            }
+          ],
+          "latencyMs": 263.8
+        },
+        {
+          "id": "distractor-02",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6951
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 0.6808
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6437
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6206
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.5688
+            }
+          ],
+          "latencyMs": 288.3
+        },
+        {
+          "id": "distractor-03",
+          "category": "近义干扰",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.631
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.593
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.5687
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.5067
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4968
+            }
+          ],
+          "latencyMs": 275.8
+        },
+        {
+          "id": "distractor-04",
+          "category": "近义干扰",
+          "rank": 3,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6443
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.6302
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.5993
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.577
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5735
+            }
+          ],
+          "latencyMs": 259.7
+        },
+        {
+          "id": "distractor-05",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6117
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.5636
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5452
+            },
+            {
+              "rank": 4,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.4789
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4735
+            }
+          ],
+          "latencyMs": 199.3
+        },
+        {
+          "id": "distractor-06",
+          "category": "近义干扰",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.6249
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 0.5787
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5657
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5254
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.4943
+            }
+          ],
+          "latencyMs": 933.8
+        },
+        {
+          "id": "distractor-07",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.3985
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.3775
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 0.3765
+            },
+            {
+              "rank": 4,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.3709
+            },
+            {
+              "rank": 5,
+              "section": "七、换货政策",
+              "score": 0.3664
+            }
+          ],
+          "latencyMs": 223.2
+        },
+        {
+          "id": "distractor-08",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.6604
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.5553
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5476
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5143
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.503
+            }
+          ],
+          "latencyMs": 211.7
+        }
+      ],
+      "oos": [
+        {
+          "id": "oos-05",
+          "query": "你们公司什么时候上市",
+          "topScore": 0.3559,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-06",
+          "query": "帮我看看隔壁邻居的订单",
+          "topScore": 0.5305,
+          "topSection": "三、物流查询"
+        },
+        {
+          "id": "oos-07",
+          "query": "能不能帮我改一下商品价格",
+          "topScore": 0.5383,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-08",
+          "query": "给我开个折扣码吧",
+          "topScore": 0.6296,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-09",
+          "query": "客服工号是多少",
+          "topScore": 0.5326,
+          "topSection": "十三、客服话术与信息脱敏规范"
+        },
+        {
+          "id": "oos-10",
+          "query": "你们仓库在哪",
+          "topScore": 0.4354,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-11",
+          "query": "推荐一款适合送人的礼物",
+          "topScore": 0.3262,
+          "topSection": "十五、常见误区澄清"
+        },
+        {
+          "id": "oos-12",
+          "query": "我的支付密码是多少",
+          "topScore": 0.4306,
+          "topSection": "十三、客服话术与信息脱敏规范"
+        },
+        {
+          "id": "oos-13",
+          "query": "你们和顺丰是什么合作关系",
+          "topScore": 0.544,
+          "topSection": "十四、渠道与自营配送政策"
+        },
+        {
+          "id": "oos-14",
+          "query": "怎么申请成为你们平台的商家",
+          "topScore": 0.4853,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-15",
+          "query": "帮我取消自动续费",
+          "topScore": 0.4492,
+          "topSection": "十一、常见问题 FAQ"
+        }
+      ]
+    },
+    {
+      "mode": "bm25",
+      "topK": 5,
+      "threshold": 0.0,
+      "hitRateAt1": 0.8696,
+      "hitRateAt3": 0.9565,
+      "hitRateAt5": 0.9565,
+      "mrr": 0.9058,
+      "avgLatencyMs": 27.5,
+      "maxLatencyMs": 47.1,
+      "oosAvgTopScore": 3.8579,
+      "perCategory": {
+        "价保规则": {
+          "total": 4,
+          "hitRateAt1": 0.75,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.8333
+        },
+        "优惠券规则": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "客服规范": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "常见问题FAQ": {
+          "total": 5,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "开票政策": {
+          "total": 4,
+          "hitRateAt1": 0.75,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.875
+        },
+        "换货政策": {
+          "total": 5,
+          "hitRateAt1": 0.8,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.8667
+        },
+        "服务时效": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "误区澄清": {
+          "total": 4,
+          "hitRateAt1": 0.75,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.875
+        },
+        "近义干扰": {
+          "total": 8,
+          "hitRateAt1": 0.75,
+          "hitRateAt3": 0.75,
+          "hitRateAt5": 0.75,
+          "mrr": 0.75
+        },
+        "配送政策": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "cases": [
+        {
+          "id": "ext-exchange-01",
+          "category": "换货政策",
+          "rank": 3,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 6.9504
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 4.17
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 3.8768
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 3.0299
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.0219
+            }
+          ],
+          "latencyMs": 47.1
+        },
+        {
+          "id": "ext-exchange-02",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 10.0362
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 9.0712
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 6.8097
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 5.6563
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 5.1082
+            }
+          ],
+          "latencyMs": 30.0
+        },
+        {
+          "id": "ext-exchange-03",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 9.4014
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 6.0525
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 4.4876
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 4.476
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 4.41
+            }
+          ],
+          "latencyMs": 29.8
+        },
+        {
+          "id": "ext-exchange-04",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 15.0361
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 13.7881
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 7.4774
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 4.7226
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 4.5831
+            }
+          ],
+          "latencyMs": 30.1
+        },
+        {
+          "id": "ext-exchange-05",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 24.7597
+            },
+            {
+              "rank": 2,
+              "section": "二、退货政策",
+              "score": 10.676
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 6.624
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 6.1615
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 5.5374
+            }
+          ],
+          "latencyMs": 30.8
+        },
+        {
+          "id": "ext-invoice-01",
+          "category": "开票政策",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 17.9478
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 11.5439
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 10.4824
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.0219
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 1.3628
+            }
+          ],
+          "latencyMs": 31.7
+        },
+        {
+          "id": "ext-invoice-02",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 15.7773
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 12.0992
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 8.2562
+            },
+            {
+              "rank": 4,
+              "section": "十二、服务等级与响应时效",
+              "score": 7.3032
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.8908
+            }
+          ],
+          "latencyMs": 31.7
+        },
+        {
+          "id": "ext-invoice-03",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 11.6176
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 6.9875
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 4.2235
+            }
+          ],
+          "latencyMs": 30.2
+        },
+        {
+          "id": "ext-invoice-04",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 23.6936
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 5.9137
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 4.0462
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.6113
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 2.6291
+            }
+          ],
+          "latencyMs": 10.2
+        },
+        {
+          "id": "ext-coupon-01",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 6.6679
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 5.8285
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 5.1365
+            },
+            {
+              "rank": 4,
+              "section": "十、价格保护与价保规则",
+              "score": 5.011
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 4.6587
+            }
+          ],
+          "latencyMs": 21.2
+        },
+        {
+          "id": "ext-coupon-02",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 8.4552
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 8.1851
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 7.0933
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 6.4127
+            },
+            {
+              "rank": 5,
+              "section": "十、价格保护与价保规则",
+              "score": 4.8542
+            }
+          ],
+          "latencyMs": 31.9
+        },
+        {
+          "id": "ext-coupon-03",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 15.9866
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 12.2129
+            },
+            {
+              "rank": 3,
+              "section": "十、价格保护与价保规则",
+              "score": 11.1339
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 7.021
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 5.4219
+            }
+          ],
+          "latencyMs": 10.2
+        },
+        {
+          "id": "ext-coupon-04",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 17.7253
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 9.3464
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 2.7028
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.2278
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.0487
+            }
+          ],
+          "latencyMs": 34.0
+        },
+        {
+          "id": "ext-price-01",
+          "category": "价保规则",
+          "rank": 3,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 17.1881
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 9.642
+            },
+            {
+              "rank": 3,
+              "section": "十、价格保护与价保规则",
+              "score": 8.9431
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 2.7945
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 2.3625
+            }
+          ],
+          "latencyMs": 32.4
+        },
+        {
+          "id": "ext-price-02",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 6.3105
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 2.7945
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.0578
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 2.0578
+            }
+          ],
+          "latencyMs": 29.7
+        },
+        {
+          "id": "ext-price-03",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 11.8277
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 8.2064
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 7.8672
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 5.5447
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 3.7036
+            }
+          ],
+          "latencyMs": 30.9
+        },
+        {
+          "id": "ext-price-04",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 8.3556
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 6.2278
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 4.6833
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.7429
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.7091
+            }
+          ],
+          "latencyMs": 31.2
+        },
+        {
+          "id": "ext-faq-01",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 26.2531
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 7.8953
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 2.729
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 2.6291
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.3594
+            }
+          ],
+          "latencyMs": 9.4
+        },
+        {
+          "id": "ext-faq-02",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 15.7083
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 3.3574
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.7632
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 2.0884
+            },
+            {
+              "rank": 5,
+              "section": "七、换货政策",
+              "score": 1.4806
+            }
+          ],
+          "latencyMs": 10.3
+        },
+        {
+          "id": "ext-faq-03",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 14.5644
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 2.7632
+            }
+          ],
+          "latencyMs": 27.2
+        },
+        {
+          "id": "ext-faq-04",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 13.1268
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 4.2235
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 3.8506
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.0219
+            }
+          ],
+          "latencyMs": 31.7
+        },
+        {
+          "id": "ext-faq-05",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 19.6083
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 8.25
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 7.876
+            },
+            {
+              "rank": 4,
+              "section": "十、价格保护与价保规则",
+              "score": 5.8778
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 5.8285
+            }
+          ],
+          "latencyMs": 24.1
+        },
+        {
+          "id": "ext-sla-01",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 5.3902
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.9349
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.8696
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.8671
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.8054
+            }
+          ],
+          "latencyMs": 45.2
+        },
+        {
+          "id": "ext-sla-02",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 16.29
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 2.9957
+            },
+            {
+              "rank": 3,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 2.6137
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 1.7928
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 1.4448
+            }
+          ],
+          "latencyMs": 33.3
+        },
+        {
+          "id": "ext-sla-03",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 7.0759
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 4.2626
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 3.462
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.2054
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.1888
+            }
+          ],
+          "latencyMs": 30.4
+        },
+        {
+          "id": "ext-sla-04",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 27.1084
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 3.9396
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.6654
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.2278
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 1.3583
+            }
+          ],
+          "latencyMs": 10.3
+        },
+        {
+          "id": "ext-privacy-01",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 9.4926
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 4.6397
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 2.8769
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 1.8888
+            },
+            {
+              "rank": 5,
+              "section": "十二、服务等级与响应时效",
+              "score": 1.7867
+            }
+          ],
+          "latencyMs": 34.6
+        },
+        {
+          "id": "ext-privacy-02",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 17.6491
+            },
+            {
+              "rank": 2,
+              "section": "六、快速参考表",
+              "score": 4.9763
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 4.8792
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.8575
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 3.204
+            }
+          ],
+          "latencyMs": 47.1
+        },
+        {
+          "id": "ext-privacy-03",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 13.0447
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 4.0595
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 3.5018
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.7429
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 2.6291
+            }
+          ],
+          "latencyMs": 32.1
+        },
+        {
+          "id": "ext-privacy-04",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 16.5387
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 5.4594
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 4.3607
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 3.8691
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 3.6484
+            }
+          ],
+          "latencyMs": 32.3
+        },
+        {
+          "id": "ext-delivery-01",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 8.0917
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 3.1321
+            },
+            {
+              "rank": 3,
+              "section": "十四、渠道与自营配送政策",
+              "score": 2.7179
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 1.9132
+            },
+            {
+              "rank": 5,
+              "section": "八、开票与发票政策",
+              "score": 1.7328
+            }
+          ],
+          "latencyMs": 10.3
+        },
+        {
+          "id": "ext-delivery-02",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 4.1012
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 1.6235
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 1.4263
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 1.3861
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 1.2848
+            }
+          ],
+          "latencyMs": 10.1
+        },
+        {
+          "id": "ext-delivery-03",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 20.8171
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 4.3471
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 4.2923
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 4.1139
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 2.9175
+            }
+          ],
+          "latencyMs": 24.6
+        },
+        {
+          "id": "ext-delivery-04",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 22.8044
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.2278
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.0487
+            }
+          ],
+          "latencyMs": 30.4
+        },
+        {
+          "id": "ext-clarify-01",
+          "category": "误区澄清",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 8.6615
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 4.3471
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 4.1342
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 4.1139
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.7429
+            }
+          ],
+          "latencyMs": 32.1
+        },
+        {
+          "id": "ext-clarify-02",
+          "category": "误区澄清",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 9.6761
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 9.0349
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 7.1723
+            },
+            {
+              "rank": 4,
+              "section": "十四、渠道与自营配送政策",
+              "score": 6.6406
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 5.2402
+            }
+          ],
+          "latencyMs": 28.7
+        },
+        {
+          "id": "ext-clarify-03",
+          "category": "误区澄清",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 20.6991
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 9.5253
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 8.1233
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 7.0483
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 5.668
+            }
+          ],
+          "latencyMs": 46.8
+        },
+        {
+          "id": "ext-clarify-04",
+          "category": "误区澄清",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 12.8352
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 11.2488
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 4.7882
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 4.4103
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 3.8275
+            }
+          ],
+          "latencyMs": 9.9
+        },
+        {
+          "id": "distractor-01",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 16.7701
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 4.3471
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 4.1139
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 2.5484
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 2.4525
+            }
+          ],
+          "latencyMs": 24.5
+        },
+        {
+          "id": "distractor-02",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 16.2392
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 16.1481
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 7.0933
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 5.8285
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 4.6587
+            }
+          ],
+          "latencyMs": 9.6
+        },
+        {
+          "id": "distractor-03",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 14.0879
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 9.4252
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 9.221
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 4.4712
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 2.4112
+            }
+          ],
+          "latencyMs": 21.0
+        },
+        {
+          "id": "distractor-04",
+          "category": "近义干扰",
+          "rank": 0,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 4.4793
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 4.2623
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 4.2294
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 3.1321
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 3.0455
+            }
+          ],
+          "latencyMs": 28.2
+        },
+        {
+          "id": "distractor-05",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 5.2225
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 4.1779
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 3.8865
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.0219
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 2.8996
+            }
+          ],
+          "latencyMs": 29.1
+        },
+        {
+          "id": "distractor-06",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 8.0282
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 5.0087
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.7632
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.722
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 2.1583
+            }
+          ],
+          "latencyMs": 33.8
+        },
+        {
+          "id": "distractor-07",
+          "category": "近义干扰",
+          "rank": 0,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 3.7128
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 2.7632
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 1.6235
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 1.4263
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 1.3861
+            }
+          ],
+          "latencyMs": 31.3
+        },
+        {
+          "id": "distractor-08",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 17.2474
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 7.1377
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 5.0258
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 4.84
+            },
+            {
+              "rank": 5,
+              "section": "十二、服务等级与响应时效",
+              "score": 4.112
+            }
+          ],
+          "latencyMs": 32.4
+        }
+      ],
+      "oos": [
+        {
+          "id": "oos-05",
+          "query": "你们公司什么时候上市",
+          "topScore": 7.1985,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-06",
+          "query": "帮我看看隔壁邻居的订单",
+          "topScore": 2.4955,
+          "topSection": "九、优惠券与活动规则"
+        },
+        {
+          "id": "oos-07",
+          "query": "能不能帮我改一下商品价格",
+          "topScore": 4.0573,
+          "topSection": "十五、常见误区澄清"
+        },
+        {
+          "id": "oos-08",
+          "query": "给我开个折扣码吧",
+          "topScore": 3.6226,
+          "topSection": "九、优惠券与活动规则"
+        },
+        {
+          "id": "oos-09",
+          "query": "客服工号是多少",
+          "topScore": 1.2259,
+          "topSection": "二、退货政策"
+        },
+        {
+          "id": "oos-10",
+          "query": "你们仓库在哪",
+          "topScore": 3.572,
+          "topSection": "三、物流查询"
+        },
+        {
+          "id": "oos-11",
+          "query": "推荐一款适合送人的礼物",
+          "topScore": 1.9786,
+          "topSection": "一、退款政策"
+        },
+        {
+          "id": "oos-12",
+          "query": "我的支付密码是多少",
+          "topScore": 8.1044,
+          "topSection": "十三、客服话术与信息脱敏规范"
+        },
+        {
+          "id": "oos-13",
+          "query": "你们和顺丰是什么合作关系",
+          "topScore": 4.0139,
+          "topSection": "十四、渠道与自营配送政策"
+        },
+        {
+          "id": "oos-14",
+          "query": "怎么申请成为你们平台的商家",
+          "topScore": 4.17,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-15",
+          "query": "帮我取消自动续费",
+          "topScore": 1.9985,
+          "topSection": "七、换货政策"
+        }
+      ]
+    },
+    {
+      "mode": "hybrid",
+      "topK": 5,
+      "threshold": 0.0,
+      "hitRateAt1": 0.8043,
+      "hitRateAt3": 0.9565,
+      "hitRateAt5": 1.0,
+      "mrr": 0.8902,
+      "avgLatencyMs": 303.1,
+      "maxLatencyMs": 758.8,
+      "oosAvgTopScore": 0.0164,
+      "perCategory": {
+        "价保规则": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "优惠券规则": {
+          "total": 4,
+          "hitRateAt1": 0.75,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.875
+        },
+        "客服规范": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "常见问题FAQ": {
+          "total": 5,
+          "hitRateAt1": 0.6,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.8
+        },
+        "开票政策": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "换货政策": {
+          "total": 5,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "服务时效": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "误区澄清": {
+          "total": 4,
+          "hitRateAt1": 0.25,
+          "hitRateAt3": 0.75,
+          "hitRateAt5": 1.0,
+          "mrr": 0.5625
+        },
+        "近义干扰": {
+          "total": 8,
+          "hitRateAt1": 0.625,
+          "hitRateAt3": 0.875,
+          "hitRateAt5": 1.0,
+          "mrr": 0.775
+        },
+        "配送政策": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "cases": [
+        {
+          "id": "ext-exchange-01",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 283.0
+        },
+        {
+          "id": "ext-exchange-02",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 264.1
+        },
+        {
+          "id": "ext-exchange-03",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 211.9
+        },
+        {
+          "id": "ext-exchange-04",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 203.9
+        },
+        {
+          "id": "ext-exchange-05",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 267.5
+        },
+        {
+          "id": "ext-invoice-01",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "八、开票与发票政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 296.2
+        },
+        {
+          "id": "ext-invoice-02",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "八、开票与发票政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 341.6
+        },
+        {
+          "id": "ext-invoice-03",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 275.3
+        },
+        {
+          "id": "ext-invoice-04",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "八、开票与发票政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 319.5
+        },
+        {
+          "id": "ext-coupon-01",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 256.0
+        },
+        {
+          "id": "ext-coupon-02",
+          "category": "优惠券规则",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 401.5
+        },
+        {
+          "id": "ext-coupon-03",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 278.2
+        },
+        {
+          "id": "ext-coupon-04",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 292.1
+        },
+        {
+          "id": "ext-price-01",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 324.9
+        },
+        {
+          "id": "ext-price-02",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 258.7
+        },
+        {
+          "id": "ext-price-03",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 261.5
+        },
+        {
+          "id": "ext-price-04",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 245.6
+        },
+        {
+          "id": "ext-faq-01",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 234.2
+        },
+        {
+          "id": "ext-faq-02",
+          "category": "常见问题FAQ",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "三、物流查询",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 255.6
+        },
+        {
+          "id": "ext-faq-03",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 381.4
+        },
+        {
+          "id": "ext-faq-04",
+          "category": "常见问题FAQ",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "八、开票与发票政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 371.1
+        },
+        {
+          "id": "ext-faq-05",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 258.5
+        },
+        {
+          "id": "ext-sla-01",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 238.0
+        },
+        {
+          "id": "ext-sla-02",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 231.3
+        },
+        {
+          "id": "ext-sla-03",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 266.6
+        },
+        {
+          "id": "ext-sla-04",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 587.2
+        },
+        {
+          "id": "ext-privacy-01",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 384.0
+        },
+        {
+          "id": "ext-privacy-02",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 260.8
+        },
+        {
+          "id": "ext-privacy-03",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "八、开票与发票政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 245.1
+        },
+        {
+          "id": "ext-privacy-04",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 213.0
+        },
+        {
+          "id": "ext-delivery-01",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 542.9
+        },
+        {
+          "id": "ext-delivery-02",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 317.7
+        },
+        {
+          "id": "ext-delivery-03",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 216.3
+        },
+        {
+          "id": "ext-delivery-04",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 224.2
+        },
+        {
+          "id": "ext-clarify-01",
+          "category": "误区澄清",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "七、换货政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 298.3
+        },
+        {
+          "id": "ext-clarify-02",
+          "category": "误区澄清",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 406.1
+        },
+        {
+          "id": "ext-clarify-03",
+          "category": "误区澄清",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 243.6
+        },
+        {
+          "id": "ext-clarify-04",
+          "category": "误区澄清",
+          "rank": 4,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 299.8
+        },
+        {
+          "id": "distractor-01",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "七、换货政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 231.4
+        },
+        {
+          "id": "distractor-02",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十、价格保护与价保规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 229.2
+        },
+        {
+          "id": "distractor-03",
+          "category": "近义干扰",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "四、保修规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "四、保修规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 758.8
+        },
+        {
+          "id": "distractor-04",
+          "category": "近义干扰",
+          "rank": 5,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 245.3
+        },
+        {
+          "id": "distractor-05",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 272.1
+        },
+        {
+          "id": "distractor-06",
+          "category": "近义干扰",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 314.5
+        },
+        {
+          "id": "distractor-07",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "八、开票与发票政策",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 310.7
+        },
+        {
+          "id": "distractor-08",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.0164
+            },
+            {
+              "rank": 3,
+              "section": "八、开票与发票政策",
+              "score": 0.0161
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.0159
+            }
+          ],
+          "latencyMs": 325.4
+        }
+      ],
+      "oos": [
+        {
+          "id": "oos-05",
+          "query": "你们公司什么时候上市",
+          "topScore": 0.0164,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-06",
+          "query": "帮我看看隔壁邻居的订单",
+          "topScore": 0.0164,
+          "topSection": "三、物流查询"
+        },
+        {
+          "id": "oos-07",
+          "query": "能不能帮我改一下商品价格",
+          "topScore": 0.0164,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-08",
+          "query": "给我开个折扣码吧",
+          "topScore": 0.0164,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-09",
+          "query": "客服工号是多少",
+          "topScore": 0.0164,
+          "topSection": "十三、客服话术与信息脱敏规范"
+        },
+        {
+          "id": "oos-10",
+          "query": "你们仓库在哪",
+          "topScore": 0.0164,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-11",
+          "query": "推荐一款适合送人的礼物",
+          "topScore": 0.0164,
+          "topSection": "十五、常见误区澄清"
+        },
+        {
+          "id": "oos-12",
+          "query": "我的支付密码是多少",
+          "topScore": 0.0164,
+          "topSection": "十三、客服话术与信息脱敏规范"
+        },
+        {
+          "id": "oos-13",
+          "query": "你们和顺丰是什么合作关系",
+          "topScore": 0.0164,
+          "topSection": "十四、渠道与自营配送政策"
+        },
+        {
+          "id": "oos-14",
+          "query": "怎么申请成为你们平台的商家",
+          "topScore": 0.0164,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-15",
+          "query": "帮我取消自动续费",
+          "topScore": 0.0164,
+          "topSection": "十一、常见问题 FAQ"
+        }
+      ]
+    },
+    {
+      "mode": "rerank",
+      "topK": 5,
+      "threshold": 0.0,
+      "hitRateAt1": 0.8696,
+      "hitRateAt3": 0.9565,
+      "hitRateAt5": 1.0,
+      "mrr": 0.9203,
+      "avgLatencyMs": 243.5,
+      "maxLatencyMs": 531.4,
+      "oosAvgTopScore": 0.9271,
+      "perCategory": {
+        "价保规则": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "优惠券规则": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "客服规范": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "常见问题FAQ": {
+          "total": 5,
+          "hitRateAt1": 0.8,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.8667
+        },
+        "开票政策": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "换货政策": {
+          "total": 5,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        },
+        "服务时效": {
+          "total": 4,
+          "hitRateAt1": 0.75,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 0.875
+        },
+        "误区澄清": {
+          "total": 4,
+          "hitRateAt1": 0.25,
+          "hitRateAt3": 0.75,
+          "hitRateAt5": 1.0,
+          "mrr": 0.5625
+        },
+        "近义干扰": {
+          "total": 8,
+          "hitRateAt1": 0.875,
+          "hitRateAt3": 0.875,
+          "hitRateAt5": 1.0,
+          "mrr": 0.9062
+        },
+        "配送政策": {
+          "total": 4,
+          "hitRateAt1": 1.0,
+          "hitRateAt3": 1.0,
+          "hitRateAt5": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "cases": [
+        {
+          "id": "ext-exchange-01",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.9167
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.8289
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6546
+            },
+            {
+              "rank": 4,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.6325
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.5884
+            }
+          ],
+          "latencyMs": 257.5
+        },
+        {
+          "id": "ext-exchange-02",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.8373
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.6756
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.657
+            },
+            {
+              "rank": 5,
+              "section": "三、物流查询",
+              "score": 0.5224
+            }
+          ],
+          "latencyMs": 230.8
+        },
+        {
+          "id": "ext-exchange-03",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.5423
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.5245
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4737
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.4724
+            }
+          ],
+          "latencyMs": 439.8
+        },
+        {
+          "id": "ext-exchange-04",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.8448
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.6391
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5994
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5904
+            }
+          ],
+          "latencyMs": 224.3
+        },
+        {
+          "id": "ext-exchange-05",
+          "category": "换货政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "一、退款政策",
+              "score": 0.7161
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.597
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 0.5757
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4273
+            }
+          ],
+          "latencyMs": 199.7
+        },
+        {
+          "id": "ext-invoice-01",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.875
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.8539
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.615
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.1881
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.1527
+            }
+          ],
+          "latencyMs": 240.8
+        },
+        {
+          "id": "ext-invoice-02",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.6821
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6795
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.3047
+            },
+            {
+              "rank": 5,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.2583
+            }
+          ],
+          "latencyMs": 203.1
+        },
+        {
+          "id": "ext-invoice-03",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.5415
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4032
+            },
+            {
+              "rank": 4,
+              "section": "七、换货政策",
+              "score": 0.1755
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.1719
+            }
+          ],
+          "latencyMs": 224.2
+        },
+        {
+          "id": "ext-invoice-04",
+          "category": "开票政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.8095
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.396
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.2238
+            },
+            {
+              "rank": 5,
+              "section": "十、价格保护与价保规则",
+              "score": 0.1971
+            }
+          ],
+          "latencyMs": 215.9
+        },
+        {
+          "id": "ext-coupon-01",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.8452
+            },
+            {
+              "rank": 3,
+              "section": "十、价格保护与价保规则",
+              "score": 0.6886
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6238
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.6009
+            }
+          ],
+          "latencyMs": 199.6
+        },
+        {
+          "id": "ext-coupon-02",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.9288
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.9053
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.85
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.5899
+            },
+            {
+              "rank": 5,
+              "section": "十、价格保护与价保规则",
+              "score": 0.5436
+            }
+          ],
+          "latencyMs": 210.4
+        },
+        {
+          "id": "ext-coupon-03",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.9167
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.7928
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.5227
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4929
+            },
+            {
+              "rank": 5,
+              "section": "十、价格保护与价保规则",
+              "score": 0.4909
+            }
+          ],
+          "latencyMs": 222.1
+        },
+        {
+          "id": "ext-coupon-04",
+          "category": "优惠券规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 0.6472
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6116
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4689
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.4684
+            }
+          ],
+          "latencyMs": 220.0
+        },
+        {
+          "id": "ext-price-01",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 0.8929
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.7336
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.4936
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.4274
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.3444
+            }
+          ],
+          "latencyMs": 243.7
+        },
+        {
+          "id": "ext-price-02",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.6217
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.6026
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5823
+            },
+            {
+              "rank": 5,
+              "section": "四、保修规则",
+              "score": 0.4554
+            }
+          ],
+          "latencyMs": 208.0
+        },
+        {
+          "id": "ext-price-03",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.7369
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6792
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.5723
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.5106
+            }
+          ],
+          "latencyMs": 232.2
+        },
+        {
+          "id": "ext-price-04",
+          "category": "价保规则",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十、价格保护与价保规则",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.6192
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6026
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.4987
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4422
+            }
+          ],
+          "latencyMs": 247.7
+        },
+        {
+          "id": "ext-faq-01",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5011
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4431
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4331
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.4053
+            }
+          ],
+          "latencyMs": 235.7
+        },
+        {
+          "id": "ext-faq-02",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.9448
+            },
+            {
+              "rank": 2,
+              "section": "三、物流查询",
+              "score": 0.7917
+            },
+            {
+              "rank": 3,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.7104
+            },
+            {
+              "rank": 4,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.6545
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5686
+            }
+          ],
+          "latencyMs": 264.2
+        },
+        {
+          "id": "ext-faq-03",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5023
+            },
+            {
+              "rank": 3,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.4842
+            },
+            {
+              "rank": 4,
+              "section": "四、保修规则",
+              "score": 0.4604
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.4488
+            }
+          ],
+          "latencyMs": 228.0
+        },
+        {
+          "id": "ext-faq-04",
+          "category": "常见问题FAQ",
+          "rank": 3,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 0.8125
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.7318
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.593
+            },
+            {
+              "rank": 4,
+              "section": "六、快速参考表",
+              "score": 0.1797
+            },
+            {
+              "rank": 5,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.1793
+            }
+          ],
+          "latencyMs": 252.2
+        },
+        {
+          "id": "ext-faq-05",
+          "category": "常见问题FAQ",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.85
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.811
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.8055
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.6784
+            },
+            {
+              "rank": 5,
+              "section": "十、价格保护与价保规则",
+              "score": 0.5653
+            }
+          ],
+          "latencyMs": 184.5
+        },
+        {
+          "id": "ext-sla-01",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.85
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6879
+            },
+            {
+              "rank": 3,
+              "section": "一、退款政策",
+              "score": 0.66
+            },
+            {
+              "rank": 4,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5461
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.4536
+            }
+          ],
+          "latencyMs": 227.0
+        },
+        {
+          "id": "ext-sla-02",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.6626
+            },
+            {
+              "rank": 3,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.575
+            },
+            {
+              "rank": 4,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.5391
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.3963
+            }
+          ],
+          "latencyMs": 280.0
+        },
+        {
+          "id": "ext-sla-03",
+          "category": "服务时效",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.8924
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.85
+            },
+            {
+              "rank": 3,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.7278
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6081
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.5824
+            }
+          ],
+          "latencyMs": 232.3
+        },
+        {
+          "id": "ext-sla-04",
+          "category": "服务时效",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十二、服务等级与响应时效",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.5072
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4717
+            },
+            {
+              "rank": 4,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.4567
+            },
+            {
+              "rank": 5,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.4284
+            }
+          ],
+          "latencyMs": 263.7
+        },
+        {
+          "id": "ext-privacy-01",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.4819
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.3478
+            },
+            {
+              "rank": 4,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.3041
+            },
+            {
+              "rank": 5,
+              "section": "六、快速参考表",
+              "score": 0.261
+            }
+          ],
+          "latencyMs": 163.6
+        },
+        {
+          "id": "ext-privacy-02",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.6708
+            },
+            {
+              "rank": 3,
+              "section": "六、快速参考表",
+              "score": 0.6423
+            },
+            {
+              "rank": 4,
+              "section": "三、物流查询",
+              "score": 0.527
+            },
+            {
+              "rank": 5,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4613
+            }
+          ],
+          "latencyMs": 240.8
+        },
+        {
+          "id": "ext-privacy-03",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.6168
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5922
+            },
+            {
+              "rank": 4,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.5867
+            },
+            {
+              "rank": 5,
+              "section": "八、开票与发票政策",
+              "score": 0.4912
+            }
+          ],
+          "latencyMs": 312.5
+        },
+        {
+          "id": "ext-privacy-04",
+          "category": "客服规范",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.4915
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4704
+            },
+            {
+              "rank": 4,
+              "section": "十三、客服话术与信息脱敏规范",
+              "score": 0.4257
+            },
+            {
+              "rank": 5,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.3419
+            }
+          ],
+          "latencyMs": 211.0
+        },
+        {
+          "id": "ext-delivery-01",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.7312
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.5453
+            },
+            {
+              "rank": 4,
+              "section": "八、开票与发票政策",
+              "score": 0.4236
+            },
+            {
+              "rank": 5,
+              "section": "十二、服务等级与响应时效",
+              "score": 0.2349
+            }
+          ],
+          "latencyMs": 280.2
+        },
+        {
+          "id": "ext-delivery-02",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.7501
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.6886
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.639
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.6161
+            }
+          ],
+          "latencyMs": 247.9
+        },
+        {
+          "id": "ext-delivery-03",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.85
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.6244
+            },
+            {
+              "rank": 3,
+              "section": "二、退货政策",
+              "score": 0.4986
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.4766
+            },
+            {
+              "rank": 5,
+              "section": "七、换货政策",
+              "score": 0.4478
+            }
+          ],
+          "latencyMs": 236.3
+        },
+        {
+          "id": "ext-delivery-04",
+          "category": "配送政策",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4732
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4359
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.411
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.3649
+            }
+          ],
+          "latencyMs": 531.4
+        },
+        {
+          "id": "ext-clarify-01",
+          "category": "误区澄清",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "七、换货政策",
+              "score": 0.875
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.7918
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.7679
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.6015
+            },
+            {
+              "rank": 5,
+              "section": "二、退货政策",
+              "score": 0.5131
+            }
+          ],
+          "latencyMs": 204.3
+        },
+        {
+          "id": "ext-clarify-02",
+          "category": "误区澄清",
+          "rank": 2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.9
+            },
+            {
+              "rank": 2,
+              "section": "十五、常见误区澄清",
+              "score": 0.85
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.7439
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6581
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.6554
+            }
+          ],
+          "latencyMs": 236.1
+        },
+        {
+          "id": "ext-clarify-03",
+          "category": "误区澄清",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 0.8257
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 0.8
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6679
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6576
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6379
+            }
+          ],
+          "latencyMs": 251.5
+        },
+        {
+          "id": "ext-clarify-04",
+          "category": "误区澄清",
+          "rank": 4,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.6909
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6894
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.6833
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.6272
+            },
+            {
+              "rank": 5,
+              "section": "九、优惠券与活动规则",
+              "score": 0.5355
+            }
+          ],
+          "latencyMs": 232.4
+        },
+        {
+          "id": "distractor-01",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十五、常见误区澄清",
+              "score": 0.85
+            },
+            {
+              "rank": 2,
+              "section": "七、换货政策",
+              "score": 0.775
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.6597
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.4647
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.4572
+            }
+          ],
+          "latencyMs": 203.9
+        },
+        {
+          "id": "distractor-02",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "九、优惠券与活动规则",
+              "score": 0.9583
+            },
+            {
+              "rank": 2,
+              "section": "十、价格保护与价保规则",
+              "score": 0.8285
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.7563
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5716
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.5358
+            }
+          ],
+          "latencyMs": 221.1
+        },
+        {
+          "id": "distractor-03",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "四、保修规则",
+              "score": 0.9306
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.85
+            },
+            {
+              "rank": 3,
+              "section": "十五、常见误区澄清",
+              "score": 0.6862
+            },
+            {
+              "rank": 4,
+              "section": "五、售后工单问题类型汇总",
+              "score": 0.4549
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.4231
+            }
+          ],
+          "latencyMs": 214.7
+        },
+        {
+          "id": "distractor-04",
+          "category": "近义干扰",
+          "rank": 4,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.9577
+            },
+            {
+              "rank": 2,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.875
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.7878
+            },
+            {
+              "rank": 4,
+              "section": "二、退货政策",
+              "score": 0.7402
+            },
+            {
+              "rank": 5,
+              "section": "一、退款政策",
+              "score": 0.6732
+            }
+          ],
+          "latencyMs": 260.1
+        },
+        {
+          "id": "distractor-05",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "一、退款政策",
+              "score": 0.9006
+            },
+            {
+              "rank": 2,
+              "section": "九、优惠券与活动规则",
+              "score": 0.85
+            },
+            {
+              "rank": 3,
+              "section": "九、优惠券与活动规则",
+              "score": 0.5575
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.546
+            },
+            {
+              "rank": 5,
+              "section": "十五、常见误区澄清",
+              "score": 0.5434
+            }
+          ],
+          "latencyMs": 232.4
+        },
+        {
+          "id": "distractor-06",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.8709
+            },
+            {
+              "rank": 2,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.8333
+            },
+            {
+              "rank": 3,
+              "section": "三、物流查询",
+              "score": 0.6491
+            },
+            {
+              "rank": 4,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.6161
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.5075
+            }
+          ],
+          "latencyMs": 243.3
+        },
+        {
+          "id": "distractor-07",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "十四、渠道与自营配送政策",
+              "score": 0.875
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.7951
+            },
+            {
+              "rank": 3,
+              "section": "七、换货政策",
+              "score": 0.7588
+            },
+            {
+              "rank": 4,
+              "section": "十五、常见误区澄清",
+              "score": 0.7407
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.7147
+            }
+          ],
+          "latencyMs": 248.3
+        },
+        {
+          "id": "distractor-08",
+          "category": "近义干扰",
+          "rank": 1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "section": "八、开票与发票政策",
+              "score": 1.0
+            },
+            {
+              "rank": 2,
+              "section": "八、开票与发票政策",
+              "score": 0.6257
+            },
+            {
+              "rank": 3,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.4971
+            },
+            {
+              "rank": 4,
+              "section": "九、优惠券与活动规则",
+              "score": 0.3785
+            },
+            {
+              "rank": 5,
+              "section": "十一、常见问题 FAQ",
+              "score": 0.3638
+            }
+          ],
+          "latencyMs": 243.6
+        }
+      ],
+      "oos": [
+        {
+          "id": "oos-05",
+          "query": "你们公司什么时候上市",
+          "topScore": 1.0,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-06",
+          "query": "帮我看看隔壁邻居的订单",
+          "topScore": 0.875,
+          "topSection": "三、物流查询"
+        },
+        {
+          "id": "oos-07",
+          "query": "能不能帮我改一下商品价格",
+          "topScore": 0.8991,
+          "topSection": "十、价格保护与价保规则"
+        },
+        {
+          "id": "oos-08",
+          "query": "给我开个折扣码吧",
+          "topScore": 0.8353,
+          "topSection": "九、优惠券与活动规则"
+        },
+        {
+          "id": "oos-09",
+          "query": "客服工号是多少",
+          "topScore": 1.0,
+          "topSection": "十三、客服话术与信息脱敏规范"
+        },
+        {
+          "id": "oos-10",
+          "query": "你们仓库在哪",
+          "topScore": 0.9911,
+          "topSection": "三、物流查询"
+        },
+        {
+          "id": "oos-11",
+          "query": "推荐一款适合送人的礼物",
+          "topScore": 0.75,
+          "topSection": "十五、常见误区澄清"
+        },
+        {
+          "id": "oos-12",
+          "query": "我的支付密码是多少",
+          "topScore": 1.0,
+          "topSection": "十三、客服话术与信息脱敏规范"
+        },
+        {
+          "id": "oos-13",
+          "query": "你们和顺丰是什么合作关系",
+          "topScore": 1.0,
+          "topSection": "十四、渠道与自营配送政策"
+        },
+        {
+          "id": "oos-14",
+          "query": "怎么申请成为你们平台的商家",
+          "topScore": 1.0,
+          "topSection": "十一、常见问题 FAQ"
+        },
+        {
+          "id": "oos-15",
+          "query": "帮我取消自动续费",
+          "topScore": 0.8481,
+          "topSection": "八、开票与发票政策"
+        }
+      ]
+    }
+  ]
+}
