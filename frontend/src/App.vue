@@ -17,6 +17,7 @@
     <main class="app-content">
       <ChatView v-if="activeTab === 'chat'" />
       <KnowledgeView v-else-if="activeTab === 'knowledge'" />
+      <TraceView v-else-if="activeTab === 'trace'" />
       <TicketView v-else />
     </main>
   </div>
@@ -28,12 +29,14 @@ import AppSidebar from './components/AppSidebar.vue'
 import SessionList from './components/SessionList.vue'
 import ChatView from './views/ChatView.vue'
 import KnowledgeView from './views/KnowledgeView.vue'
+import TraceView from './views/TraceView.vue'
 import TicketView from './views/TicketView.vue'
 
 // 导航项配置：图标名对应 @element-plus/icons-vue 全局注册的组件名
 const NAV_ITEMS = [
   { key: 'chat', label: '智能客服', icon: 'ChatDotRound' },
   { key: 'knowledge', label: '知识库管理', icon: 'Collection' },
+  { key: 'trace', label: 'Trace 观测', icon: 'DataLine' },
   { key: 'ticket', label: '售后工单', icon: 'Tickets' },
 ]
 

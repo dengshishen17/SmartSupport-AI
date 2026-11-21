@@ -1,12 +1,18 @@
 """可观测性：每次问答落库 SQLite，统计延迟/Token/成功率/工具调用。
 DB 文件 python-service/ops.db，表 request_logs。失败也不影响主流程。
 """
+import os
 import sqlite3
 import threading
 import time
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parents[1] / "ops.db"
+# ops.db 路径。可用 SMART_OPS_DB 覆盖（与 app/trace.py 共用同一约定），
+# 单测用它指向临时库，避免单测数据污染生产观测数据。
+DB_PATH = Path(
+    os.environ.get("SMART_OPS_DB")
+    or (Path(__file__).resolve().parents[1] / "ops.db")
+)
 _lock = threading.Lock()
 
 

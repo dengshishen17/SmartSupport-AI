@@ -31,6 +31,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 import threading
 import time
@@ -40,7 +41,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterator
 
-DB_PATH = Path(__file__).resolve().parents[1] / "ops.db"
+# ops.db 路径。可用 SMART_OPS_DB 覆盖 —— 单测用它指向临时库，
+# 否则单测写的 span 会污染生产库的观测数据（实测踩过：trace 列表全是单测数据）。
+DB_PATH = Path(
+    os.environ.get("SMART_OPS_DB")
+    or (Path(__file__).resolve().parents[1] / "ops.db")
+)
 
 _lock = threading.Lock()
 _init_lock = threading.Lock()
@@ -64,7 +70,8 @@ CREATE TABLE IF NOT EXISTS trace_spans (
     status TEXT NOT NULL,
     error TEXT,
     attributes TEXT,
-    ts REAL NOT NULL
+    ts REAL NOT NULL,
+    mode TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_trace_spans_trace ON trace_spans(trace_id);
 CREATE INDEX IF NOT EXISTS idx_trace_spans_name ON trace_spans(name);
@@ -85,6 +92,10 @@ def _ensure_schema() -> None:
                 conn = sqlite3.connect(str(DB_PATH), timeout=5)
                 try:
                     conn.executescript(_SCHEMA)
+                    # 老库补列：mode 是后加的字段，用 PRAGMA 判断避免重复 ALTER
+                    cols = {r[1] for r in conn.execute("PRAGMA table_info(trace_spans)")}
+                    if "mode" not in cols:
+                        conn.execute("ALTER TABLE trace_spans ADD COLUMN mode TEXT")
                     conn.commit()
                 finally:
                     conn.close()
@@ -102,8 +113,8 @@ def _write_span(row: tuple) -> None:
             try:
                 conn.execute(
                     "INSERT INTO trace_spans (trace_id, span_id, parent_span_id, name,"
-                    " span_type, start_ms, duration_ms, status, error, attributes, ts)"
-                    " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    " span_type, start_ms, duration_ms, status, error, attributes, ts, mode)"
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
                     row,
                 )
                 conn.commit()
@@ -143,7 +154,7 @@ class Span:
         self.status = "error"
         self.error = str(error)[:300]
 
-    def to_row(self, trace_id: str) -> tuple:
+    def to_row(self, trace_id: str, mode: str = "") -> tuple:
         return (
             trace_id,
             self.span_id,
@@ -156,6 +167,7 @@ class Span:
             self.error[:300] if self.error else None,
             json.dumps(self.attributes, ensure_ascii=False, default=str),
             time.time(),
+            mode or None,
         )
 
 
@@ -187,6 +199,21 @@ class Trace:
     # -- span 上下文管理 ---------------------------------------------------
 
     @contextmanager
+    def root_span(self, span_type: str = "agent") -> Iterator[Span]:
+        """开一个**根 span**，本次请求内所有 span 都挂在它下面。
+
+        没有根 span 时，各阶段 span 是平级孤儿，无法表达"这次请求总共花了多久"，
+        也不便于在 UI 上按树形展开。典型用法::
+
+            with tr.root_span() as root:
+                with tr.span("retrieval", "retrieval"):
+                    ...
+                root.set("question", question)
+        """
+        with self.span(self.name, span_type) as sp:
+            yield sp
+
+    @contextmanager
     def span(self, name: str, span_type: str = "step") -> Iterator[Span]:
         """开一个 span；退出时自动记耗时并落库。"""
         sp = Span(name=name, span_type=span_type,
@@ -205,7 +232,7 @@ class Trace:
             with self._lock:
                 self.spans.append(sp)
             if self.enabled:
-                _write_span(sp.to_row(self.trace_id))
+                _write_span(sp.to_row(self.trace_id, self.mode))
 
     # -- 便捷记录 ----------------------------------------------------------
 
@@ -216,7 +243,7 @@ class Trace:
         with self._lock:
             self.spans.append(sp)
         if self.enabled:
-            _write_span(sp.to_row(self.trace_id))
+            _write_span(sp.to_row(self.trace_id, self.mode))
         return sp
 
     # -- 汇总 --------------------------------------------------------------
@@ -269,7 +296,7 @@ def get_trace(trace_id: str) -> dict[str, Any]:
             try:
                 rows = conn.execute(
                     "SELECT span_id, parent_span_id, name, span_type, start_ms,"
-                    " duration_ms, status, error, attributes FROM trace_spans"
+                    " duration_ms, status, error, attributes, mode FROM trace_spans"
                     " WHERE trace_id=? ORDER BY start_ms", (trace_id,)).fetchall()
             finally:
                 conn.close()
@@ -282,6 +309,7 @@ def get_trace(trace_id: str) -> dict[str, Any]:
                 "spanId": r[0], "parentSpanId": r[1], "name": r[2], "type": r[3],
                 "startMs": round(r[4], 2), "durationMs": round(r[5], 2),
                 "status": r[6], "error": r[7], "attributes": attrs,
+                "mode": r[9] or "",
             })
     except Exception:
         pass
@@ -297,17 +325,21 @@ def recent_traces(limit: int = 20) -> list[dict[str, Any]]:
             conn = sqlite3.connect(str(DB_PATH), timeout=5)
             try:
                 rows = conn.execute(
-                    "SELECT trace_id, name, span_type, MIN(start_ms),"
-                    " SUM(duration_ms), COUNT(*), SUM(status='error')"
+                    "SELECT trace_id,"
+                    " COALESCE(MAX(CASE WHEN parent_span_id IS NULL THEN name END),"
+                    "          MAX(name)),"
+                    " MIN(start_ms),"
+                    " SUM(duration_ms), COUNT(*), SUM(status='error'),"
+                    " MAX(mode)"
                     " FROM trace_spans GROUP BY trace_id"
                     " ORDER BY MIN(ts) DESC LIMIT ?", (limit,)).fetchall()
             finally:
                 conn.close()
         for r in rows:
             out.append({
-                "traceId": r[0], "name": r[1], "mode": r[2],
-                "totalSpanMs": round(r[4] or 0, 2), "spanCount": r[5],
-                "errors": r[6] or 0,
+                "traceId": r[0], "name": r[1], "mode": r[6] or "",
+                "totalSpanMs": round(r[3] or 0, 2), "spanCount": r[4],
+                "errors": r[5] or 0,
             })
     except Exception:
         pass
@@ -323,7 +355,8 @@ def slow_spans(threshold_ms: float = 500.0, limit: int = 20) -> list[dict[str, A
             conn = sqlite3.connect(str(DB_PATH), timeout=5)
             try:
                 rows = conn.execute(
-                    "SELECT trace_id, name, span_type, duration_ms, status, attributes"
+                    "SELECT trace_id, name, span_type, duration_ms, status, attributes,"
+                    " MAX(mode)"
                     " FROM trace_spans WHERE duration_ms >= ?"
                     " ORDER BY duration_ms DESC LIMIT ?", (threshold_ms, limit)).fetchall()
             finally:
@@ -336,6 +369,7 @@ def slow_spans(threshold_ms: float = 500.0, limit: int = 20) -> list[dict[str, A
             out.append({
                 "traceId": r[0], "name": r[1], "type": r[2],
                 "durationMs": round(r[3], 2), "status": r[4], "attributes": attrs,
+                "mode": r[6] or "",
             })
     except Exception:
         pass

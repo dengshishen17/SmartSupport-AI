@@ -9,6 +9,12 @@
           </span>
         </template>
         <template #actions>
+          <!-- 链路切换：Python 双栈 Agent / Java 固定 RAG 管线 -->
+          <el-radio-group v-model="chatMode" size="small" class="mode-switch">
+            <el-radio-button v-for="m in CHAT_MODES" :key="m.key" :value="m.key">
+              {{ m.label }}
+            </el-radio-button>
+          </el-radio-group>
           <span class="session-id" v-if="currentSessionId">
             <el-icon><Position /></el-icon>
             会话 {{ shortSessionId }}
@@ -82,7 +88,7 @@
 <script setup>
 import { computed, inject, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
-import { knowledgeChatStream } from '../api/chat'
+import { knowledgeChatStream, pythonAgentStream } from '../api/chat'
 import AppHeader from '../components/AppHeader.vue'
 import ChatComposer from '../components/ChatComposer.vue'
 import ChatContextPanel from '../components/ChatContextPanel.vue'
@@ -143,6 +149,19 @@ const panelCollapsed = ref(false)
 const panelDrawer = ref(false)
 // 是否为窄屏（窄屏时右侧栏改为抽屉）
 const isNarrow = ref(false)
+
+/**
+ * 对话链路模式：
+ *   'java' → Java 后端 /ai/knowledge/chat/stream（固定 RAG 管线）
+ *   'python' → Python 双栈 /py/agent/chat/stream（LangGraph ReAct 编排 + 工具调用）
+ *
+ * 两条链路共用同一套消息与工具卡渲染，前端只切换请求端点。
+ */
+const chatMode = ref('python')
+const CHAT_MODES = [
+  { key: 'python', label: 'Python Agent', hint: 'LangGraph ReAct 编排 · 工具调用' },
+  { key: 'java', label: 'Java RAG', hint: 'Spring AI 固定管线 · 知识库检索' },
+]
 
 /**
  * 与左侧栏的共享通道（由 App.vue provide）。
@@ -289,61 +308,80 @@ async function send() {
   let lastSaveTs = 0
   let chunkCount = 0
 
-  await knowledgeChatStream(text, currentSessionId.value, {
-    onContent(delta) {
-      // 用数组索引访问 reactive 代理，赋值才会触发 UI 响应式更新（逐字刷新）
-      messages.value[replyIndex].content += delta
-      chunkCount++
-      const now = Date.now()
-      // 每 800ms 或每 30 个 chunk 落盘一次，防止刷新丢历史
-      if (now - lastSaveTs > 800 || chunkCount % 30 === 0) {
-        lastSaveTs = now
-        persistCurrent()
-      }
-      scrollToBottom()
-    },
-    onReference(rag, sources) {
-      messages.value[replyIndex].sources = sources
-    },
-    onTool(stage, toolName, payload) {
-      const reply = messages.value[replyIndex]
-      if (stage === 'start') {
-        // 新工具调用：状态 running，展示"正在查询..."
-        reply.tools.push({
-          name: toolName,
-          label: TOOL_LABELS[toolName] || toolName,
-          args: payload,
-          status: 'running',
-          result: '',
-        })
-      } else if (stage === 'result') {
-        // 配对同名、仍在 running 的最后一次调用，标记完成并填结果
-        const target = [...reply.tools].reverse().find((t) => t.name === toolName && t.status === 'running')
-        if (target) {
-          target.status = 'done'
-          target.result = payload.result || ''
-        }
-      }
-      scrollToBottom()
-    },
-    onDone(sessionId) {
-      if (sessionId) currentSessionId.value = sessionId
-      // 回答完成，给这条消息打上时间戳
-      timestamps.value[replyIndex] = nowLabel()
-      streamingIndex.value = -1
-      // 流结束后落盘当前会话
+  // 两条链路事件格式一致，只有引用来源事件是 Java 侧独有
+  const handlers = {
+    onContent: handleContent,
+    onTool: handleTool,
+    onDone: handleDone,
+    onError: handleError,
+  }
+  if (chatMode.value === 'python') {
+    await pythonAgentStream(text, currentSessionId.value, handlers)
+  } else {
+    await knowledgeChatStream(text, currentSessionId.value, {
+      ...handlers,
+      onReference: handleReference,
+    })
+  }
+
+  function handleContent(delta) {
+    // 用数组索引访问 reactive 代理，赋值才会触发 UI 响应式更新（逐字刷新）
+    messages.value[replyIndex].content += delta
+    chunkCount++
+    const now = Date.now()
+    // 每 800ms 或每 30 个 chunk 落盘一次，防止刷新丢历史
+    if (now - lastSaveTs > 800 || chunkCount % 30 === 0) {
+      lastSaveTs = now
       persistCurrent()
-      loading.value = false
-      scrollToBottom()
-    },
-    onError(message) {
-      // 后端已把网络类异常翻译成中文提示；这里再兜底一层，
-      // 避免把 "Connection reset" 这类底层网络术语直接展示给用户。
-      const text = String(message || '未知错误')
-      const friendly = /connection reset|network error|failed to fetch|socket|ECONNRESET|Load failed/i
-        .test(text)
-        ? '网络连接不稳定，请稍后重试'
-        : text
+    }
+    scrollToBottom()
+  }
+
+  function handleReference(rag, sources) {
+    messages.value[replyIndex].sources = sources
+  }
+
+  function handleTool(stage, toolName, payload) {
+    const reply = messages.value[replyIndex]
+    if (stage === 'start') {
+      // 新工具调用：状态 running，展示"正在查询..."
+      reply.tools.push({
+        name: toolName,
+        label: TOOL_LABELS[toolName] || toolName,
+        args: payload,
+        status: 'running',
+        result: '',
+      })
+    } else if (stage === 'result') {
+      // 配对同名、仍在 running 的最后一次调用，标记完成并填结果
+      const target = [...reply.tools].reverse().find((t) => t.name === toolName && t.status === 'running')
+      if (target) {
+        target.status = 'done'
+        target.result = payload.result || ''
+      }
+    }
+    scrollToBottom()
+  }
+
+  function handleDone(sessionId) {
+    if (sessionId) currentSessionId.value = sessionId
+    // 回答完成，给这条消息打上时间戳
+    timestamps.value[replyIndex] = nowLabel()
+    streamingIndex.value = -1
+    // 流结束后落盘当前会话
+    persistCurrent()
+    loading.value = false
+    scrollToBottom()
+  }
+
+  function handleError(message) {
+    // 后端已把网络类异常翻译成中文提示；这里再兜底一层，
+    // 避免把 "Connection reset" 这类底层网络术语直接展示给用户。
+    const text = String(message || '未知错误')
+    const friendly = /connection reset|network error|failed to fetch|socket|ECONNRESET|Load failed/i
+      .test(text)
+      ? '网络连接不稳定，请稍后重试'
+      : text
       ElMessage.error('AI 回答出错：' + friendly)
       const reply = messages.value[replyIndex]
       // 如果一个字都没收到、也没工具调用，删掉占位的空 assistant 消息
@@ -356,8 +394,7 @@ async function send() {
       persistCurrent()
       loading.value = false
       scrollToBottom()
-    },
-  })
+  }
 }
 
 function newSession() {
@@ -453,6 +490,17 @@ onMounted(() => {
   padding: 4px 11px;
   border-radius: var(--ss-radius-pill);
   background: var(--ss-bg-hover);
+}
+
+/* 链路切换：Python Agent / Java RAG */
+.mode-switch {
+  margin-right: 4px;
+}
+
+.mode-switch :deep(.el-radio-button__inner) {
+  font-size: 12px;
+  padding: 6px 12px;
+  font-weight: 600;
 }
 
 .panel-open-btn {

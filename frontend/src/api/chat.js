@@ -43,6 +43,10 @@ export async function chatStream(message, sessionId, { onContent, onDone, onErro
 
       // 追加到缓冲区，按 \n\n 切分事件（SSE 事件以空行分隔）
       buffer += decoder.decode(value, { stream: true })
+      // SSE 帧分隔符可能是 \n\n 也可能是 \r\n\r\n
+      // （Python EventSourceResponse 用 CRLF，Java SseEmitter 用 LF），
+      // 统一成 LF 再切分，否则整段流会被当成一个事件，页面永远收不到内容。
+      buffer = buffer.replace(/\r\n/g, '\n')
       const events = buffer.split('\n\n')
       // 最后一段可能是不完整的半包，留到下一轮
       buffer = events.pop()
@@ -67,6 +71,76 @@ export async function chatStream(message, sessionId, { onContent, onDone, onErro
           onDone?.(evt.sessionId)
         } else if (evt.type === 'error') {
           onError?.(evt.message || '未知错误')
+        }
+      }
+    }
+  } catch (e) {
+    onError?.(e.message || '网络异常')
+  } finally {
+    reader.releaseLock()
+  }
+}
+
+/**
+ * Python 双栈 Agent 流式问答：POST /py/agent/chat/stream
+ *
+ * 与 knowledgeChatStream 事件格式一致（tool / content / done），
+ * 但走的是 Python 侧 LangGraph ReAct 编排 + 业务工具服务。
+ */
+export async function pythonAgentStream(question, sessionId, {
+  onContent, onDone, onError, onTool,
+}) {
+  const resp = await fetch('/py/agent/chat/stream', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question, sessionId: sessionId || undefined }),
+  })
+
+  if (!resp.ok) {
+    onError?.(`HTTP ${resp.status}`)
+    return
+  }
+
+  const reader = resp.body.getReader()
+  const decoder = new TextDecoder('utf-8')
+  let buffer = ''
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      buffer += decoder.decode(value, { stream: true })
+      // 帧分隔符统一成 LF：Python EventSourceResponse 用 \r\n\r\n，Java 用 \n\n
+      buffer = buffer.replace(/\r\n/g, '\n')
+      const events = buffer.split('\n\n')
+      buffer = events.pop()
+
+      for (const raw of events) {
+        const line = raw.split('\n').find((l) => l.startsWith('data:'))
+        if (!line) continue
+        const jsonStr = line.slice(5).trim()
+        if (!jsonStr) continue
+
+        let evt
+        try {
+          evt = JSON.parse(jsonStr)
+        } catch {
+          continue
+        }
+
+        if (evt.type === 'content') {
+          onContent?.(evt.content || '')
+        } else if (evt.type === 'done') {
+          onDone?.(evt.sessionId, evt.usage)
+        } else if (evt.type === 'error') {
+          onError?.(evt.message || '未知错误')
+        } else if (evt.type === 'tool') {
+          if (evt.stage === 'start') {
+            onTool?.('start', evt.toolName, evt.args || {})
+          } else if (evt.stage === 'result') {
+            onTool?.('result', evt.toolName, { result: evt.result || '' })
+          }
         }
       }
     }
@@ -113,6 +187,8 @@ export async function knowledgeChatStream(question, sessionId, {
       if (done) break
 
       buffer += decoder.decode(value, { stream: true })
+      // 帧分隔符统一成 LF：Python EventSourceResponse 用 \r\n\r\n，Java 用 \n\n
+      buffer = buffer.replace(/\r\n/g, '\n')
       const events = buffer.split('\n\n')
       buffer = events.pop()
 

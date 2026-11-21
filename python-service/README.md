@@ -75,12 +75,24 @@ Prompt 是代码，却极易被"顺手改一句"破坏。`app/prompts.py` 把 Pr
 | 能力 | 说明 |
 |---|---|
 | `Trace` 上下文管理器 | 支持嵌套 `with tr.span("retrieval"):`，通过活跃执行栈自动串联父子关系 |
+| `root_span()` | 开一个**根 span**（`rag_chat` / `react_chat`），本次请求内所有 span 挂在它下面 —— 这样才能算出「本次请求总共花了多久」，也便于 UI 按树形展开 |
 | 落库 | SQLite `ops.db` → `trace_spans` 表，按 `trace_id` / `name` / `ts` 建索引 |
 | span 类型 | `retrieval` / `context` / `tool` / `agent` / `llm`，各带耗时、状态与 JSON 属性 |
 | 查询 | `get_trace(trace_id)` / `recent_traces(limit)` / `slow_spans(threshold_ms)` / `stats()` |
 
 **接入点**：`agent.py`（`retrieval`→`context`→`tool`→`llm`）、`workflow.py`（`context`→`tool`→`agent`）、
-`main.py`（生成 `traceId` 并回传）。单条请求的完整调用链可以一次性拉出来看。
+`main.py`（生成 `traceId` 并回传，外层套 `tr.root_span("agent")`）。单条请求的完整调用链可以一次性拉出来看：
+
+```text
+react_chat  2148.6ms                          ← 根 span：本次请求总耗时
+├─ context      0.1ms  budget=4096, historyKept=0
+└─ agent     2124.6ms  messageCount=5        ← LangGraph ReAct 编排
+   ├─ tool      36.5ms  queryOrderByOrderNo   ← 工具子 span
+   └─ tool      23.4ms  queryRefundByOrderNo
+```
+
+> 🧪 **测试隔离**：`DB_PATH` 支持用环境变量 `SMART_OPS_DB` 覆盖，单测指向临时库，
+> 避免单测写的假 span 污染生产观测数据（实测踩过：trace 列表全是 `name="a"` 的单测数据）。
 
 ## 工具清单（LangChain + MCP 共用）
 

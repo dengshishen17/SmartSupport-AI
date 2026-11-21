@@ -7,6 +7,7 @@
     <div class="stat-main">
       <span class="ss-stat-value stat-value">{{ value }}</span>
       <span class="ss-stat-label">{{ label }}</span>
+      <span v-if="hint" class="stat-hint">{{ hint }}</span>
     </div>
     <span class="stat-icon">
       <el-icon><component :is="icon" /></el-icon>
@@ -22,6 +23,8 @@ defineProps({
   icon: { type: String, default: 'Tickets' },
   // neutral / primary / warning / success / danger
   tone: { type: String, default: 'neutral' },
+  // 补充说明（可选，显示在标签下方的小字）
+  hint: { type: String, default: '' },
 })
 </script>
 
@@ -43,6 +46,15 @@ defineProps({
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+}
+
+.stat-hint {
+  font-size: 11px;
+  color: var(--ss-text-tertiary);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .stat-value {

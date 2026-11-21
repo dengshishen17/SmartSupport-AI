@@ -49,8 +49,11 @@ def chat(req: ChatReq):
     t0 = time.time()
     tr = trace.Trace("rag_chat", session_id=session_id, mode="rag")
     try:
-        reply, sources, rag_hit, tool_events, usage = agent.chat_once(
-            req.question, session_id, top_k=config.RAG_TOP_K, threshold=config.RAG_THRESHOLD, tr=tr)
+        with tr.root_span("agent") as root:
+            root.set("question", req.question[:200])
+            reply, sources, rag_hit, tool_events, usage = agent.chat_once(
+                req.question, session_id, top_k=config.RAG_TOP_K,
+                threshold=config.RAG_THRESHOLD, tr=tr)
         metrics.log_call("rag", session_id, req.question, (time.time() - t0) * 1000,
                          rag_hit, len(tool_events) // 2, True, "",
                          usage.get("prompt_tokens", 0), usage.get("completion_tokens", 0),
@@ -111,7 +114,9 @@ async def agent_chat(req: ChatReq):
     t0 = time.time()
     tr = trace.Trace("react_chat", session_id=session_id, mode="react")
     try:
-        reply, tool_events, usage = await workflow.run_react(req.question, session_id, tr=tr)
+        with tr.root_span("agent") as root:
+            root.set("question", req.question[:200])
+            reply, tool_events, usage = await workflow.run_react(req.question, session_id, tr=tr)
         # 工具调用次数统一从 stage=="start" 计数，不再用 len(events)//2 的脆弱假设
         tool_count = sum(1 for e in tool_events if e.get("stage") == "start")
         metrics.log_call("react", session_id, req.question, (time.time() - t0) * 1000,

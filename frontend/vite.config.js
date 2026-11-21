@@ -26,6 +26,11 @@ export default defineConfig({
         target: 'http://localhost:8080',
         changeOrigin: true,
       },
+      // Python 双栈服务（FastAPI 8001）：Agent 链路 / Trace 观测 / 评测
+      '/py': {
+        target: 'http://localhost:8001',
+        changeOrigin: true,
+      },
     },
   },
 })

@@ -1,10 +1,12 @@
 # 截图目录说明
 
-本目录存放 **SmartSupport AI** 项目根目录 `README.md`「功能演示」章节引用的 5 张真实运行截图。
+本目录存放 **SmartSupport AI** 项目根目录 `README.md`「功能演示」章节引用的 **7 张**真实运行截图。
 
-> ✅ **5 张截图均已就位**，与根目录 README 的引用路径一一对应，GitHub 上可直接正常渲染。
+> ✅ **7 张截图均已就位**，与根目录 README 的引用路径一一对应，GitHub 上可直接正常渲染。
 >
-> 截图采集自本机真实运行环境（后端 8080 + 前端 5173 + PostgreSQL/pgvector + Redis + MySQL），未做任何合成或伪造。
+> 截图采集自本机真实运行环境（**Python 双栈 8001** + Java 后端 8080 + 前端 5173 + PostgreSQL/pgvector + Redis + MySQL），未做任何合成或伪造。
+>
+> 其中 `06-trace.png` / `07-python-agent.png` 对应 **Python AI 应用主线**（Agent 编排、span 级可观测），是本项目的核心能力展示。
 
 ---
 
@@ -12,6 +14,8 @@
 
 | 文件名 | 对应 README 章节 | 截图实际内容 |
 |---|---|---|
+| `07-python-agent.png` | 功能演示 → ⑥ Python Agent 工具调用 | **Python LangGraph ReAct Agent** 链路：右上角「Python Agent / Java RAG」链路切换器（选中 Python Agent），消息气泡内展开的**工具调用卡片**（`查询订单` / `查询退款记录`，含入参 `10001` 与真实返回结果），以及模型基于工具返回值组织的完整回答。 |
+| `06-trace.png` | 功能演示 → ⑦ Python span 级全链路追踪 | **Trace 观测**页：顶部四张指标卡（Span 类型 / Span 总数 / 平均耗时 / 异常数）、左侧最近 Trace 列表（带 `ReAct` / `RAG` 模式徽标）、右侧**嵌套 span 树**（`react_chat` → `agent` → `tool` → `tool`，带耗时徽标与状态标签）、底部慢 Span 排行表。 |
 | `01-chat.png` | 功能演示 → 1. 智能客服主界面 | AI 客服聊天主界面：左侧历史会话列表、中间聊天区、底部 2×2 快捷提问卡片（退款条件 / 运费承担 / 物流停滞 / 保修期限）、右侧「上下文」面板。 |
 | `02-rag.png` | 功能演示 → 2. RAG 知识库问答 | RAG 知识问答及**引用来源**：政策类问题的完整回答，以及右侧「上下文」面板中显示的命中来源（`售后政策演示数据.md`）。 |
 | `03-tool-calling.png` | 功能演示 → 3. Tool Calling 工具调用 | 工具调用过程：消息气泡内展开的工具调用卡片，包含工具名（`查询订单` / `查询退款记录` / `查询售后工单`）、入参（`{"orderNo":"10001"}`）和真实返回结果。 |
@@ -33,7 +37,7 @@
 | 项目 | 实测值 |
 |---|---|
 | 格式 | PNG（无损） |
-| 单张体积 | 76 KB ~ 377 KB，5 张合计约 1.0 MB |
+| 单张体积 | 51 KB ~ 385 KB，7 张合计约 1.2 MB |
 | 视口 | 1600 × 900，浏览器缩放 100% |
 
 ---
@@ -44,19 +48,24 @@
 
 1. **启动中间件**：`cd backend && docker compose up -d`（PostgreSQL + Redis）
 2. **初始化 MySQL**：执行 `backend/src/main/resources/db/schema.sql`（含 7 条订单 / 3 条退款 / 4 条工单演示数据）
-3. **启动后端**：`cd backend && mvn spring-boot:run`
-4. **导入知识库**：调用 `POST /ai/knowledge/import-policy`，或在「知识库管理」页上传 `售后政策演示数据.md`
-5. **启动前端**：`cd frontend && npm install && npm run dev`，访问 http://localhost:5173
+3. **启动 Java 后端**：`cd backend && mvn spring-boot:run`（端口 8080）
+4. **启动 Python 双栈**：`cd python-service && python -m uvicorn app.main:app --port 8001`（**`06` / `07` 两张截图需要它**）
+5. **导入知识库**：调用 `POST /py/knowledge/import-text` 或 `POST /ai/knowledge/import-policy`，或在「知识库管理」页上传 `售后政策演示数据.md`
+6. **启动前端**：`cd frontend && npm install && npm run dev`，访问 http://localhost:5173
 
 ### 各截图的推荐操作
 
 | 文件名 | 推荐操作 |
 |---|---|
+| `07-python-agent.png` | 聊天页右上角切到 **Python Agent**（默认就是），提问「订单 10001 到哪了？帮我查一下退款进度」，等工具调用卡片展开且回答流式输出完毕。 |
+| `06-trace.png` | 先完成一次 Python Agent 提问（产生真实 span），再进「Trace 观测」页，选中最新的一条 `react_chat` Trace，等右侧 span 树渲染完成。 |
 | `01-chat.png` | 停留在聊天页欢迎态（未发送消息），展示完整界面布局 |
 | `02-rag.png` | 提问「什么情况下可以申请退款」或点击对应的快捷提问卡片，等回答流式输出完毕，等右侧出现引用来源 |
 | `03-tool-calling.png` | 提问「订单 10001 到哪了？」，等待工具调用卡片展开并显示返回结果 |
 | `04-knowledge.png` | 进入「知识库管理」页，确保已完成至少一次导入，文件列表和检索测试都有内容 |
 | `05-ticket.png` | 进入「售后工单」页，列表中已有演示工单，统计卡片数字不为 0 |
+
+> 💡 **截图时机**：Trace 观测页是异步加载的，切换到该页后建议**等 1 秒再截图**，否则可能拍到加载中的空态。
 
 ---
 

@@ -1,24 +1,25 @@
 # SmartSupport AI —— 企业智能售后助手
 
-> 基于 **Java + Python 双栈（Spring AI + FastAPI + LangChain/LangGraph + RAG + Tool Calling + MCP）** 的企业售后智能客服系统。
-> **Python 侧承担 AI 应用主线**：LangGraph Agent 编排、RAG 检索与知识运营、上下文预算、Prompt 版本化回归、span 级可观测、MCP 对外接入；
-> Java 侧承担业务 CRUD 与工具服务化保障。两栈共用同一批 MySQL / Redis / pgvector / DeepSeek / 百炼 Key。
+> **Python AI 应用 + Java 业务双栈**的企业售后智能客服系统。
+> **Python 侧承担 AI 应用主线**：LangGraph Agent 编排、RAG 检索与知识运营、上下文 Token 预算、Prompt 版本化回归、span 级全链路可观测、工具运行时（超时/重试/熔断/限流）、MCP 对外接入；
+> Java 侧承担业务 CRUD 与只读工具服务化保障。两栈共用同一批 MySQL / Redis / pgvector / DeepSeek / 百炼 Key。
 > 把售后政策文档导入向量库，让 AI 基于真实政策回答问题；再挂载订单 / 退款 / 工单查询工具，让 AI 说出**真实业务数据**而不是编造。
 >
-> 所有能力均由**可复现的评测**支撑：75 条检索标注用例 + 114 条 Agent 轨迹用例 + 151 个离线单测（详见[核心可量化指标](#核心可量化指标实测非估算)）。
+> 所有能力均由**可复现的评测**支撑：75 条检索标注用例 + 114 条 Agent 轨迹用例 + 154 个离线单测（详见[核心可量化指标](#核心可量化指标实测非估算)）。
 
 > 🤝 **开发方式**：本项目由本人在 Cursor、Claude Code 等 AI 编程工具辅助下完成 —— 需求拆解、技术选型、架构设计、数据库与接口设计、代码审查与本地调试验收均由本人负责；AI 工具用于代码生成、问题排查与文档整理。
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![LangChain](https://img.shields.io/badge/LangChain-0.3-1C3C3C?logo=langchain&logoColor=white)](https://www.langchain.com/)
+[![LangGraph](https://img.shields.io/badge/LangGraph-0.2-1C3C3C)](https://langchain-ai.github.io/langgraph/)
+[![MCP](https://img.shields.io/badge/MCP-stdio-7C3AED)](https://modelcontextprotocol.io/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.1-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0.9-6DB33F?logo=spring&logoColor=white)](https://docs.spring.io/spring-ai/reference/)
 [![Vue](https://img.shields.io/badge/Vue-3.5-42b883?logo=vuedotjs&logoColor=white)](https://vuejs.org/)
 [![Java](https://img.shields.io/badge/JDK-17-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![pgvector](https://img.shields.io/badge/pgvector-PostgreSQL%2016-336791?logo=postgresql&logoColor=white)](https://github.com/pgvector/pgvector)
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![LangChain](https://img.shields.io/badge/LangChain-0.3-1C3C3C?logo=langchain&logoColor=white)](https://www.langchain.com/)
-[![LangGraph](https://img.shields.io/badge/LangGraph-0.2-1C3C3C)](https://langchain-ai.github.io/langgraph/)
-[![MCP](https://img.shields.io/badge/MCP-stdio-7C3AED)](https://modelcontextprotocol.io/)
 
 ---
 
@@ -35,7 +36,7 @@
 - [本地运行步骤](#本地运行步骤)
 - [API 一览](#api-一览)
 - [数据库说明](#数据库说明)
-- [RAG 评测](#rag-评测)
+- [评测体系](#评测体系)
 - [开发方式与 AI 工具使用](#开发方式与-ai-工具使用)
 - [注意事项](#注意事项)
 - [许可证](#许可证)
@@ -65,7 +66,39 @@
 
 ## 功能演示
 
-> 📷 以下截图均采集自本机真实运行环境（后端 8080 + 前端 5173 + PostgreSQL/pgvector + Redis + MySQL），未做任何合成或伪造。
+> 📷 以下截图均采集自本机真实运行环境（Java 后端 8080 + **Python 双栈 8001** + 前端 5173 + PostgreSQL/pgvector + Redis + MySQL），未做任何合成或伪造。
+> 其中 **⑥⑦ 是 Python 侧 AI 主线**（Agent 编排与全链路追踪），**①~⑤ 是 Java 侧业务与前端**。
+
+<table>
+<tr>
+<td width="50%" align="center"><b>⑥ Python Agent 工具调用（ReAct）</b></td>
+<td width="50%" align="center"><b>⑦ Python span 级全链路追踪</b></td>
+</tr>
+<tr>
+<td align="center"><img src="docs/screenshots/07-python-agent.png" alt="Python Agent 工具调用" width="100%"></td>
+<td align="center"><img src="docs/screenshots/06-trace.png" alt="Python Trace 观测" width="100%"></td>
+</tr>
+</table>
+
+**⑥ Python Agent 工具调用（LangGraph ReAct）** — 聊天页右上角可切换 **Python Agent / Java RAG** 两条链路。切到 Python Agent 后，提问含订单号的问题，模型自主决定调用哪些业务工具；消息气泡内展开的**工具调用卡片**显示工具名、入参与真实返回结果，最终回答由模型基于工具返回值组织：
+
+```
+订单 10001 到哪了？帮我查一下退款进度
+```
+
+这条链路对应后端 `POST /py/agent/chat/stream`：**LangGraph ReAct 编排 → 工具运行时（超时/重试/熔断/并发限流）→ 业务工具服务（Java 侧只读接口）→ 回填上下文 → 生成回答**。
+
+**⑦ Python span 级全链路追踪（Trace 观测）** — 单次请求按 **根 span → 阶段 span → 工具子 span** 展开为树形，直接暴露耗时、Token 与召回章节：
+
+```text
+react_chat  2148.6ms                          ← 根 span：本次请求总耗时
+├─ context      0.1ms  budget=4096, historyKept=0
+└─ agent     2124.6ms  messageCount=5        ← LangGraph ReAct 编排
+   ├─ tool      36.5ms  queryOrderByOrderNo   ← 工具子 span
+   └─ tool      23.4ms  queryRefundByOrderNo
+```
+
+右上角四个指标卡是按 span 类型聚合的耗时画像，底部「慢 Span 排行」用于定位瓶颈到底在检索、上下文组装还是模型生成。这套观测由 `app/trace.py` 落库到 SQLite `trace_spans` 表，通过 `/py/ops/*` 暴露。
 
 <table>
 <tr>
@@ -125,6 +158,8 @@
 
 > 📁 截图文件位于 `docs/screenshots/`：
 > ```
+> 07-python-agent.png  # Python Agent 工具调用（ReAct 编排 + 业务工具）
+> 06-trace.png         # Python Trace 观测（span 调用链 + 慢 span 排行）
 > 01-chat.png          # 智能客服主界面
 > 02-rag.png           # RAG 知识库问答与引用来源
 > 03-tool-calling.png  # Tool Calling 工具调用过程
@@ -136,17 +171,81 @@
 
 ## 核心功能
 
-### 1. RAG 知识库问答
+> 分两层组织：先讲 **⭐ Python AI 应用主线**（Agent 编排 / 上下文工程 / Prompt 版本化 / 工具可靠性 / Trace 可观测 / RAG / MCP），
+> 再讲 **Java 业务与前端**（Tool Calling 后端 / 记忆 / SSE / 知识库管理 / 工单）。
+
+### ⭐ Python AI 应用主线
+
+#### 1. LangGraph ReAct Agent 编排（`app/workflow.py`）
+
+- 用 `create_react_agent` 组织 **检索 → 工具 → 生成** 的自主规划循环，模型自己决定调用哪些业务工具、调用几次
+- 工具调用经过 `app/tool_runtime.py` 可靠性层（超时 / 重试 / 熔断 / 限流），失败时降级为可读的字符串提示而不是抛异常
+- 与固定 RAG 管线（`app/agent.py`）并存：前者适合「查订单 / 查退款」这类需要工具的问题，后者适合「政策是什么」这类知识问答
+- 对外暴露 `POST /py/agent/chat`（同步）与 `POST /py/agent/chat/stream`（SSE）
+
+#### 2. 上下文工程与 Token 预算（`app/context.py`）
+
+模型上下文是有限预算。RAG 场景下「检索片段 + 多轮历史 + 系统提示」三者会互相挤占，超限会直接报错。
+
+`app/context.py` 把这件事做成了**可分配、可观测**的预算器：
+
+- `count_tokens(text)`：CJK / 拉丁混排启发式计数，不依赖 `tiktoken`（避免额外依赖与网络调用）
+- `compress_context(retrieved, budget_tokens)`：**按句**截断过长片段；预算不足时**整段丢弃**低相关度尾部片段，而不是从中间切断语义
+- `build_history(...)`：保留最近若干轮，超预算时从最旧的历史往回收，且强制保留最后一轮
+- `assemble(...)`：统一入口，三段预算分配，返回组装结果 + `ContextStats`（含压缩节省比例、丢弃片段数）
+
+已接入 `workflow.py` 的 ReAct 链路与 `agent.py` 的固定 RAG 管线。
+
+#### 3. Prompt 版本化与回归比对（`app/prompts.py`）
+
+Prompt 是代码，却极易被「顺手改一句」破坏。这里把 Prompt 当**带版本的代码资产**管：
+
+- `PromptRegistry`：不可变注册表，按 `(name, version)` 命名空间存放，自动计算 SHA256 哈希
+- `registry.diff(...)`：输出统一 diff + 增删行数，用于 code review 式评审 Prompt 改动
+- `eval_prompt_regression.py`：**多轮交错执行**（候选/基线轮换，避免后端状态漂移与 API 延迟偏差），
+  对忠实度 / 工具选型 / 拒答率 / 成功率 / 延迟取中位数，用**跨轮标准差**估计噪声带，超噪声带才判定 `IMPROVED` / `REGRESSED`
+
+#### 4. 工具执行可靠性（`app/tool_runtime.py`）
+
+Agent 调工具时工具可能卡住、失败、宕机。`ToolExecutor` 提供四层保护：
+**超时控制**（8s）、**指数退避重试**（2 次）、**熔断降级**（3 次失败开闸，30s 冷却半开）、**并发限流**（8）。
+
+两个关键实现细节：
+
+- **同步阻塞工具必须放自管线程池**。业务工具是阻塞式 MySQL 查询，`asyncio.wait_for` 无法中断它（实测 0.5s 超时实际跑了 3s）；
+  但**不能用 `asyncio.to_thread`**（它用 asyncio 默认线程池，事件循环关闭时会等池内线程结束，导致「超时后总耗时仍被拖长」）。
+- **失败必须返回字符串而不是抛异常**。模型需要看到「工具失败了，请转人工」才能正确处理；抛异常会崩掉整条 ReAct 链路。
+
+#### 5. span 级全链路 Trace（`app/trace.py`）
+
+`ops.db` 原先只有「每次请求一行」的粗粒度日志，无法回答「到底是检索慢还是模型慢」。
+
+`app/trace.py` 提供 **span 级别**追踪：单次请求按 **根 span → 阶段 span → 工具子 span** 展开为**嵌套树**
+（`react_chat → agent → tool → tool`），通过活跃执行栈自动串联父子关系，落库 `ops.db` 的 `trace_spans` 表
+（按 `trace_id` / `name` / `ts` 建索引）。
+
+对外提供 5 个运维接口：`/py/ops/trace/{trace_id}`（完整调用链）、`/py/ops/traces`（最近列表）、
+`/py/ops/slow-spans`（慢 span 排行）、`/py/ops/trace-stats`（按类型聚合的耗时画像）、`/py/ops/stats`（调用量/成功率/延迟分位/Token）。
+
+前端「Trace 观测」页直接消费这些接口，把 span 树画成可视化调用链。
+
+#### 6. RAG 检索与知识运营
 
 售后政策 Markdown 文档按 `##` 标题切分成段落 → 阿里云百炼 `text-embedding-v4` 生成 1024 维向量 → 存入 PostgreSQL + pgvector。
 
-提问时先做向量相似度检索，把召回的条文拼进 system prompt，LLM **只依据这些条文**作答，并返回引用来源。
-
-- 生产配置：`topK=5`、`similarityThreshold=0.0`（详见 [RAG 评测](#rag-评测)）
+- 四策略横向对比（dense / bm25 / hybrid / rerank），**rerank 策略胜出**：Hit@1 89.3%、NDCG@5 0.9048
 - 检索异常（向量库 / Embedding 不可用）时**自动降级**为无知识回答，接口不会 500
-- 命中 / 未命中走**两套不同的 system prompt**：未命中时改用"共情 + 说明现状 + 不编造 + 建议转人工"的兜底话术
+- 命中 / 未命中走**两套不同的 system prompt**：未命中时改用「共情 + 说明现状 + 不编造 + 建议转人工」的兜底话术
+- 知识运营接口：切分预览（只切不入库）、文本入库、文件上传、检索测试
 
-### 2. Spring AI Tool Calling
+#### 7. MCP 对外接入（`app/mcp_server.py`）
+
+`python -m app.mcp_server`（stdio 协议）暴露订单 / 退款 / 工单 / 保修 4 个查询工具，
+可被 Dify、Claude Desktop 等任意 MCP 客户端直接接入，把这套售后能力复用到别的应用里。
+
+### Java 业务与前端
+
+#### 8. Spring AI Tool Calling（工具后端实现）
 
 三个 `@Tool` 方法把业务查询包装成 AI 可自动调用的工具，**只读，不写任何业务数据**：
 
@@ -158,9 +257,9 @@
 
 模型判断问题涉及具体订单号时会自动调用这些工具。工具返回的是**自然语言文本**（而非 JSON），对 LLM 更友好。
 
-> 🔒 **安全设计**：项目暂无登录认证体系，工具按"客服后台演示"定位实现——知道订单号即可查询。缓解措施是返回数据中**刻意裁剪掉 `userId`**，减少信息泄露面。生产环境应接入认证后校验 `order.userId == 当前用户 ID`。
+> 🔒 **安全设计**：项目暂无登录认证体系，工具按「客服后台演示」定位实现——知道订单号即可查询。缓解措施是返回数据中**刻意裁剪掉 `userId`**，减少信息泄露面。生产环境应接入认证后校验 `order.userId == 当前用户 ID`。
 
-### 3. Redis 会话记忆
+#### 9. Redis 会话记忆
 
 自定义 `RedisChatMemoryRepository` 实现 Spring AI 的 `ChatMemoryRepository`：
 
@@ -169,81 +268,64 @@
 - **关键设计：只存纯文本问答对**。丢弃 `SystemMessage`（每轮重新注入，存了会重复膨胀）和**工具调用消息**（带 `toolCalls` 的 assistant / `ToolResponseMessage` 必须成对出现，被窗口裁剪拆散后 DeepSeek 会直接报 400）
 - 两个 AI 接口（`/ai/chat` 与 `/ai/knowledge/chat`）**共用同一个 `ChatMemory` Bean**，同一 `sessionId` 下跨接口也能接上上下文
 
-### 4. SSE 流式响应
+#### 10. SSE 流式响应
 
-两个流式接口用 `SseEmitter`（300 秒超时）逐 chunk 推送，前端用 `fetch` + `ReadableStream` 手动解析 SSE：
+流式接口用 `SseEmitter`（300 秒超时）逐 chunk 推送，前端用 `fetch` + `ReadableStream` 手动解析 SSE：
 
 | 接口 | 事件类型 |
 |---|---|
 | `POST /ai/chat/stream` | `content`（增量文本）、`done`、`error` |
 | `POST /ai/knowledge/chat/stream` | `reference`（是否命中知识 + 引用来源）、`tool`（`stage=start/result`，工具名 / 入参 / 结果）、`content`、`done`、`error` |
+| `POST /py/agent/chat/stream` | `tool`（`stage=start/result`）、`content`、`done` |
+
+> ⚠️ **帧分隔符差异（实测踩坑）**：Java `SseEmitter` 用 `\n\n`，Python `EventSourceResponse` 用 `\r\n\r\n`。
+> 前端解析器若只按 `\n\n` 切分，Python 流会被当成**一个巨型事件**，页面永远收不到内容。
+> 现在前端统一先把 `\r\n` 归一为 `\n` 再切分。
 
 前端 Vite 代理对 `text/event-stream` 做了 **禁缓冲**处理（`cache-control: no-cache, no-transform` + `x-accel-buffering: no`），保证逐字刷新不被代理攒包。
 
-### 5. 知识库管理
+#### 11. 知识库管理
 
 - **上传** `.md` / `.txt` 文件（≤10MB）→ 按 `##` 标题切段 → 批量 Embedding 入库，`metadata.source` 记为原始文件名
 - **文件列表**：直接查 pgvector 的 `vector_store` 表，按 `metadata->>'source'` 分组统计段落数
 - **检索测试**：输入问题直接看相似度分数与命中段落
 
-### 6. 售后工单管理
+#### 12. 售后工单管理
 
 工单列表 + 统计概览（总数 / 待处理 / 处理中 / 已完成）+ 新建工单抽屉。创建时状态留空，后端 `TicketServiceImpl.create` 自动置为「待处理」，数据库层另有 `DEFAULT '待处理'` 兜底。
 
-### 7. 业务数据接口
+#### 13. 业务数据接口
 
 订单 / 退款 / 工单的查询与写入接口，统一返回 `{ code, message, data }` 结构。
-
-### 8. Python AI 应用主线（FastAPI 8001）
-
-#### 8.1 上下文工程与 Token 预算（`app/context.py`）
-
-模型上下文是有限预算。RAG 场景下"检索片段 + 多轮历史 + 系统提示"三者会互相挤占，超限会直接报错。
-
-`app/context.py` 把这件事做成了**可分配、可观测**的预算器：
-
-- `count_tokens(text)`：CJK / 拉丁混排启发式计数，不依赖 `tiktoken`（避免额外依赖与网络调用）
-- `compress_context(retrieved, budget_tokens)`：**按句**截断过长片段；预算不足时**整段丢弃**低相关度尾部片段，而不是从中间切断语义
-- `build_history(...)`：保留最近若干轮，超预算时从最旧的历史往回收，且强制保留最后一轮
-- `assemble(...)`：统一入口，三段预算分配，返回组装结果 + `ContextStats`（含压缩节省比例、丢弃片段数）
-
-已接入 `workflow.py` 的 ReAct 链路与 `agent.py` 的固定 RAG 管线。
-
-#### 8.2 Prompt 版本化与回归比对（`app/prompts.py`）
-
-Prompt 是代码，却极易被"顺手改一句"破坏。这里把 Prompt 当**带版本的代码资产**管：
-
-- `PromptRegistry`：不可变注册表，按 `(name, version)` 命名空间存放，自动计算 SHA256 哈希
-- `registry.diff(...)`：输出统一 diff + 增删行数，用于 code review 式评审 Prompt 改动
-- `eval_prompt_regression.py`：**多轮交错执行**（候选/基线轮换，避免后端状态漂移与 API 延迟偏差），
-  对忠实度 / 工具选型 / 拒答率 / 成功率 / 延迟取中位数，用**跨轮标准差**估计噪声带，超噪声带才判定 `IMPROVED` / `REGRESSED`
-
-#### 8.3 工具执行可靠性（`app/tool_runtime.py`）
-
-Agent 调工具时工具可能卡住、失败、宕机。`ToolExecutor` 提供四层保护：
-**超时控制**（8s）、**指数退避重试**（2 次）、**熔断降级**（3 次失败开闸，30s 冷却半开）、**并发限流**（8）。
-
-两个关键实现细节：
-
-- **同步阻塞工具必须放自管线程池**。业务工具是阻塞式 MySQL 查询，`asyncio.wait_for` 无法中断它（实测 0.5s 超时实际跑了 3s）；
-  但**不能用 `asyncio.to_thread`**（它用 asyncio 默认线程池，事件循环关闭时会等池内线程结束，导致"超时后总耗时仍被拖长"）。
-- **失败必须返回字符串而不是抛异常**。模型需要看到"工具失败了，请转人工"才能正确处理；抛异常会崩掉整条 ReAct 链路。
-
-### 9. 全链路 Trace 追踪（`app/trace.py`）
-
-`ops.db` 原先只有"每次请求一行"的粗粒度日志，无法回答"到底是检索慢还是模型慢"。
-
-`app/trace.py` 提供 **span 级别**追踪：单次请求按 `agent → retrieval / context / tool → llm` 展开为**嵌套 span**，
-通过活跃执行栈自动串联父子关系，落库 `ops.db` 的 `trace_spans` 表（按 `trace_id` / `name` / `ts` 建索引）。
-
-对外提供 4 个运维接口：`/py/ops/trace/{trace_id}`（完整调用链）、`/py/ops/traces`（最近列表）、
-`/py/ops/slow-spans`（慢 span 排行）、`/py/ops/trace-stats`（按类型聚合的耗时画像）。
 
 ---
 
 ## 技术栈
 
-### 后端
+### ⭐ Python AI 应用栈（主线）
+
+> 这部分是本项目的**核心**：Agent 编排、RAG 检索与知识运营、上下文工程、Prompt 版本化回归、span 级可观测、MCP 对外接入，全部在 Python 侧实现。
+
+| 类别 | 技术 | 说明 |
+|---|---|---|
+| 语言 | Python | 3.10+ |
+| Web 框架 | FastAPI + uvicorn | 端口 8001，与 Java 版共用同一批中间件与 Key |
+| Agent 编排 | LangChain 0.3+ / LangGraph 0.2+ | 固定 RAG 管线 + `create_react_agent` 自主规划（ReAct） |
+| 上下文工程 | 自研 Token 预算器（`app/context.py`） | 系统提示 / 会话历史 / 检索片段三段预算分配，句级压缩 + 整段丢弃 |
+| Prompt 工程 | 版本化注册表（`app/prompts.py`） | SHA256 版本哈希 + diff 评审 + A/B 回归比对，v2 已验证提升为默认 |
+| RAG 检索 | 自研混合检索 + Rerank | 向量召回 + 章节级重排，命中即答案锚点 |
+| 切分 | LangChain Text Splitters | 按 `##` 粗切、超长按 512/50 细切入库，支持切分预览 |
+| 工具运行时 | 自研（`app/tool_runtime.py`） | 超时中断 + 指数退避重试 + 熔断器 + 并发限流 + 降级 |
+| 协议 | MCP（FastMCP / MCPServer 2.x，stdio） | 4 个查询工具对外暴露，可供 Dify / Claude Desktop 接入 |
+| 评估 | 自研检索评测 + LLM-as-Judge 生成评估 | 75 条检索标注 + 114 条 Agent 轨迹；Hit@K / MRR / **NDCG / MAP** / 忠实度 / 工具选型 / 无效调用率 |
+| 可观测 | SQLite（`ops.db`）+ span 级 Trace | 延迟 p50/p95、Token、工具数、成功率 + **完整 span 调用链**（检索/上下文/工具/模型） |
+| 向量库 / 记忆 | PostgreSQL + pgvector / Redis | 与 Java 版共用同一套基础设施 |
+
+> 📁 Python 服务详情见 [`python-service/README.md`](python-service/README.md)。
+
+### Java 业务栈（支撑）
+
+> 这部分是**支撑**：业务 CRUD、订单/退款/工单数据模型、只读工具服务化、MCP 工具后端实现。
 
 | 类别 | 技术 | 版本 |
 |---|---|---|
@@ -258,21 +340,6 @@ Agent 调工具时工具可能卡住、失败、宕机。`ToolExecutor` 提供�
 | Embedding | 阿里云百炼 `text-embedding-v4`（1024 维） | — |
 | 构建 | Maven | 3.9+ |
 
-### Python 双栈（AI 应用能力扩展）
-
-| 类别 | 技术 | 说明 |
-|---|---|---|
-| 框架 | FastAPI + uvicorn | 端口 8001，与 Java 版共用同一批中间件与 Key |
-| 编排 | LangChain 0.3+ / LangGraph 0.2+ | 固定 RAG 管线 + `create_react_agent` 自主规划 |
-| 上下文工程 | 自研 Token 预算器（`app/context.py`） | 系统提示 / 会话历史 / 检索片段三段预算分配，句级压缩 + 整段丢弃 |
-| Prompt 工程 | 版本化注册表（`app/prompts.py`） | SHA256 版本哈希 + diff 评审 + A/B 回归比对，v2 已验证提升为默认 |
-| 切分 | LangChain Text Splitters | 按 `##` 粗切、超长按 512/50 细切入库，支持切分预览 |
-| 协议 | MCP（FastMCP / MCPServer 2.x，stdio） | 4 个查询工具对外暴露，可供 Dify / Claude Desktop 接入 |
-| 评估 | 自研检索评测 + LLM-as-Judge 生成评估 | 75 条检索标注 + 114 条 Agent 轨迹；Hit@K / MRR / **NDCG / MAP** / 忠实度 / 工具选型 / 无效调用率 |
-| 可观测 | SQLite（`ops.db`）+ span 级 Trace | 延迟 p50/p95、Token、工具数、成功率 + **完整 span 调用链**（检索/上下文/工具/模型） |
-
-> 📁 Python 服务详情见 [`python-service/README.md`](python-service/README.md)。
-
 ### 核心可量化指标（实测，非估算）
 
 | 能力 | 指标 | 实测值 |
@@ -281,7 +348,7 @@ Agent 调工具时工具可能卡住、失败、宕机。`ToolExecutor` 提供�
 | Agent 轨迹 | pass@1 / pass@3 / 引用忠实度 | **89.5% / 96.5% / 96.5%**（114 条用例，成功率 100%） |
 | 工具调用 | 无效调用率 / 浪费调用率 / 降级调用 | **0.0% / 0.0% / 0** |
 | Prompt 回归 | 拒答率提升（超噪声带） | **+1.78pt**（噪声带 0.84pt，判定 IMPROVED） |
-| 离线单测 | 全绿 | **151 个**，零 API 消耗 |
+| 离线单测 | 全绿 | **154 个**，零 API 消耗 |
 
 ### 前端
 
@@ -296,47 +363,63 @@ Agent 调工具时工具可能卡住、失败、宕机。`ToolExecutor` 提供�
 
 ## 系统架构
 
+> 下图中 **Python 双栈是 AI 应用主链路**（橙色框），Java 是业务与工具服务支撑（灰色框）。
+> 浏览器可以在 **Python Agent** 与 **Java RAG** 两条链路间切换。
+
 ```
-┌──────────────────────────────────────────────────────────────────────┐
-│                        浏览器 (Vue 3 + Element Plus)                    │
-│   智能客服 ChatView  │  知识库管理 KnowledgeView  │  售后工单 TicketView    │
-└───────────────┬──────────────────────────────┬───────────────────────┘
-                │ /ai/*  (SSE)                 │ /api/*
-                └──────────────┬───────────────┘
-                               │ Vite 代理 (5173 → 8080)
-┌──────────────────────────────┴───────────────────────────────────────┐
-│                     Spring Boot 3.4.1  (端口 8080)                      │
-│                                                                          │
-│  ┌────────────────┐  ┌──────────────────┐  ┌────────────────────────┐  │
-│  │ AiChatController│ │AiKnowledgeController│ │ Order/Refund/Ticket   │  │
-│  │  /ai/chat      │  │ /ai/knowledge/*   │ │      Controller        │  │
-│  │  /ai/chat/stream│ │ /chat  /chat/stream│ │      /api/*            │  │
-│  └───────┬────────┘  └────────┬──────────┘  └───────────┬────────────┘  │
-│          │                    │                         │               │
-│  ┌───────▼────────────────────▼─────────────────────────▼────────────┐  │
-│  │  ChatClient (Spring AI)                                          │  │
-│  │   └─ RetryableChatModel   流式网络异常重试兜底                      │  │
-│  │   └─ MessageChatMemoryAdvisor  多轮记忆                            │  │
-│  └───────┬──────────────┬──────────────────────────┬─────────────────┘  │
-│          │              │                          │                    │
-│  ┌───────▼──────┐ ┌─────▼──────────┐  ┌────────────▼──────────────┐  │
-│  │ DeepSeek API │ │  PgVectorStore  │  │  AfterSaleQueryTools      │  │
-│  │  (deepseek-  │ │  → 向量相似度    │  │  @Tool × 3（只读）        │  │
-│  │   chat)      │ │    检索          │  │  ↓                        │  │
-│  └──────────────┘ └────┬───────────┘  │  OrderService             │  │
-│                         │              │  RefundService             │  │
-│  ┌──────────────┐ ┌────▼───────────┐  │  TicketService            │  │
-│  │ 百炼 Embedding│ │  PostgreSQL    │  └────────────┬──────────────┘  │
-│  │ text-embedding│ │  + pgvector    │               │                 │
-│  │     -v4       │ │  (库: knowledge)│               ▼                 │
-│  └──────────────┘ └────────────────┘        ┌────────────────┐        │
-│                                               │     MySQL      │        │
-│  ┌──────────────┐                            │  (库: smart_    │        │
-│  │    Redis     │                            │    support)    │        │
-│  │ chat:memory: │                            └────────────────┘        │
-│  │  {sessionId} │                                                      │
-│  └──────────────┘                                                      │
-└──────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────┐
+│                      浏览器 (Vue 3 + Element Plus)                         │
+│  智能客服 ChatView (链路切换: Python Agent / Java RAG)                     │
+│  知识库管理 KnowledgeView   │   Trace 观测 TraceView   │   售后工单 TicketView │
+└───────┬──────────────────────┴────────────┬─────────────┴──────────────────┘
+        │ /py/* (SSE + REST)                │ /ai/* (SSE)  │ /api/*
+        └───────────────────┬────────────────┴─────────────┘
+                            │ Vite 代理 (5173 → 8001 / 8080)
+┌───────────────────────────┴──────────────────────────────────────────────────┐
+│        ⭐ Python AI 应用栈 · FastAPI (端口 8001) — AI 主链路                 │
+│                                                                            │
+│  ┌──────────────────────┐  ┌──────────────────┐  ┌──────────────────────┐  │
+│  │  /py/agent/chat      │  │ /py/knowledge/*  │  │   /py/ops/*          │  │
+│  │  (LangGraph ReAct)   │  │  (固定 RAG 管线)  │  │  Trace / 慢 span /    │  │
+│  │                      │  │                  │  │  耗时画像 / 调用统计   │  │
+│  └───────────┬──────────┘  └────────┬─────────┘  └──────────┬───────────┘  │
+│              │                        │                       │              │
+│  ┌───────────▼────────────────────────▼───────────────────────▼───────────┐  │
+│  │  app/workflow.py  编排   │  app/agent.py   │  app/context.py 预算      │  │
+│  │  LangGraph StateGraph    │  固定 RAG + tool │  三段 Token 预算分配      │  │
+│  │  ├ 检索 → 工具 → 生成    │  loop（≤5 轮）  │  句级压缩 + 整段丢弃      │  │
+│  │  └ app/prompts.py        │                 │                           │  │
+│  │     Prompt 版本注册表    │                 │  app/prompts.py           │  │
+│  │     SHA256 + diff + 回归 │                 │  app/trace.py  span 树     │  │
+│  └───────────┬──────────────────────────────┬────────────────────────────┘  │
+│              │                              │                               │
+│  ┌───────────▼──────────────┐  ┌────────────▼───────────┐  ┌────────────┐  │
+│  │ app/tool_runtime.py      │  │  app/retrieval.py      │  │  app/tools │  │
+│  │ 超时中断 · 指数退避重试   │  │  向量召回 + 章节重排    │  │  工具协议  │  │
+│  │ 熔断器 CLOSED/OPEN/HALF  │  │  (pgvector)            │  │  + 分派    │  │
+│  └───────────┬──────────────┘  └────────────┬───────────┘  └─────┬──────┘  │
+└──────────────┼──────────────────────────────┼────────────────────┼─────────┘
+               │  只读工具调用 (HTTP)          │                    │
+┌──────────────▼──────────────────────────────────────────────┐  │
+│        Java 业务栈 · Spring Boot 3.4.1 (端口 8080) — 支撑      │  │
+│  ┌────────────────────────┐  ┌─────────────────────────────┐ │  │
+│  │ AfterSaleQueryTools     │  │ Order / Refund / Ticket    │ │  │
+│  │ @Tool × 3（只读）        │  │ Controller + MyBatis-Plus  │ │  │
+│  │ → OrderService          │  │ → 业务表 CRUD              │ │  │
+│  │ → RefundService         │  └──────────────┬──────────────┘ │  │
+│  │ → TicketService         │                 ▼                │  │
+│  └────────────┬───────────┘        ┌────────────────┐        │  │
+│               ▼                    │     MySQL      │        │  │
+│        ┌─────────────┐             │  (smart_support)│       │  │
+│        │    MySQL    │             └────────────────┘        │  │
+│        └─────────────┘                                      │  │
+│                                                             ▼  │
+│  ┌──────────────┐   ┌────────────────┐   ┌──────────────────┐   │
+│  │    Redis     │   │  PostgreSQL    │   │  DeepSeek Chat   │   │
+│  │ chat:memory: │   │  + pgvector    │   │  百炼 Embedding  │   │
+│  │  {sessionId} │   │  (knowledge)   │   │  (text-embedding-v4) │
+│  └──────────────┘   └────────────────┘   └──────────────────┘   │
+└──────────────────────────────────────────────────────────────────┘
 ```
 
 ### 关键设计说明
@@ -368,7 +451,38 @@ JDK HttpClient 复用被对端关闭的连接会收到 RST（表现为 `Connecti
 ├── .gitignore                      # 统一忽略规则
 ├── 售后政策演示数据.md              # RAG 知识库源文档（模拟政策）
 │
-├── backend/                        # ===== 后端 =====
+├── python-service/                 # ===== ⭐ Python AI 应用栈（FastAPI，端口 8001）=====
+│   ├── README.md                   # Python 服务说明（含接口/评测/可观测/MCP）
+│   ├── requirements.txt
+│   ├── app/                        # FastAPI 应用
+│   │   ├── main.py                 # /py/* 接口（RAG/Agent/知识运营/ops）
+│   │   ├── workflow.py             # ★ LangGraph ReAct Agent 编排
+│   │   ├── agent.py                # 固定 RAG 管线（与 Java 同语义）
+│   │   ├── context.py              # ★ 上下文工程：Token 预算分配 + 片段压缩
+│   │   ├── prompts.py              # ★ Prompt 版本注册表（哈希 + diff + 生效版本）
+│   │   ├── trace.py                # ★ span 级全链路追踪（SQLite trace_spans）
+│   │   ├── tool_runtime.py         # ★ 工具可靠性层（超时/重试/熔断/限流）
+│   │   ├── ingest.py               # ## 粗切 + 512/50 细切入库
+│   │   ├── tools.py                # 订单/退款/工单/保修 4 工具
+│   │   ├── vectorstore.py          # pgvector 检索（topK/threshold）
+│   │   ├── memory.py               # Redis 会话记忆（与 Java 共用 key）
+│   │   ├── metrics.py              # SQLite 可观测落库
+│   │   └── mcp_server.py           # MCP stdio 服务（4 工具对外）
+│   └── eval/                       # 评测与离线单测（154 个，全绿）
+│       ├── eval_retrieval.py       # 检索策略横向对比（75 条，零 LLM 消耗）
+│       ├── eval_agent.py           # Agent 轨迹级评测（114 条）
+│       ├── eval_prompt_regression.py # ★ Prompt A/B 回归（多轮交错 + 噪声带）
+│       ├── metrics_ndcg.py         # ★ NDCG / MAP（分级相关性）
+│       ├── eval_answer.py          # 端到端生成评估（LLM-as-Judge）
+│       ├── test_context.py         # 上下文预算器单测（31）
+│       ├── test_prompt_version.py  # Prompt 版本注册表单测（22）
+│       ├── test_ndcg.py            # NDCG/MAP 单测（41）
+│       ├── test_trace.py           # Trace span 单测（26）
+│       ├── test_tool_runtime.py    # 工具可靠性单测（13）
+│       ├── test_eval_agent.py      # 轨迹解析单测（15）
+│       └── test_rerank_authority.py # 重排权威度单测（6）
+│
+├── backend/                        # ===== Java 业务栈（Spring Boot，端口 8080）=====
 │   ├── pom.xml                     # Maven 依赖与版本管理
 │   ├── docker-compose.yml          # Redis + PostgreSQL/pgvector 编排
 │   ├── eval/                       # RAG 评测
@@ -404,47 +518,18 @@ JDK HttpClient 复用被对端关闭的连接会收到 RST（表现为 `Connecti
 │
 ├── frontend/                       # ===== 前端 =====
 │   ├── package.json
-│   ├── vite.config.js              # 代理 /ai 与 /api → 8080，SSE 禁缓冲
+│   ├── vite.config.js              # 代理 /py → 8001，/ai 与 /api → 8080，SSE 禁缓冲
 │   └── src/
 │       ├── main.js  App.vue
-│       ├── api/                    # axios 封装 + chat/ticket/knowledge
+│       ├── api/                    # axios 封装 + chat/ticket/knowledge/trace
 │       ├── components/             # 17 个通用组件
-│       ├── views/                  # ChatView / KnowledgeView / TicketView
+│       ├── views/                  # ChatView / KnowledgeView / TraceView / TicketView
 │       └── styles/                 # theme / chat / index
 │
-├── python-service/                 # ===== Python 双栈（FastAPI，端口 8001）=====
-│   ├── README.md                   # Python 服务说明（含接口/评测/可观测/MCP）
-│   ├── requirements.txt
-│   ├── app/                        # FastAPI 应用
-│   │   ├── main.py                 # /py/* 接口（RAG/Agent/知识运营/ops）
-│   │   ├── agent.py                # 固定 RAG 管线（与 Java 同语义）
-│   │   ├── workflow.py             # LangGraph ReAct Agent
-│   │   ├── context.py              # ★ 上下文工程：Token 预算分配 + 片段压缩
-│   │   ├── prompts.py              # ★ Prompt 版本注册表（哈希 + diff + 生效版本）
-│   │   ├── trace.py                # ★ span 级全链路追踪（SQLite trace_spans）
-│   │   ├── ingest.py               # ## 粗切 + 512/50 细切入库
-│   │   ├── tools.py                # 订单/退款/工单/保修 4 工具
-│   │   ├── tool_runtime.py         # 工具可靠性层（超时/重试/熔断/限流）
-│   │   ├── vectorstore.py          # pgvector 检索（topK/threshold）
-│   │   ├── memory.py               # Redis 会话记忆（与 Java 共用 key）
-│   │   ├── metrics.py              # SQLite 可观测落库
-│   │   └── mcp_server.py           # MCP stdio 服务（4 工具对外）
-│   └── eval/                       # 评测与离线单测
-│       ├── eval_retrieval.py       # 检索策略横向对比（75 条，零 LLM 消耗）
-│       ├── eval_agent.py           # Agent 轨迹级评测（114 条）
-│       ├── eval_prompt_regression.py # ★ Prompt A/B 回归（多轮交错 + 噪声带）
-│       ├── metrics_ndcg.py         # ★ NDCG / MAP（分级相关性）
-│       ├── eval_answer.py          # 端到端生成评估（LLM-as-Judge）
-│       ├── test_context.py         # 上下文预算器单测（31）
-│       ├── test_prompt_version.py  # Prompt 版本注册表单测（22）
-│       ├── test_ndcg.py            # NDCG/MAP 单测（41）
-│       ├── test_trace.py           # Trace span 单测（23）
-│       ├── test_tool_runtime.py    # 工具可靠性单测（13）
-│       ├── test_eval_agent.py      # 轨迹解析单测（15）
-│       └── test_rerank_authority.py # 重排权威度单测（6）
-│
 └── docs/
-    └── screenshots/                # ★ README 截图（需自行放置）
+    └── screenshots/                # ★ README 截图
+        ├── 07-python-agent.png     # Python Agent 工具调用（ReAct）
+        ├── 06-trace.png            # Python Trace 观测（span 调用链）
         ├── 01-chat.png
         ├── 02-rag.png
         ├── 03-tool-calling.png
@@ -458,6 +543,7 @@ JDK HttpClient 复用被对端关闭的连接会收到 RST（表现为 `Connecti
 
 | 依赖 | 版本要求 | 说明 |
 |---|---|---|
+| **Python** | **3.10+** | ⭐ Python AI 应用栈（FastAPI / LangChain / LangGraph）最低要求 |
 | **JDK** | **17+** | Spring Boot 3.x 最低要求 |
 | **Maven** | 3.6+ | 或使用项目内 `.tools/apache-maven-3.9.9` |
 | **Node.js** | 18+ | Vite 5 要求 |
@@ -675,30 +761,9 @@ curl -X POST http://localhost:8080/ai/knowledge/import-policy
 
 > `import-policy` 默认读取 `../售后政策演示数据.md`（相对 `backend/` 运行目录，即项目根目录下的政策文档）。可用配置项 `smartsupport.knowledge.policy-file` 覆盖路径。
 
-### 步骤 5 — 启动前端
+### 步骤 5 — 启动 Python AI 应用栈（FastAPI，端口 8001）
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-前端监听 **5173**，访问 http://localhost:5173 。
-
-Vite 已配置代理：`/ai` 与 `/api` 转发到 `http://localhost:8080`，开发环境不产生跨域问题。SSE 响应做了禁缓冲处理，可正常逐字刷新。
-
-### 步骤 6 — 运行单元测试
-
-```bash
-cd backend
-mvn test
-```
-
-`RetryableChatModelTest` 覆盖流式重试逻辑（JUnit 5 + AssertJ）。
-
-### 步骤 7 — 启动 Python 双栈服务（FastAPI，端口 8001，可选但推荐）
-
-Python 版与 Java 版共用同一批中间件与 Key（MySQL / Redis / pgvector / DeepSeek / 百炼），提供 ReAct Agent、知识运营、MCP 与生成评估能力。
+Python 服务与 Java 版**共用同一批中间件与 Key**（MySQL / Redis / pgvector / DeepSeek / 百炼），提供 ReAct Agent、上下文预算、Prompt 版本化回归、span 级可观测、知识运营、MCP 与生成评估能力。
 
 ```powershell
 cd python-service
@@ -714,11 +779,65 @@ python -m uvicorn app.main:app --port 8001
 
 验证：`curl http://localhost:8001/health`，详情见 [`python-service/README.md`](python-service/README.md)。
 
+### 步骤 6 — 启动前端
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+前端监听 **5173**，访问 http://localhost:5173 。
+
+Vite 已配置代理：`/py` 转发到 `http://localhost:8001`（Python 双栈），`/ai` 与 `/api` 转发到 `http://localhost:8080`（Java），开发环境不产生跨域问题。SSE 响应做了禁缓冲处理，可正常逐字刷新。
+
+> 💡 聊天页右上角可在 **Python Agent / Java RAG** 两条链路间切换；「Trace 观测」页直接读 Python 侧的 span 调用链。
+
+### 步骤 7 — 运行单元测试
+
+```bash
+# Python AI 应用栈（154 个离线单测，零 API 消耗）
+cd python-service
+python eval/test_context.py
+python eval/test_prompt_version.py
+python eval/test_ndcg.py
+python eval/test_trace.py
+python eval/test_tool_runtime.py
+python eval/test_eval_agent.py
+python eval/test_rerank_authority.py
+
+# Java 业务栈
+cd backend
+mvn test
+```
+
+Java 侧 `RetryableChatModelTest` 覆盖流式重试逻辑（JUnit 5 + AssertJ）。
+
 ---
 
 ## API 一览
 
 所有接口统一返回 `{ code, message, data }`，`code=200` 表示成功。
+
+### ⭐ Python AI 应用栈（FastAPI 8001，`/py/*`）
+
+> AI 应用主链路接口。`/py/agent/*` 是 LangGraph ReAct Agent，`/py/ops/*` 是 span 级可观测。
+
+| 方法 | 路径 | 说明 |
+|---|---|---|
+| GET | `/health` | Python 服务存活检查 |
+| POST | `/py/agent/chat` / `/py/agent/chat/stream` | ⭐ LangGraph ReAct Agent（自主规划多工具调用，SSE 含 tool/content/done） |
+| POST | `/py/knowledge/chat` / `/py/knowledge/chat/stream` | 固定 RAG 管线（与 Java 同语义，SSE 含 reference/tool/content/done） |
+| GET | `/py/knowledge/search?query=&topK=` | 向量检索测试 |
+| POST | `/py/knowledge/preview-split` | 只切分不入库，预览 chunk 效果 |
+| POST | `/py/knowledge/import-text` | 文本切分→embedding→pgvector 入库 |
+| POST | `/py/knowledge/upload` | 上传 md/txt 并入库（multipart，字段名 `file`） |
+| GET | `/py/ops/stats` | 调用量/成功率/延迟 p50/p95/Token/工具均值/分链路统计 |
+| GET | `/py/ops/recent?limit=` | 最近调用明细 |
+| GET | `/py/ops/trace/{trace_id}` | 单次请求的完整 span 调用链（父子关系 + 各段耗时） |
+| GET | `/py/ops/traces?limit=` | 最近 trace 列表 |
+| GET | `/py/ops/slow-spans?thresholdMs=` | 慢 span 排行（性能瓶颈定位） |
+| GET | `/py/ops/trace-stats` | 按 span 类型聚合的耗时画像 |
 
 ### 健康检查
 
@@ -727,7 +846,7 @@ python -m uvicorn app.main:app --port 8001
 | GET | `/health` | 应用存活检查 |
 | GET | `/db-check` | MySQL 连通性检查（实际执行 SQL） |
 
-### AI 对话
+### AI 对话（Java）
 
 | 方法 | 路径 | 说明 |
 |---|---|---|
@@ -736,7 +855,7 @@ python -m uvicorn app.main:app --port 8001
 
 请求体：`{"message": "你好", "sessionId": "可选，续聊时传上次返回的 sessionId"}`
 
-### AI 知识库
+### AI 知识库（Java）
 
 | 方法 | 路径 | 说明 |
 |---|---|---|
@@ -762,31 +881,13 @@ python -m uvicorn app.main:app --port 8001
 | GET | `/api/ticket/{orderNo}` | 工单详情 |
 | POST | `/api/ticket` | 创建工单（status 留空 → 「待处理」） |
 
-### RAG 评测
+### RAG 评测（Java）
 
 | 方法 | 路径 | 说明 |
 |---|---|---|
 | GET | `/eval/rag/knowledge-base` | 知识库信息 |
 | GET | `/eval/rag/dataset` | 评测用例集 |
 | POST | `/eval/rag/run?topKs=&thresholds=` | 批量评测（**只读**，仅对 `vector_store` 做 SELECT） |
-
-### Python 双栈（FastAPI 8001，`/py/*`）
-
-| 方法 | 路径 | 说明 |
-|---|---|---|
-| GET | `/health` | Python 服务存活检查 |
-| GET | `/py/knowledge/search?query=&topK=` | 向量检索测试 |
-| POST | `/py/knowledge/chat` / `/py/knowledge/chat/stream` | 固定 RAG 管线（与 Java 同语义，SSE 含 reference/tool/content/done） |
-| POST | `/py/agent/chat` / `/py/agent/chat/stream` | LangGraph ReAct Agent（自主规划多工具调用） |
-| POST | `/py/knowledge/preview-split` | 只切分不入库，预览 chunk 效果 |
-| POST | `/py/knowledge/import-text` | 文本切分→embedding→pgvector 入库 |
-| POST | `/py/knowledge/upload` | 上传 md/txt 并入库（multipart，字段名 `file`） |
-| GET | `/py/ops/stats` | 调用量/成功率/延迟 p50/p95/Token/工具均值/分链路统计 |
-| GET | `/py/ops/recent?limit=` | 最近调用明细 |
-| GET | `/py/ops/trace/{trace_id}` | 单次请求的完整 span 调用链（父子关系 + 各段耗时） |
-| GET | `/py/ops/traces?limit=` | 最近 trace 列表 |
-| GET | `/py/ops/slow-spans?thresholdMs=` | 慢 span 排行（性能瓶颈定位） |
-| GET | `/py/ops/trace-stats` | 按 span 类型聚合的耗时画像 |
 
 ---
 
@@ -861,9 +962,37 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 
 ---
 
-## RAG 评测
+## 评测体系
 
-项目内置了一套 RAG 检索评测工具（`backend/eval/`），评测集共 **33 条**用例 = **29 条可答用例** + **4 条越界探针**。
+项目的评测分两层：**Python AI 应用栈**是主力（检索质量 + Agent 轨迹 + Prompt 回归 + 单测），**Java 业务栈**保留一套基础检索评测做交叉验证。
+
+### ⭐ Python AI 应用栈评测（`python-service/eval/`）
+
+| 评测 | 用例规模 | 关键结果 |
+|---|---|---|
+| **检索评测**（`eval_retrieval.py`） | 75 条标注 + 15 条越界 | Rerank 策略 **Hit@1 89.3%、Hit@5 100%、MRR 0.9400、NDCG@5 0.9048**；四策略横向对比 dense / bm25 / hybrid / rerank |
+| **Agent 轨迹评测**（`eval_agent.py`） | 114 条 = 政策63 + 工具24 + 口语8 + 越界19 | **pass@1 89.5%、pass@3 96.5%、引用忠实度 96.5%**、执行成功率 100%、**无效调用率 0.0%、浪费调用率 0.0%、降级调用 0**、平均步数 0.87 |
+| **Prompt 回归比对**（`eval_prompt_regression.py`） | 84 条 × 2 轮 × 2 版本交错执行 | `rag_system:v1` vs `v2`：忠实度 97.0% → 97.6%（无退化）、**拒答率 +1.78pt > 0.84pt 噪声带 → IMPROVED**，故 `v2` 提升为默认版本 |
+| **离线单测** | 154 个 | context 31 / prompt 22 / ndcg 41 / trace 26 / tool_runtime 13 / eval_agent 15 / rerank 6 —— **零 API 消耗** |
+
+**评测方法要点：**
+
+- ground truth 用**章节标题**（chunk 正文首行 `## xxx`），不用 chunk id —— 向量库 id 由 `uuid_generate_v4()` 随机生成、跨次导入不稳定
+- **严格只读**：对 `vector_store` 只有 `SELECT`，不做任何写入 / 删除 / 重置
+- NDCG 采用**分级相关性**（Primary=3 / Secondary=2 / Tertiary=1 / Distractor=-1 / None=0），专门区分「命中正确章节」与「命中近似干扰章节」；干扰项会按 `expectedSections` 顺序受罚
+- 检索评测 **零 LLM 消耗**（只跑向量检索 + 重排），因此可以高频回归
+
+**上下文工程**（`app/context.py`）：Token 预算三段分配 + 句级压缩 + 整段丢弃，已接入 ReAct 与固定 RAG 两条链路。
+
+**可观测**：每次 `/py/knowledge/chat` 与 `/py/agent/chat` 落库 SQLite（`ops.db`），`/py/ops/stats` 看调用量/成功率/延迟 p50/p95/Token/工具均值/RAG 命中率/分链路统计；另提供 **span 级 Trace**（`/py/ops/trace/{trace_id}`、`/py/ops/slow-spans`、`/py/ops/trace-stats`），可下钻到「单次请求里检索、上下文组装、工具调用、模型生成各耗时多少」。
+
+**MCP**：`python -m app.mcp_server`（stdio）暴露订单/退款/工单/保修 4 工具，可供 Dify / Claude Desktop 接入。
+
+> 📌 **一个重要的方法论教训**：初版评测参考答案只写了 1 句摘要，模型引用完整条款反被判 `HALLUCINATION`，pass@1 一度只有 64.9%。修复参考答案质量 + 裁判 Prompt 后，pass@1 提升到 89.5%、幻觉从 35 条降到 4 条。
+
+### Java 业务栈检索评测（`backend/eval/`）
+
+评测集共 **33 条**用例 = **29 条可答用例** + **4 条越界探针**。
 
 **生产配置（`topK=5, threshold=0.0`）实测结果：**
 
@@ -875,33 +1004,7 @@ MyBatis-Plus 的 `selectOne` **不带 `LIMIT 1`**，命中多行时直接抛 `To
 | 平均检索延迟 | 271.0 ms |
 | 最大检索延迟 | 783.9 ms |
 
-**评测方法：**
-
-- ground truth 用**章节标题**（chunk 正文首行 `## xxx`），不用 chunk id —— 向量库 id 由 `uuid_generate_v4()` 随机生成、跨次导入不稳定
-- **严格只读**：对 `vector_store` 只有 `SELECT`，不做任何写入 / 删除 / 重置
-
 **完整报告：** [`backend/eval/RAG-评测报告.md`](backend/eval/RAG-评测报告.md)
-
-### Python 双栈评测（`python-service/eval/`，与 Java 同口径）
-
-- **检索评测**（`eval_retrieval.py`，75 条标注 + 15 条越界，ground truth=章节标题，只读 `vector_store`）：
-  **75 条**（含 8 条近义干扰）下 Rerank 策略 **Hit@1 89.3%、Hit@5 100%、MRR 0.9400、NDCG@5 0.9048**；
-  四策略横向对比 dense / bm25 / hybrid / rerank。NDCG 采用**分级相关性**（Primary=3 / Secondary=2 / Tertiary=1 / Distractor=-1），
-  专门区分"命中正确章节"与"命中近似干扰章节"。
-- **Agent 轨迹评测**（`eval_agent.py`，114 条 = 政策63 + 工具24 + 口语8 + 越界19）：
-  **pass@1 89.5%、pass@3 96.5%、引用忠实度 96.5%**、执行成功率 100%、
-  **无效调用率 0.0%、浪费调用率 0.0%、降级调用 0**、平均步数 0.87。
-- **Prompt 回归比对**（`eval_prompt_regression.py`，84 条 × 2 轮 × 2 版本交错执行）：
-  `rag_system:v1` vs `v2`，忠实度 97.0% → 97.6%（无退化）、**拒答率 +1.78pt > 0.84pt 噪声带 → IMPROVED**，
-  故 `v2` 提升为默认版本。
-- **上下文工程**（`app/context.py`）：Token 预算三段分配 + 句级压缩 + 整段丢弃，接入 ReAct 与固定 RAG 两条链路。
-- **可观测**：每次 `/py/knowledge/chat` 与 `/py/agent/chat` 落库 SQLite（`ops.db`），`/py/ops/stats` 看调用量/成功率/延迟 p50/p95/Token/工具均值/RAG 命中率/分链路统计；
-  另提供 **span 级 Trace**（`/py/ops/trace/{trace_id}`、`/py/ops/slow-spans`、`/py/ops/trace-stats`），
-  可下钻到"单次请求里检索、上下文组装、工具调用、模型生成各耗时多少"。
-- **MCP**：`python -m app.mcp_server`（stdio）暴露订单/退款/工单/保修 4 工具，可供 Dify / Claude Desktop 接入。
-
-> 📌 **一个重要的方法论教训**：初版评测参考答案只写了 1 句摘要，模型引用完整条款反被判 `HALLUCINATION`，
-> pass@1 一度只有 64.9%。修复参考答案质量 + 裁判 Prompt 后，pass@1 提升到 89.5%、幻觉从 35 条降到 4 条。
 > **评测集本身的质量决定了评测结论的可信度** —— 这比调 Prompt 更值得记录。
 
 ---

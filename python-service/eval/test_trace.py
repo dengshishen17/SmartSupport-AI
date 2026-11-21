@@ -6,9 +6,18 @@
 """
 from __future__ import annotations
 
+import os
 import sys
+import tempfile
 import time
 from pathlib import Path
+
+# ★ 必须在 import app.trace 之前设置：把单测的 span 写到临时库，
+#   否则单测数据会污染生产 ops.db，观测面板上全是 name="a" 的脏数据。
+_TMP_DB = Path(tempfile.gettempdir()) / "smartsupport-test-trace.db"
+os.environ["SMART_OPS_DB"] = str(_TMP_DB)
+if _TMP_DB.exists():
+    _TMP_DB.unlink()
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -76,6 +85,48 @@ def test_top_level_span_has_no_parent():
     with t.span("a"):
         pass
     assert t.spans[0].parent_span_id is None
+
+
+def test_root_span_is_parent_of_all_children():
+    """根 span 让整棵 span 树有根节点，否则各阶段 span 是平级孤儿。"""
+    t = tr.Trace("rag_chat")
+    with t.root_span("agent"):
+        with t.span("retrieval", "retrieval"):
+            pass
+        with t.span("context", "context"):
+            pass
+        with t.span("llm", "llm"):
+            pass
+    by_name = {sp.name: sp for sp in t.spans}
+    root = by_name["rag_chat"]
+    assert root.parent_span_id is None
+    for child in ("retrieval", "context", "llm"):
+        assert by_name[child].parent_span_id == root.span_id
+
+
+def test_root_span_records_duration_and_attributes():
+    t = tr.Trace("rag_chat")
+    with t.root_span("agent") as root:
+        root.set("question", "运费谁承担")
+        time.sleep(0.01)
+    root = t.spans[-1]
+    assert root.span_type == "agent"
+    assert root.duration_ms > 0
+    assert root.attributes["question"] == "运费谁承担"
+
+
+def test_root_span_captures_child_error_and_reraises():
+    t = tr.Trace("rag_chat")
+    try:
+        with t.root_span("agent"):
+            with t.span("llm", "llm"):
+                raise RuntimeError("boom")
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("应向上抛出")
+    root = t.spans[-1]
+    assert root.status == "error"
 
 
 def test_span_exception_marks_error_and_reraises():
