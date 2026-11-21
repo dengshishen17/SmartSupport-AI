@@ -716,7 +716,7 @@ mysql -u root -p smart_support < backend/src/main/resources/db/schema.sql
 
 其中 **`order_no = '10001'`** 是主锚点：三个查询工具的 `@ToolParam` 示例值都是 `10001`，保证 AI 演示时能查到真实数据。订单号 `10001`~`10007` 均能通过 `/api/order/{orderNo}` 访问。
 
-### 步骤 3 — 启动后端
+### 步骤 3 — 启动 Java 业务栈（Spring Boot，端口 8080）
 
 ```bash
 cd backend
@@ -751,10 +751,16 @@ curl http://localhost:8080/api/order/list
 
 ### 步骤 4 — 导入知识库到向量库
 
-后端启动后，把售后政策导入 pgvector：
+后端启动后，把售后政策导入 pgvector（**任选一条接口，Java / Python 均可**，两套写入格式一致）：
 
 ```bash
+# Java 侧（读取 ../售后政策演示数据.md）
 curl -X POST http://localhost:8080/ai/knowledge/import-policy
+
+# Python 侧（source 不传时默认 upload.txt）
+curl -X POST http://localhost:8001/py/knowledge/import-text \
+  -H "Content-Type: application/json" \
+  -d "{\"content\":\"$(cat ../售后政策演示数据.md)\",\"source\":\"售后政策演示数据.md\",\"replace\":true}"
 ```
 
 或者在**前端「知识库管理」页**上传 `.md` / `.txt` 文件。
